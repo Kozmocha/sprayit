@@ -11,7 +11,7 @@ $loginURL = $client->createAuthUrl();
 				<form action="checklogin.php" method="post">
 					<input placeholder="Email" name="Email" class="form-control"><br />
 					<input placeholder="Password" type="password" name="password"  class="form-control"><br />
-					<input type="submit" value="Log In" class="btn btn-primary">
+					<!-- <input type="submit" value="Log In" class="btn btn-primary"> -->
 					<input type="button" onclick="window.location = '<?php echo $loginURL ?>';" value="Log In With Google" class="btn btn-danger">
 				</form>
 			</div>
