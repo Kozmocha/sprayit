@@ -1,0 +1,10 @@
+1. Ensure that your Google API Console project has the Google Calendar API enabled (I think Google+ is optional, but if this doesn't work try enabling it).
+2. Ensure you've installed the required Google API dependencies for the local directory for the workspace.
+3. Go to settings.php and fill in the required fields according to your client_secret.json file. The redirect URL has already been entered for you.
+4. Ensure your credentials have the correct redirect URL on the Google API Console.
+5. Open google-login.php from your web browser.
+
+TODO: 
+- Integrate this code to work with the existing login code.
+- Implement a way to edit & delete existing events.
+- Link this code with the visual representation of the user's pulled calendar.
