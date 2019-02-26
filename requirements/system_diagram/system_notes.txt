@@ -1,0 +1,33 @@
+Views
+
+Login
+Type User Select
+Client Registration
+Contractor Registration
+Client Calendar
+Contractor Calendar
+Client - Set Appointment
+Confirmation - Set Appointment Success
+Client - Cancel Appointment
+Confirmation - Cancelled Appointment
+Contractor Calendar
+Contractor - Cancel Appointment
+Password Reset Request
+Password Reset
+
+
+Controllers
+
+
+
+Models
+
+Users -> Clients -> Contractors -> Admin
+Calendar 
+--Create
+--Read
+--Update
+--Destroy
+API
+Email
+
