@@ -1,11 +1,10 @@
 Views
 
 Login
-Type User Select
+Select User Type
 Client Registration
 Contractor Registration
 Client Calendar
-Contractor Calendar
 Client - Set Appointment
 Confirmation - Set Appointment Success
 Client - Cancel Appointment
@@ -18,6 +17,30 @@ Password Reset
 
 Controllers
 
+LoginController
+--Verifies Google API
+--Determines User Type
+--Generates Calendar
+UserTypeController
+--Sets User Type
+--Opens Registration Page
+Registration Controller
+--Creates User
+--Generates Calendar Page
+SetAppointmentController
+--Creates Appointment
+--Generates Confirmation
+--Generates Email
+DestroyAppointmentController
+--Destroys Appointment
+--Generates Confirmation
+--Generates Email
+PasswordRequestController
+--Generates Email
+PasswordResetController
+--Compares Passwords
+--Updates Passwords
+--Generates Login Page
 
 
 Models
