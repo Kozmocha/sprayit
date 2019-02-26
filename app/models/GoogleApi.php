@@ -1,8 +1,8 @@
 <?php
 
 //This class is used to make the API calls to Google and handles events such as login and calendar manipulation.
-class GoogleApi
-{
+class GoogleApi {
+	
 	//Function used to grab an access token using the credentials data and the authorization code provided by Google for the user.
 	public function GetAccessToken($client_id, $redirect_uri, $client_secret, $code) {	
 		$url = 'https://accounts.google.com/o/oauth2/token';			

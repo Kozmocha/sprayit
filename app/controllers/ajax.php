@@ -3,7 +3,7 @@ session_start();
 
 header('Content-type: application/json');
 
-require_once('google-calendar-api.php');
+require_once('../models/GoogleApi.php');
 
 try {
 	

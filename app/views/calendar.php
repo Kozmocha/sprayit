@@ -1,6 +1,6 @@
 <?php
 
-include('header.php');
+include('inc/header.php');
 
 ?>
 
@@ -16,5 +16,5 @@ include('header.php');
 </div>
 
 <?php
-include('footer.php');
+include('inc/footer.php');
 ?>
