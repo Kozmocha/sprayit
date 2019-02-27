@@ -2,10 +2,10 @@
 session_start();
 
 //Contains the necessary Google APIs.
-require_once('google-api.php');
+require_once('../models/GoogleApi.php');
 
 //Contains necessary client_secret information to use the various Google APIs.
-require_once('settings.php');
+require_once('../settings.php');
 
 //Google's API passes a parameter value for an authorization code within the redirect URL. This 'code' will grant us the ability to make a login call to grab an access token.
 if(isset($_GET['code'])) {

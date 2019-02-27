@@ -3,7 +3,7 @@ session_start();
 
 //If the system session does not have an access token from the user, they will be redirected to the Google login page for authorization.
 if(!isset($_SESSION['access_token'])) {
-	header('Location: google-login.php');
+	header('Location: login.php');
 	exit();	
 }
 
@@ -131,7 +131,7 @@ if(!isset($_SESSION['access_token'])) {
 			$("#create-event").attr('disabled', 'disabled');
 			$.ajax({
 		        type: 'POST',
-		        url: 'ajax.php',
+		        url: '../controllers/ajax.php',
 		        data: { event_details: parameters },
 		        dataType: 'json',
 		        success: function(response) {
