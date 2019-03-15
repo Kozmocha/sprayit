@@ -1,3 +1,11 @@
 <?php
 
-require_once 'core/Controller.php';
+// Load Configuration file
+require_once 'config/config.php';
+
+// Autoload Core Libraries
+spl_autoload_register(function($className){
+    require_once 'libraries/' . $className . '.php';
+})
+
+?>

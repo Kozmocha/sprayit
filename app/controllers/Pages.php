@@ -6,13 +6,13 @@
         }
 
         public function index(){
-            $data = ['title' => 'TraversyMVC'];
+            $data = ['title' => 'BookIt'];
 
             $this->view('pages/index', $data);
         }
 
-        public function about(){
-            $data = ['title' => 'About'];
-            $this->view('pages/about', $data);
+        public function registerClient(){
+            $data = ['title' => 'Register'];
+            $this->view('pages/register-client', $data);
         }
     }
