@@ -1,3 +1,12 @@
+To fix password conflicts:
+
 1. Open the config.inc.php file from the xamp/phpmyadmin directory.
 2. Change line 21 to the password you are using for your database.
 3. May need to change the user as well on line 20.
+
+The database:
+
+1. Name is bookit
+
+Tables:
+
