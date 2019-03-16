@@ -10,3 +10,32 @@ The database:
 
 Tables:
 
+Login
+    NAME        TYPE        LENGTH      KEY
+    id          INT                     Primary
+    username    Varchar     255
+    password    Varchar     255
+
+User
+    NAME        TYPE        LENGTH      KEY
+    id          INT                     Primary
+    address     Varchar     255
+    city        Varchar     255
+    state       Varchar     2
+    zip         INT         5
+    phone       Varchar     50
+    email       Varchar     255
+    client      Boolean
+
+Client
+    NAME        TYPE        LENGTH      KEY
+    id          INT                     Primary
+    fName       Varchar     255
+    lName       Varchar     255
+
+
+Contractor
+    NAME            TYPE        LENGTH      KEY
+    id              INT                     Primary
+    companyName     Varchar     255
+    services        Varchar     255
