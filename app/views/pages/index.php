@@ -2,7 +2,7 @@
         <div class="row" style="padding-top: 25px;">
             <div class="col-lg-3"></div>
             <div class="col-lg-6">
-                <h3>Let us set the <span class="red">appointments</span> so you have more time to do the things you <span class="green">need </span>to.</h3>
+                <h3><?php echo $data['description']; ?></h3>
             </div>
             <div class="col-lg-3"></div>
         </div>
@@ -34,7 +34,7 @@
         </div>
         <div class="row">
             <div class="col-lg-4"></div>
-            <div class="col-lg-4"><a href="register.php" class="red">Register Here.</a></div>
+            <div class="col-lg-4"><a href="../users/register.php" class="red">Register Here.</a></div>
             <div class="col-lg-4"></div>
         </div>
         <div class="row" style="padding-top: 50px;">
