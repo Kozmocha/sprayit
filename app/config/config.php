@@ -13,4 +13,4 @@
     define('URLROOT', 'http://localhost/bookit');
 
     // Site Name
-    define('SITENAME', 'bookit');
+    define('SITENAME', 'BookIt');

@@ -6,13 +6,15 @@
         }
 
         public function index(){
-            $data = ['title' => 'BookIt'];
+            $data = [
+                'title' => 'BookIt',
+                'description' => 'A simple application that lets you set appointments with contractors.'
+            ];
 
             $this->view('pages/index', $data);
         }
 
-        public function registerClient(){
-            $data = ['title' => 'Register'];
-            $this->view('pages/register-client', $data);
-        }
+//        public function register() {
+//            $this->view('pages/register');
+//        }
     }
