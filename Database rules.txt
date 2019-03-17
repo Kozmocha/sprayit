@@ -1,0 +1,41 @@
+To fix password conflicts:
+
+1. Open the config.inc.php file from the xamp/phpmyadmin directory.
+2. Change line 21 to the password you are using for your database.
+3. May need to change the user as well on line 20.
+
+The database:
+
+1. Name is bookit
+
+Tables:
+
+Login
+    NAME        TYPE        LENGTH      KEY
+    id          INT                     Primary
+    username    Varchar     255
+    password    Varchar     255
+
+User
+    NAME        TYPE        LENGTH      KEY
+    id          INT                     Primary
+    address     Varchar     255
+    city        Varchar     255
+    state       Varchar     2
+    zip         INT         5
+    phone       Varchar     50
+    email       Varchar     255
+    client      Boolean
+
+Client
+    NAME        TYPE        LENGTH      KEY
+    id          INT                     Primary
+    fName       Varchar     255
+    lName       Varchar     255
+
+
+Contractor
+    NAME            TYPE        LENGTH      KEY
+    id              INT                     Primary
+    companyName     Varchar     255
+    services        Varchar     255
