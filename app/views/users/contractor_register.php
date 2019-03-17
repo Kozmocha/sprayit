@@ -11,9 +11,10 @@
         <div class="row">
             <div class="col-lg-3"></div>
             <div class="col-sm">
-                <input type="text" class="form-control" id="fname" placeholder="First Name">
+                <input type="text" class="form-control" id="companyname" placeholder="Company Name">
                 <br>
-                <input type="text" class="form-control" id="lname" placeholder="Last Name">
+                <!-- TODO: define services somewhere and make services a drop-down menu -->
+                <input type="text" class="form-control" id="service" placeholder="Services">
                 <br>
                 <input type="text" class="form-control" id="address" placeholder="Street Address">
                 <br>
@@ -22,7 +23,6 @@
                         <input type="text" class="form-control" id="city" placeholder="City">
                     </div>
                     <div class="col-sm">
-                        <!-- TODO: define states somewhere and make the state field a drop-down menu -->
                         <input type="text" class="form-control" id="state" placeholder="State">
                     </div>
                     <div class="col-sm">

@@ -10,44 +10,36 @@ class User
 
 //=============BEGIN GENERATED FUNCTIONS=============
 
-    public function getFirstName()
-    {
+    public function getFirstName() {
         return $this->firstName;
     }
 
-    public function setFirstName($firstName)
-    {
-        $this->firstName = $firstName;
+    public function setFirstName($_firstName) {
+        $this->firstName = $_firstName;
     }
 
-    public function getLastName()
-    {
+    public function getLastName() {
         return $this->lastName;
     }
 
-    public function setLastName($lastName)
-    {
-        $this->lastName = $lastName;
+    public function setLastName($_lastName) {
+        $this->lastName = $_lastName;
     }
 
-    public function getEmail()
-    {
+    public function getEmail() {
         return $this->email;
     }
 
-    public function setEmail($email)
-    {
-        $this->email = $email;
+    public function setEmail($_email) {
+        $this->email = $_email;
     }
 
-    public function getUsername()
-    {
+    public function getUsername() {
         return $this->username;
     }
 
-    public function setUsername($username)
-    {
-        $this->username = $username;
+    public function setUsername($_username) {
+        $this->username = $_username;
     }
 
 //=============END GENERATED FUNCTIONS=============
@@ -55,4 +47,5 @@ class User
 //TODO: add constructor and functions that affect all users.
 
 }
+
 ?>
