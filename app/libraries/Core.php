@@ -1,4 +1,5 @@
 <?php
+
 /*
  * App Core Class
  * Creates URL and loads Core controller
