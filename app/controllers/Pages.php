@@ -8,19 +8,18 @@ class Pages extends Controller {
 
     public function index() {
         $data = [
-            'title' => 'BookIt',
-            'description' => 'Let us set the <span class="red">appointments</span> so you have more time to do the things you <span class="green">need </span>to.'
+            'title' => SITENAME,
+            'description' => MOTTO
         ];
 
         $this->view('pages/index', $data);
     }
 
-    public function register() {
+    public function calendar() {
         $data = [
-            'title' => 'Registration',
-            'description' => 'Here is where to register'
+            'title' => SITENAME,
+            'description' => COMINGSOON
         ];
-
-        $this->view('pages/register', $data);
+        $this->view('pages/calendar', $data);
     }
 }

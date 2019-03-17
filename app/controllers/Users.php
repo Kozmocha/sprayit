@@ -1,14 +1,15 @@
 <?php
 
 class Users extends Controller {
+
     public function __construct() {
 
     }
 
     public function login() {
         $data = [
-            'title' => 'BookIt',
-            'description' => 'Let us set the <span class="red">appointments</span> so you have more time to do the things you <span class="green">need </span>to.'
+            'title' => SITENAME,
+            'description' => MOTTO
         ];
 
         $this->view('users/login', $data);
@@ -16,18 +17,27 @@ class Users extends Controller {
 
     public function register() {
         $data = [
-            'title' => 'BookIt',
-            'description' => 'Let us set the <span class="red">appointments</span> so you have more time to do the things you <span class="green">need </span>to.'
+            'title' => SITENAME,
+            'description' => MOTTO
         ];
 
         $this->view('users/register', $data);
     }
 
+    public function contractor_register() {
+        $data = [
+            'title' => SITENAME,
+            'description' => MOTTO
+        ];
+
+        $this->view('users/contractor_register', $data);
+    }
+
     public function user_type() {
         $data = [
-            'title' => 'BookIt',
-            'description' => 'Let us set the <span class="red">appointments</span> so you have more time to do the things you <span class="green">need </span>to.',
-            'instructions' => '<span class="blue">Select</span> the type of <span class="pink">account</span> you\'ll be using <span class="purple">BookIt</span> for.'
+            'title' => SITENAME,
+            'description' => MOTTO,
+            'instructions' => TYPEINSTRUCTIONS
         ];
         $this->view('users/user_type', $data);
     }

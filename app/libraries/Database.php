@@ -37,29 +37,29 @@ class Database {
     }
 
     // Prepare statement with query
-    public function query($sql) {
-        $this->stmt = $this->dbh->prepare($sql);
+    public function query($_sql) {
+        $this->stmt = $this->dbh->prepare($_sql);
     }
 
     // Method to bind the values
-    public function bind($param, $value, $type = null) {
-        if (is_null($type)) {
+    public function bind($_param, $_value, $_type = null) {
+        if (is_null($_type)) {
             switch (true) {
-                case is_int($value):
-                    $type = PDO::PARAM_INT;
+                case is_int($_value):
+                    $_type = PDO::PARAM_INT;
                     break;
-                case is_bool($value):
-                    $type = PDO::PARAM_BOOL;
+                case is_bool($_value):
+                    $_type = PDO::PARAM_BOOL;
                     break;
-                case is_null($value):
-                    $type = PDO::PARAM_NULL;
+                case is_null($_value):
+                    $_type = PDO::PARAM_NULL;
                     break;
                 default:
-                    $type = PDO::PARAM_STR;
+                    $_type = PDO::PARAM_STR;
             }
         }
 
-        $this->stmt->bindValue($param, $value, $type);
+        $this->stmt->bindValue($_param, $_value, $_type);
     }
 
     // Execute the prepared statement

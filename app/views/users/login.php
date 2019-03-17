@@ -2,7 +2,7 @@
 <div class="row" style="padding-top: 25px;">
     <div class="col-lg-3"></div>
     <div class="col-lg-6">
-        <h3><?php echo $data['description']; ?></h3>
+        <h3><?php echo $_data['description']; ?></h3>
     </div>
     <div class="col-lg-3"></div>
 </div>
@@ -23,7 +23,7 @@
     </div>
     <div class="row" style="padding-top: 15px;">
         <div class="col-lg-4"></div>
-        <button class="col-lg-4 btn btn-primary" type="submit">Sign in</button>
+        <input type="submit" value="Sign In" class="col-lg-4 btn btn-primary">
         <div class="col-lg-4"></div>
     </div>
 </form>
