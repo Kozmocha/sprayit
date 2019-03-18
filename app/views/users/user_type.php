@@ -25,18 +25,18 @@
         </form>
     </div>
     <script>
-        var checkClient = document.getElementById('client').checked;
-        var checkContractor = document.getElementById('contractor').checked;
         function checkRadio() {
-            if (checkClient = true) {
-                alert("client = " + checkClient);
-            }
-            else if (checkContractor = true) {
-                alert("contractor = " + checkContractor);
-            }
-            else {
-                alert("a button must be pressed");
-            }
+            var checkClient = document.getElementById('client').checked;
+            var checkContractor = document.getElementById('contractor').checked;
+                if (checkClient == true) {
+                    alert("client = " + checkClient);
+                }
+                else if (checkContractor == true) {
+                    alert("contractor = " + checkContractor);
+                }
+                else {
+                    alert("a button must be pressed");
+                }
         }
     </script>
 <?php require APPROOT . '/views/inc/footer.php'; ?>
