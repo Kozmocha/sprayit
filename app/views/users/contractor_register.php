@@ -44,6 +44,7 @@
             </div>
             <div class="col-lg-3"></div>
         </div>
+        <br>
         <div class="row" style="padding-top: 15px;">
             <div class="col-lg-4"></div>
             <input type="submit" value="Register" class="col-lg-4 btn btn-primary">
