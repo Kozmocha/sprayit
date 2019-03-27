@@ -33,6 +33,15 @@ class Users extends Controller {
         $this->view('users/contractor_register', $data);
     }
 
+    public function client_register() {
+        $data = [
+            'title' => SITENAME,
+            'description' => MOTTO
+        ];
+
+        $this->view('users/client_register', $data);
+    }
+
     public function user_type() {
         $data = [
             'title' => SITENAME,
