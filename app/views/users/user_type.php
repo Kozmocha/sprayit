@@ -29,10 +29,10 @@
             var checkClient = document.getElementById('client').checked;
             var checkContractor = document.getElementById('contractor').checked;
                 if (checkClient == true) {
-                    alert("client = " + checkClient);
+                    window.location = 'http://localhost/bookit/users/register';
                 }
                 else if (checkContractor == true) {
-                    alert("contractor = " + checkContractor);
+                    <?php Redirect::redirect('users/contractor_register'); ?>
                 }
                 else {
                     alert("a button must be pressed");
