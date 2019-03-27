@@ -15,15 +15,6 @@ class Users extends Controller {
         $this->view('users/login', $data);
     }
 
-    public function register() {
-        $data = [
-            'title' => SITENAME,
-            'description' => MOTTO
-        ];
-
-        $this->view('users/register', $data);
-    }
-
     public function contractor_register() {
         $data = [
             'title' => SITENAME,

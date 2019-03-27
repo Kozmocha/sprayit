@@ -1,12 +1,10 @@
 <?php
 
 class Redirect {
-    public function __construct() {
-
-    }
-
-    public function redirect($_page) {
-        header('location: ' . URLROOT . '/' . $_page);
+    public function to($_page = null) {
+        if($_page) {
+            header('location: ' . URLROOT . '/' . $_page);
+        }
     }
 
 }

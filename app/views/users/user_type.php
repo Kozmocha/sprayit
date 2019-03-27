@@ -28,15 +28,13 @@
 <script>
     function checkRadio() {
         <?php
-        if($_POST["user_type"] == "client")
-        {
-            header("Location: client_register");
+        if($_POST["user_type"] == "client") {
+            Redirect::to('users/client_register');
             exit;
         }
 
-        if($_POST["user_type"] == "contractor")
-        {
-            header("Location: contractor_register");
+        if($_POST["user_type"] == "contractor") {
+            Redirect::to('users/contractor_register');
             exit;
         }
         ?>
