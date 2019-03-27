@@ -22,4 +22,11 @@ class Pages extends Controller {
         ];
         $this->view('pages/calendar', $data);
     }
+
+    public function not_found() {
+        $data = [
+            'title' => SITENAME
+        ];
+        $this->view('pages/not_found', $data);
+    }
 }
