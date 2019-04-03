@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 // Load Configuration file
 require_once 'config/config.php';
 

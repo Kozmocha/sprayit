@@ -1,51 +1,75 @@
 <?php
 
-class User
-{
+class User {
 
-    private $firstName;
-    private $lastName;
-    private $email;
-    private $username;
+    private $db;
+    protected $dataTable = 'user';
 
-//=============BEGIN GENERATED FUNCTIONS=============
-
-    public function getFirstName() {
-        return $this->firstName;
+    public function __construct($data = []) {
+        foreach ($data as $key => $value) {
+            $this->$key = $value;
+        };
+        $this->db = new Database;
     }
 
-    public function setFirstName($_firstName) {
-        $this->firstName = $_firstName;
+    public function authenticate($email = null, $password = null, $errors = []) {
+
+        if ($email != '' && $email != null && $password != '' && $password != null) {
+            $user = $this->findByEmail($email);
+        } else {
+            return false;
+        }
+
+        if ($user) {
+            /*if (password_verify($password, $user->password_hash)) {
+                return $user;
+            }*/
+
+            // TODO: Assume the password matches for now (until register is finished).
+            return $user;
+        }
+        return false;
     }
 
-    public function getLastName() {
-        return $this->lastName;
+    public function findByEmail($email) {
+
+        // TODO: MOVE SQL CODE TO THE DB TRANSLATOR
+        /*$this->db->query('SELECT * FROM `user` WHERE email = :email');
+        // Bind value
+        $this->db->bind(':email', $email);
+
+        $row = $this->db->single();
+
+        // Check row
+        if($this->db->rowCount() > 0){
+            return $row;
+        } else {
+            return false;
+        }*/
     }
 
-    public function setLastName($_lastName) {
-        $this->lastName = $_lastName;
+    public function getEmail($user) {
+        return $user->email;
     }
 
-    public function getEmail() {
-        return $this->email;
+    public function createSession($user) {
+        $_SESSION['user_id'] = $user->id;
+        $_SESSION['user_email'] = $user->email;
     }
 
-    public function setEmail($_email) {
-        $this->email = $_email;
+    public function destroySession() {
+        unset($_SESSION['user_id']);
+        unset($_SESSION['user_email']);
+        session_destroy();
+        Redirect::to('users/login');
     }
 
-    public function getUsername() {
-        return $this->username;
+    public function isLoggedIn() {
+        if(isset($_SESSION['user_id'])){
+            return true;
+        } else {
+            return false;
+        }
     }
-
-    public function setUsername($_username) {
-        $this->username = $_username;
-    }
-
-//=============END GENERATED FUNCTIONS=============
-
-//TODO: add constructor and functions that affect all users.
-
 }
-
 ?>

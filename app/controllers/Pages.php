@@ -8,7 +8,7 @@ class Pages extends Controller {
 
     public function index() {
         $data = [
-            'title' => SITENAME,
+            'title' => SITE_NAME,
             'description' => MOTTO
         ];
 
@@ -17,15 +17,15 @@ class Pages extends Controller {
 
     public function calendar() {
         $data = [
-            'title' => SITENAME,
-            'description' => COMINGSOON
+            'title' => SITE_NAME,
+            'description' => COMING_SOON
         ];
         $this->view('pages/calendar', $data);
     }
 
     public function not_found() {
         $data = [
-            'title' => SITENAME
+            'title' => SITE_NAME
         ];
         $this->view('pages/not_found', $data);
     }

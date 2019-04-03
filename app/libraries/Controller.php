@@ -17,7 +17,7 @@ class Controller {
     }
 
     // Load the view
-    public function view($_view, $_data = []) {
+    public function view($_view, $_data = [], $_error = []) {
         // Check for view file
         if (file_exists('../app/views/' . $_view . '.php')) {
             require_once '../app/views/' . $_view . '.php';
