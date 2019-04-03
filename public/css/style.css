@@ -22,3 +22,14 @@
     padding-top: 100px;
     text-align: center;
 }
+
+.g_button {
+    background: #fff;
+}
+
+.vl {
+    display: inline;
+    border-left: 1px solid white;
+}
+
+

@@ -6,6 +6,14 @@
     </div>
     <div class="col-lg-3"></div>
 </div>
+<!--    <div class="row">-->
+<!--        <div class="col-lg-4 col-md-4"></div>-->
+<!--        <div class="col-lg-4 col-md-4">-->
+<!--            <br>-->
+<!--            <button class="btn btn-primary"><span class="fab fa-google"></span>&nbsp;&nbsp;<div class="vl"></div>&nbsp; Log In With Google</button>-->
+<!--        </div>-->
+<!--        <div class="col-lg-4 col-md-4"></div>-->
+<!--    </div>-->
 <form action="" method="post" style="padding-top: 25px;">
     <div class="form-row">
         <div class="col-lg-4"></div>
@@ -29,6 +37,7 @@
 </form>
 <div class="row" style="padding-top: 25px;">
     <div class="col-lg-4"></div>
+    <br>
     <div class="col-lg-4"><h5>Don't have an account?</h5></div>
     <div class="col-lg-4"></div>
 </div>

@@ -2,8 +2,8 @@
 
 // Database Parameters
 define('DB_HOST', 'localhost');
-define('DB_USER', '');
-define('DB_PASS', '');
+define('DB_USER', 'root');
+define('DB_PASS', '123456');
 define('DB_NAME', 'bookit');
 
 // App Root
@@ -23,3 +23,14 @@ define('TYPEINSTRUCTIONS', '<span class="blue">Select</span> the type of <span c
 
 // Coming soon!
 define('COMINGSOON', 'This page is under construction!');
+
+return [
+    'google' => [
+        'id' => '601469690265-ur4a5vfj2mkpeim0lhik9pjrvu4lruj1.apps.googleusercontent.com',
+        'secret' =>'erGg1m-Msi8kxG93GwHnwNfP',
+        'callback_url' => 'http://localhost/bookit',
+        'scope' => ['https://www.googleapis.com/auth/userinfo.profile',
+                    'https://www.googleapis.com/auth/userinfo.email',
+                    'https://www.googleapis.com/auth/calendar']
+    ]
+];

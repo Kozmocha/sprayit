@@ -1,4 +1,5 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
+<?php require APPROOT . '/config/google_setup.php'; ?>
 <div class="row" style="padding-top: 25px;">
     <div class="col-lg-3"></div>
     <div class="col-lg-6">
@@ -44,11 +45,19 @@
             <div class="col-lg-3"></div>
         </div>
         <br>
-        <div class="row" style="padding-top: 15px;">
-            <div class="col-lg-4"></div>
-            <input type="submit" value="Register" class="col-lg-4 btn btn-primary">
-            <div class="col-lg-4"></div>
-        </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-4"></div>
+                <div class="col-lg-4 col-md-4">
+                    <br>
+                    <a href="<?= $googleLoginUrl ?>"> <button class="btn btn-primary" style="width: 100%;"><span class="fab fa-google"></span>&nbsp;&nbsp;<div class="vl"></div>&nbsp; Log In With Google</button></a>
+                </div>
+                <div class="col-lg-4 col-md-4"></div>
+            </div>
+<!--        <div class="row" style="padding-top: 15px;">-->
+<!--            <div class="col-lg-4"></div>-->
+<!--            <input type="submit" value="Register" class="col-lg-4 btn btn-primary">-->
+<!--            <div class="col-lg-4"></div>-->
+<!--        </div>-->
     </form>
 </div>
 <div class="row" style="padding-top: 25px;">
