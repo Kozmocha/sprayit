@@ -5,18 +5,22 @@ require_once APP_ROOT . '/models/User.php';
 class Users extends Controller {
 
     public function __construct() {
-        $this->userModel = $this->model('User');
+        //$this->userModel = $this->model('User');
     }
 
     public function login() {
 
+        if (User::isLoggedIn()) {
+            Redirect::to('pages/calendar');
+        }
+
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+            $post = User::sanitizePost();
 
             $data = [
-                'email' => trim($_POST['email']),
-                'password' => trim($_POST['password'])
+                'email' => trim($post['email']),
+                'password' => trim($post['password'])
             ];
 
             // TODO: For future error identification.
@@ -25,15 +29,9 @@ class Users extends Controller {
                 'password_err' => ''
             ];
 
-            $user = $this->userModel->authenticate($_POST['email'], $_POST['password']);
+            $isLoggedIn = User::authenticate($post['email'], $post['password']);
 
-            if ($user) {
-
-                // Log the user in.
-                $this->userModel->createSession($user);
-
-                //TODO: Flash success message.
-
+            if ($isLoggedIn) {
                 Redirect::to('pages/calendar');
             } else {
                 $this->view('users/login', $data, $errors);

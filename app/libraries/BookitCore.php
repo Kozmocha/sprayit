@@ -1,12 +1,12 @@
 <?php
 
 /*
- * App Core Class
- * Creates URL and loads Core controller
+ * App BookitCore Class
+ * Creates URL and loads BookitCore controller
  * URL Format -/controller/method/params
  */
 
-class Core {
+class BookitCore {
 
     protected $currentController = 'Users';
     protected $currentMethod = 'login';
@@ -44,8 +44,12 @@ class Core {
         // Get params
         $this->params = $url ? array_values($url) : [];
 
-        // Call a callback with array of params
-        call_user_func_array([$this->currentController, $this->currentMethod], $this->params);
+        try {
+            // Call a callback with array of params
+            call_user_func_array([$this->currentController, $this->currentMethod], $this->params);
+        } catch (\Exception $e) {
+            Redirect::to('pages/not_found');
+        }
 
     }
 
