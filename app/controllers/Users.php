@@ -1,32 +1,54 @@
 <?php
 
+require_once APP_ROOT . '/models/User.php';
+
 class Users extends Controller {
 
     public function __construct() {
-
+        //$this->userModel = $this->model('User');
     }
 
     public function login() {
-        $data = [
-            'title' => SITENAME,
-            'description' => MOTTO
-        ];
 
-        $this->view('users/login', $data);
-    }
+        if (User::isLoggedIn()) {
+            Redirect::to('pages/calendar');
+        }
 
-    public function register() {
-        $data = [
-            'title' => SITENAME,
-            'description' => MOTTO
-        ];
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-        $this->view('users/register', $data);
+            $post = User::sanitizePost();
+
+            $data = [
+                'email' => trim($post['email']),
+                'password' => trim($post['password'])
+            ];
+
+            // TODO: For future error identification.
+            $errors = [
+                'email_err' => '',
+                'password_err' => ''
+            ];
+
+            $isLoggedIn = User::authenticate($post['email'], $post['password']);
+
+            if ($isLoggedIn) {
+                Redirect::to('pages/calendar');
+            } else {
+                $this->view('users/login', $data, $errors);
+            }
+        } else {
+            $data = [
+              'email' => '',
+              'password' => ''
+            ];
+
+            $this->view('users/login', $data);
+        }
     }
 
     public function contractor_register() {
         $data = [
-            'title' => SITENAME,
+            'title' => SITE_NAME,
             'description' => MOTTO
         ];
 
@@ -35,7 +57,7 @@ class Users extends Controller {
 
     public function client_register() {
         $data = [
-            'title' => SITENAME,
+            'title' => SITE_NAME,
             'description' => MOTTO
         ];
 
@@ -44,9 +66,9 @@ class Users extends Controller {
 
     public function user_type() {
         $data = [
-            'title' => SITENAME,
+            'title' => SITE_NAME,
             'description' => MOTTO,
-            'instructions' => TYPEINSTRUCTIONS
+            'instructions' => TYPE_INSTRUCTIONS
         ];
         $this->view('users/user_type', $data);
     }

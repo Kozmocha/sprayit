@@ -1,4 +1,4 @@
-<?php require APPROOT . '/views/inc/header.php'; ?>
+<?php require APP_ROOT . '/views/inc/header.php'; ?>
 <div class="row" style="padding-top: 25px;">
     <div class="col-lg-3"></div>
     <div class="col-lg-6">
@@ -21,24 +21,22 @@
                 <div class="col-lg-4"></div>
             </div>
             <br>
-            <h6><a href="<?php echo URLROOT; ?>/users/login">Have an account? Login</a></h6>
+            <h6><a href="<?php echo URL_ROOT; ?>/users/login">Have an account? Login</a></h6>
         </form>
     </div>
 </div>
 <script>
     function checkRadio() {
         <?php
-        if($_POST["user_type"] == "client")
-        {
-            header("Location: client_register");
+        if($_POST["user_type"] == "client") {
+            Redirect::to('users/client_register');
             exit;
         }
 
-        if($_POST["user_type"] == "contractor")
-        {
-            header("Location: contractor_register");
+        if($_POST["user_type"] == "contractor") {
+            Redirect::to('users/contractor_register');
             exit;
         }
         ?>
 </script>
-<?php require APPROOT . '/views/inc/footer.php'; ?>
+<?php require APP_ROOT . '/views/inc/footer.php'; ?>

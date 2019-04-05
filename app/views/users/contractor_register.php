@@ -1,4 +1,4 @@
-<?php require APPROOT . '/views/inc/header.php'; ?>
+<?php require APP_ROOT . '/views/inc/header.php'; ?>
 <div class="row" style="padding-top: 25px;">
     <div class="col-lg-3"></div>
     <div class="col-lg-6">
@@ -59,7 +59,7 @@
 </div>
 <div class="row" style="padding-bottom: 30px;">
     <div class="col-lg-4"></div>
-    <div class="col-lg-4"><a href="<?php echo URLROOT; ?>/users/login" class="red">Login Here</a></div>
+    <div class="col-lg-4"><a href="<?php echo URL_ROOT; ?>/users/login" class="red">Login Here</a></div>
     <div class="col-lg-4"></div>
 </div>
-<?php require APPROOT . '/views/inc/footer.php'; ?>
+<?php require APP_ROOT . '/views/inc/footer.php'; ?>

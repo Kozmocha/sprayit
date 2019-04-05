@@ -36,6 +36,10 @@ class Database {
         }
     }
 
+    public function readObject($field, $table) {
+
+    }
+
     // Prepare statement with query
     public function query($_sql) {
         $this->stmt = $this->dbh->prepare($_sql);
