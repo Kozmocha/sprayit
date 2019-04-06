@@ -2,14 +2,14 @@
 <div class="row" style="padding-top: 25px;">
     <div class="col-lg-3"></div>
     <div class="col-lg-6">
-        <h3><?php echo $_data['description']; ?></h3>
+        <h3><?php echo SITENAME; ?></h3>
         <br>
-        <h3><?php echo $_data['instructions']; ?></h3>
+        <h3><?php echo MOTTO; ?></h3>
         <br>
         <br>
         <form action="" method="post" style="padding-top 25px;" onsubmit="checkRadio()">
             <div class="radio">
-                <label><input type="radio" name="user_type" value="client"> Client</label>
+                <label><input type="radio" name="user_type" value="Client"> Client</label>
             </div>
             <div class="radio">
                 <label><input type="radio" name="user_type" value="contractor"> Contractor</label>
@@ -17,7 +17,7 @@
             <br>
             <div class="row" style="padding-top: 15px;">
                 <div class="col-lg-4"></div>
-                <input type="submit" value="Create Account" class="col-lg-4 btn btn-primary">
+                <button type="submit" class="col-lg-4 btn btn-primary">Create Account</button>
                 <div class="col-lg-4"></div>
             </div>
             <br>

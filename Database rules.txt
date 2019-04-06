@@ -25,7 +25,7 @@ User
     zip         INT         5
     phone       Varchar     50
     email       Varchar     255
-    client      Boolean
+    client 	Boolean
 
 Client
     NAME        TYPE        LENGTH      KEY

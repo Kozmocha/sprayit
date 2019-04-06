@@ -2,27 +2,19 @@
 <div class="row" style="padding-top: 25px;">
     <div class="col-lg-3"></div>
     <div class="col-lg-6">
-        <h3><?php echo $_data['description']; ?></h3>
+        <h3><?php echo MOTTO; ?></h3>
     </div>
     <div class="col-lg-3"></div>
 </div>
-<!--    <div class="row">-->
-<!--        <div class="col-lg-4 col-md-4"></div>-->
-<!--        <div class="col-lg-4 col-md-4">-->
-<!--            <br>-->
-<!--            <button class="btn btn-primary"><span class="fab fa-google"></span>&nbsp;&nbsp;<div class="vl"></div>&nbsp; Log In With Google</button>-->
-<!--        </div>-->
-<!--        <div class="col-lg-4 col-md-4"></div>-->
-<!--    </div>-->
-<form action="" method="post" style="padding-top: 25px;">
-    <div class="form-row">
+<form action="<?php echo URLROOT; ?>/users/login" method="post" style="padding-top: 25px;">
+    <div class="row">
         <div class="col-lg-4"></div>
         <div class="form-group col-lg-4">
             <input type="email" class="form-control" id="email" placeholder="Email">
         </div>
         <div class="col-lg-4"></div>
     </div>
-    <div class="form-row">
+    <div class="row">
         <div class="col-lg-4"></div>
         <div class="form-group col-lg-4">
             <input type="password" class="form-control" id="password" placeholder="Password">
@@ -31,10 +23,23 @@
     </div>
     <div class="row" style="padding-top: 15px;">
         <div class="col-lg-4"></div>
-        <input type="submit" value="Sign In" class="col-lg-4 btn btn-primary">
+        <div class="col-lg-4"><button class="btn btn-primary" style="width: 100%;" type="submit">Sign In</button></div>
         <div class="col-lg-4"></div>
     </div>
 </form>
+<div class="row">
+
+    <div class="col-lg-4 col-md-4"></div>
+    <div class="col-lg-4 col-md-4">
+        <br>
+        <form action="<?php echo URLROOT; ?>/users/google_login.php" method="post">
+            <button class="btn btn-danger" style="width: 100%;" type="submit">
+                <span class="fab fa-google"></span>&nbsp;&nbsp;<div class="vl"></div>&nbsp; Log In With Google
+            </button>
+        </form>
+    </div>
+    <div class="col-lg-4 col-md-4"></div>
+</div>
 <div class="row" style="padding-top: 25px;">
     <div class="col-lg-4"></div>
     <br>

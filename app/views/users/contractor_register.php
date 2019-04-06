@@ -2,16 +2,21 @@
 <div class="row" style="padding-top: 25px;">
     <div class="col-lg-3"></div>
     <div class="col-lg-6">
-        <h3><?php echo $_data['description']; ?></h3>
+        <h3><?php echo MOTTO; ?></h3>
     </div>
     <div class="col-lg-3"></div>
 </div>
+<?php
+$_data = ['coname'=>''];
+?>
 <div class="container">
-    <form action="" method="post" style="padding-top: 25px;">
+    <form action="<?php echo URLROOT; ?>/users/contractor_register" method="post" style="padding-top: 25px;">
         <div class="row">
             <div class="col-lg-3"></div>
             <div class="col-sm">
-                <input type="text" class="form-control" id="companyname" placeholder="Company Name">
+                <input type="text" class="form-control <?php echo (!empty($_data['coname_err'])) ? 'is-invalid' : ''; ?>"
+                       placeholder="Company Name" value="<?php echo $_data['coname']; ?>">
+                <span class="invalid-feedback"><?php echo $_data['coname_err']; ?></span>
                 <br>
                 <!-- TODO: define services somewhere and make services a drop-down menu -->
                 <input type="text" class="form-control" id="service" placeholder="Services">
@@ -47,7 +52,7 @@
         <br>
         <div class="row" style="padding-top: 15px;">
             <div class="col-lg-4"></div>
-            <input type="submit" value="Register" class="col-lg-4 btn btn-primary">
+            <button type="submit" class="col-lg-4 btn btn-primary">Register</button>
             <div class="col-lg-4"></div>
         </div>
     </form>
