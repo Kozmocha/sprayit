@@ -53,6 +53,9 @@ class Users extends Controller {
                 }
             } else {
                 //Load view with errors
+                /*
+                 * This is where the statment is going to...
+                 */
                 $this->view('users/login', $data);
             }
 
