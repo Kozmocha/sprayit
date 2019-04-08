@@ -10,20 +10,22 @@
     <div class="row">
         <div class="col-lg-4"></div>
         <div class="form-group col-lg-4">
-            <input type="email" class="form-control" id="email" placeholder="Email">
+            <input type="email" class="form-control" id="email">
         </div>
         <div class="col-lg-4"></div>
     </div>
     <div class="row">
         <div class="col-lg-4"></div>
         <div class="form-group col-lg-4">
-            <input type="password" class="form-control" id="password" placeholder="Password">
+            <input type="password" class="form-control" id="password">
         </div>
         <div class="col-lg-4"></div>
     </div>
     <div class="row" style="padding-top: 15px;">
         <div class="col-lg-4"></div>
-        <div class="col-lg-4"><button class="btn btn-primary" style="width: 100%;" type="submit">Sign In</button></div>
+        <div class="col-lg-4">
+            <button class="btn btn-primary" style="width: 100%;" type="submit">Sign In</button>
+        </div>
         <div class="col-lg-4"></div>
     </div>
 </form>
@@ -32,7 +34,7 @@
     <div class="col-lg-4 col-md-4"></div>
     <div class="col-lg-4 col-md-4">
         <br>
-        <form action="<?php echo URLROOT; ?>/users/google_login.php" method="post">
+        <form action="<?php echo URLROOT; ?>/users/google_login" method="post">
             <button class="btn btn-danger" style="width: 100%;" type="submit">
                 <span class="fab fa-google"></span>&nbsp;&nbsp;<div class="vl"></div>&nbsp; Log In With Google
             </button>
