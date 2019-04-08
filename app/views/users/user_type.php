@@ -2,12 +2,12 @@
 <div class="row" style="padding-top: 25px;">
     <div class="col-lg-3"></div>
     <div class="col-lg-6">
-        <h3><?php echo $_data['description']; ?></h3>
+        <h3><?php echo MOTTO ?></h3>
         <br>
-        <h3><?php echo $_data['instructions']; ?></h3>
+        <h3><?php echo TYPE_INSTRUCTIONS ?></h3>
         <br>
         <br>
-        <form action="" method="post" style="padding-top 25px;" onsubmit="checkRadio()">
+        <form action="<?php echo URL_ROOT; ?>/users/user_type" method="post" style="padding-top 25px;">
             <div class="radio">
                 <label><input type="radio" name="user_type" value="client"> Client</label>
             </div>
@@ -25,18 +25,5 @@
         </form>
     </div>
 </div>
-<script>
-    function checkRadio() {
-        <?php
-        if($_POST["user_type"] == "client") {
-            Redirect::to('users/client_register');
-            exit;
-        }
 
-        if($_POST["user_type"] == "contractor") {
-            Redirect::to('users/contractor_register');
-            exit;
-        }
-        ?>
-</script>
 <?php require APP_ROOT . '/views/inc/footer.php'; ?>
