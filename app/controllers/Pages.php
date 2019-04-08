@@ -16,6 +16,10 @@ class Pages extends Controller {
     }
 
     public function calendar() {
+        if (!Session::isLoggedIn()) {
+            Redirect::to('users/login');
+        }
+
         $data = [
             'title' => SITE_NAME,
             'description' => COMING_SOON

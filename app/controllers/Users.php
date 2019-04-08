@@ -10,13 +10,13 @@ class Users extends Controller {
 
     public function login() {
 
-        if (User::isLoggedIn()) {
+        if (Session::isLoggedIn()) {
             Redirect::to('pages/calendar');
         }
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-            $post = User::sanitizePost();
+            $post = Session::sanitizePost();
 
             $data = [
                 'email' => trim($post['email']),
