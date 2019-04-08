@@ -36,6 +36,22 @@ class Database {
         }
     }
 
+    public static function findUserByEmail($email) {
+        $db = new Database;
+        $db->query('SELECT * FROM `user` WHERE email = :email');
+        // Bind value
+        $db->bind(':email', $email);
+
+        $row = $db->single();
+
+        // Check row
+        if($db->rowCount() > 0){
+            return $row;
+        } else {
+            return false;
+        }
+    }
+
     public function readObject($field, $table) {
 
     }

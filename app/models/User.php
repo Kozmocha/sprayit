@@ -40,7 +40,7 @@ class User {
      */
     public static function authenticate($_email = null, $_password = null, $_errors = []) {
         if ($_email != '' && $_email != null && $_password != '' && $_password != null) {
-            $user = self::findByEmail($_email);
+            $user = Database::findUserByEmail($_email);
         } else {
             return false;
         }
@@ -64,31 +64,6 @@ class User {
             }
         }
         return false;
-    }
-
-
-    /**
-     * Find User by Email: Returns a row from the database where the row's 'email' field matches the parameterized
-     * email that is passed in.
-     *
-     * @param $email
-     * @return bool
-     */
-    public static function findByEmail($email) {
-        $db = new Database;
-        // TODO: MOVE SQL CODE TO THE DB TRANSLATOR
-        $db->query('SELECT * FROM `user` WHERE email = :email');
-        // Bind value
-        $db->bind(':email', $email);
-
-        $row = $db->single();
-
-        // Check row
-        if($db->rowCount() > 0){
-            return $row;
-        } else {
-            return false;
-        }
     }
 
     /**
