@@ -19,6 +19,7 @@ Login
 User
     NAME        TYPE        LENGTH      KEY
     id          INT                     Primary
+    uuid        VarChar     255
     address     Varchar     255
     city        Varchar     255
     state       Varchar     2
