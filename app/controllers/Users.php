@@ -73,4 +73,12 @@ class Users extends Controller {
         }
         $this->view('users/user_type');
     }
+
+    /**
+     * Log user out: Destroys the local session variable, which logs the user out.
+     */
+    public function logout() {
+        User::destroySession();
+        Redirect::to('users/login');
+    }
 }
