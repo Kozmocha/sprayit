@@ -244,6 +244,16 @@ class Users extends Controller {
     }
 
     public function user_type() {
+        if($_SERVER['REQUEST_METHOD'] == 'POST') {
+            if ($_POST["user_type"] == "client") {
+                Redirect::to('users/client_register');
+                //exit;
+            }
+            if ($_POST["user_type"] == "contractor") {
+                Redirect::to('users/contractor_register');
+                //exit;
+            }
+        }
 
         $this->view('users/user_type');
     }

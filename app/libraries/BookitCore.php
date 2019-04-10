@@ -1,18 +1,19 @@
 <?php
 
 /*
- * App Core Class
- * Creates URL and loads Core controller
+ * App BookitCore Class
+ * Creates URL and loads BookitCore controller
  * URL Format -/controller/method/params
  */
 
-class Core {
+class BookitCore {
 
     protected $currentController = 'Users';
     protected $currentMethod = 'login';
     protected $params = [];
 
     public function __construct() {
+
         // print_r($this->getURL());
         $url = $this->getURL();
 
@@ -35,7 +36,6 @@ class Core {
             // Check to see if method exists in controller
             if (method_exists($this->currentController, $url[1])) {
                 $this->currentMethod = $url[1];
-
                 // Unset 1 index.php
                 unset($url[1]);
             }
@@ -43,10 +43,12 @@ class Core {
 
         // Get params
         $this->params = $url ? array_values($url) : [];
-
-        // Call a callback with array of params
-        call_user_func_array([$this->currentController, $this->currentMethod], $this->params);
-
+        try {
+            // Call a callback with array of params
+            call_user_func_array([$this->currentController, $this->currentMethod], $this->params);
+        } catch (\Exception $e) {
+            Redirect::to('pages/not_found');
+        }
     }
 
     // Method to fetch URL and create array
