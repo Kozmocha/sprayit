@@ -6,7 +6,7 @@
     </div>
     <div class="col-lg-3"></div>
 </div>
-<form action="" method="post" style="padding-top: 25px;">
+<form action="<?php echo URL_ROOT; ?>/users/login" method="post" style="padding-top: 25px;">
     <div class="form-row">
         <div class="col-lg-4"></div>
         <div class="form-group col-lg-4">
