@@ -1,82 +1,98 @@
 <?php
 
-class User
-{
+/**
+ * User Model: This is a model for any given user. It handles login authentication and has custom methods related
+ * to users.
+ */
+class User {
 
-    private $fname;
-    private $lname;
-    private $email;
-    private $db;
+    /**
+     * The table that this particular object belongs to within the database.
+     *
+     * @var string
+     */
+    protected $dataTable = 'user';
 
-//=============BEGIN GENERATED FUNCTIONS=============
+//  TODO: DO NOT DELETE THIS CODE. It is not necessary at the moment, but might be necessary later.
+//    public function __construct($data = []) {
+//        foreach ($data as $key => $value) {
+//            $this->$key = $value;
+//        };
+//    }
 
-    public function __construct(){
-        $this->db = new Database;
-    }
+    /**
+     * Sanitize POST: Returns a sanitized version of the $_POST associative array without overriding it.
+     *
+     * @return mixed
+     */
+//    public static function sanitizePost() {
+//        return filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+//    }
 
-    public function getFirstName()
-    {
-        return $this->fname;
-    }
-
-    public function setFirstName($_fName)
-    {
-        $this->fname = $_fName;
-    }
-
-    public function getLastName()
-    {
-        return $this->lname;
-    }
-
-    public function setLastName($_lname)
-    {
-        $this->lname = $_lname;
-    }
-
-    public function getEmail()
-    {
-        return $this->email;
-    }
-
-    public function setEmail($_email)
-    {
-        $this->email = $_email;
-    }
-
-//=============END GENERATED FUNCTIONS=============
-    // Find user by email
-    //login user
-    public function login($login, $password){
-        $this->db->query('SELECT * FROM login WHERE email = :email');
-        $this->db->bind(':email', $email);
-
-        $row = $this->db->single();
-
-        $hashed_password = $row->password;
-        if(password_verify($password, $hashed_password)){
-            return $row;
-        }else{
-            return false;
-        }
-    }
-
-    // Find user by email
-    public function findUserByEmail($email){
-        $this->db->query('SELECT * FROM login WHERE email = :email');
-        // Bind value
-        $this->db->bind(':email', $email);
-
-        $row = $this->db->single();
-
-        // Check row
-        if($this->db->rowCount() > 0){
-            return true;
+    /**
+     * Authenticate User Login: Checks the credentials that are passed in as parameters and proceeds to perform
+     * the login flow.
+     *
+     * @param null $_email
+     * @param null $_password
+     * @param array $_errors
+     * @return bool
+     */
+    public static function authenticate($_email = null, $_password = null, $_errors = []) {
+        if ($_email != '' && $_email != null && $_password != '' && $_password != null) {
+            $user = Database::findUserByEmail($_email);
         } else {
             return false;
         }
+
+        // If $user is not false.
+        if ($user) {
+
+            // Checks the parametrized password against the one found in the database.
+            if ($_password == $user->password) {
+
+                // Passwords matched, commence login.
+                self::createSession($user);
+
+                // TODO: FLASH MESSAGE
+
+                return true;
+            } else {
+
+                // Passwords did not match.
+                return false;
+            }
+        }
+        return false;
     }
 
-}
+    /**
+     * Get User Email: Returns the email of the passed in user.
+     *
+     * @param $user
+     * @return mixed
+     */
+    public function getEmail($user) {
+        return $user->email;
+    }
 
+    /**
+     * Create User Session: Sets the session variables to the passed in user's properties or values.
+     *
+     * @param $user
+     */
+    protected static function createSession($user) {
+        $_SESSION['user_id'] = $user->id;
+        $_SESSION['user_email'] = $user->email;
+    }
+
+    /**
+     * Destroy User Session: Un-sets all of the session variables for the logged in user.
+     */
+    public function destroySession() {
+        unset($_SESSION['user_id']);
+        unset($_SESSION['user_email']);
+        session_destroy();
+    }
+}
 ?>

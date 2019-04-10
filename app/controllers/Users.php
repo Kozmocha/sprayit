@@ -7,68 +7,31 @@ class Users extends Controller {
     }
 
     public function login() {
-        //Check for POST
-        if($_SERVER['REQUEST_METHOD'] == 'POST'){
-            //Process form
-            //Sanitize POST Data
-            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-
-            //Init data
+        if (Session::isLoggedIn()) {
+            Redirect::to('pages/calendar');
+        }
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $post = Session::sanitizePost();
             $data = [
-                'email' => trim($_POST['email']),
-                'password' => trim($_POST['password']),
-                'email_err' => '',
-                'password_err' => '',
+                'email' => trim($post['email']),
+                'password' => trim($post['password'])
             ];
-
-            //Validate Email
-            if(empty($data['email'])){
-                $data['email_err'] = 'Please enter email';
-            }
-
-            //Validate Password
-            if(empty($data['password'])){
-                $data['password_err'] = 'Please enter a password';
-            }
-
-            //Check for user/email
-            if($this->userModel->findUserByEmail($data['email'])){
-                //User found
+            // TODO: For future error identification.
+            $errors = [
+                'email_err' => '',
+                'password_err' => ''
+            ];
+            $isLoggedIn = User::authenticate($post['email'], $post['password']);
+            if ($isLoggedIn) {
+                Redirect::to('pages/calendar');
             } else {
-                //User not found
-                $data['email_err'] = 'No User found';
+                $this->view('users/login', $data, $errors);
             }
-
-            //Make sure errors are empty
-            if(empty($data['email_err']) && empty($data['password_err'])){
-                //Validated
-                //Check and set logged in user
-                $loggedInUser = $this->userModel->login($data['email'], $data['password']);
-
-                if($loggedInUser){
-                    $this->createUserSession($loggedInUser);
-                } else {
-                    $data['password_err'] = 'Password incorrect';
-                    $this->view('users/login', $data);
-                }
-            } else {
-                //Load view with errors
-                /*
-                 * This is where the statment is going to...
-                 */
-                $this->view('users/login', $data);
-            }
-
         } else {
-            //Init data
             $data = [
                 'email' => '',
-                'password' => '',
-                'email_err' => '',
-                'password_err' => '',
+                'password' => ''
             ];
-
-            //Load view
             $this->view('users/login', $data);
         }
     }
@@ -240,7 +203,12 @@ class Users extends Controller {
 
     public function google_login(){
 
-        $this->view('users/google_login');
+        if (GoogleAPI::testCheck() == true){
+            Redirect::to("pages/calendar");
+        } else {
+            echo 'false';
+        }
+        GoogleAPI::testCheck();
     }
 
     public function user_type() {
