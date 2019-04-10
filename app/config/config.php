@@ -1,6 +1,6 @@
 <?php
 
-// Database Parameters
+// MySqlTranslator Parameters
 define('DB_HOST', 'localhost');
 define('DB_USER', 'root');
 define('DB_PASS', '');
@@ -13,7 +13,7 @@ define('APP_ROOT', dirname(dirname(__FILE__)));
 define('URL_ROOT', 'http://localhost/bookit');
 
 // DB Translator Name
-define('DB_TRANSLATOR', 'Database');
+define('DB_TRANSLATOR', 'MySqlTranslator');
 
 // Site Name
 define('SITE_NAME', 'BookIt');

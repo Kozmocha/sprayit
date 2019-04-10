@@ -8,8 +8,8 @@
 
 class BookitCore {
 
-    protected $currentController = 'Users';
-    protected $currentMethod = 'login';
+    protected $currentController = 'Pages';
+    protected $currentMethod = 'index';
     protected $params = [];
 
     public function __construct() {

@@ -22,4 +22,17 @@ class Session {
             return false;
         }
     }
+
+    /**
+     * If the request method is POST: Returns true if the server's request method is 'POST', false if not.
+     *
+     * @return bool
+     */
+    public static function isPost() {
+        return $_SERVER['REQUEST_METHOD'] == 'POST';
+    }
+
+    public static function fieldIsSet($_field) {
+        return (isset($_POST["{$_field}"]));
+    }
 }
