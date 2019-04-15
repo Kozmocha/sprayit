@@ -13,7 +13,7 @@ define('APP_ROOT', dirname(dirname(__FILE__)));
 define('URL_ROOT', 'http://localhost/bookit');
 
 // Site Name
-define('SITENAME', 'BookIt');
+define('SITE_NAME', 'BookIt');
 
 // Site Motto
 define('MOTTO', 'Let us set the <span class="red">appointments</span> so you have more time to do the things you <span class="green">need </span>to.');
@@ -24,13 +24,4 @@ define('TYPE_INSTRUCTIONS', '<span class="blue">Select</span> the type of <span 
 // Coming soon!
 define('COMINGSOON', 'This page is under construction!');
 
-return [
-    'google' => [
-        'id' => '601469690265-ur4a5vfj2mkpeim0lhik9pjrvu4lruj1.apps.googleusercontent.com',
-        'secret' =>'erGg1m-Msi8kxG93GwHnwNfP',
-        'callback_url' => 'http://localhost/bookit',
-        'scope' => ['https://www.googleapis.com/auth/userinfo.profile',
-                    'https://www.googleapis.com/auth/userinfo.email',
-                    'https://www.googleapis.com/auth/calendar']
-    ]
-];
+

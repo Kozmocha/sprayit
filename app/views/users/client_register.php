@@ -1,5 +1,4 @@
 <?php require APP_ROOT . '/views/inc/header.php'; ?>
-<?php require APP_ROOT . '/config/google_setup.php'; ?>
 <div class="row" style="padding-top: 25px;">
     <div class="col-lg-3"></div>
     <div class="col-lg-6">
