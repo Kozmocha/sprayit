@@ -8,4 +8,8 @@ class Redirect {
             header('location: ' . URL_ROOT . '/pages/not_found');
         }
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 7aee0329b603842ae9a36944b3956e7c950aee86
 }

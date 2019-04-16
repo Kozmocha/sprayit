@@ -2,7 +2,8 @@
 <div class="row" style="padding-top: 25px;">
     <div class="col-lg-3"></div>
     <div class="col-lg-6">
-        <h3><?php echo $_data['description']; ?></h3>
+        <h3><?php echo MOTTO; ?></h3>
+        <p>Hello, <?php echo $_SESSION['user_email']; ?></p>
     </div>
     <div class="col-lg-3"></div>
 </div>
