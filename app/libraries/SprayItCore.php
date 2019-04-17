@@ -6,13 +6,14 @@
  * URL Format -/controller/method/params
  */
 
-class BookitCore {
+class SprayItCore {
 
     protected $currentController = 'Pages';
     protected $currentMethod = 'index';
     protected $params = [];
 
     public function __construct() {
+
         // print_r($this->getURL());
         $url = $this->getURL();
 
@@ -35,7 +36,6 @@ class BookitCore {
             // Check to see if method exists in controller
             if (method_exists($this->currentController, $url[1])) {
                 $this->currentMethod = $url[1];
-
                 // Unset 1 index.php
                 unset($url[1]);
             }

@@ -13,19 +13,7 @@ class Pages extends Controller {
      * an index method would not be found. Use this method to redirect to another page.
      */
     public function index() {
-        Redirect::to('pages/calendar');
-    }
-
-    /**
-     * Calendar: Loads the calendar view with any data that is necessary. Note, this class is only accessible if the
-     * user is logged in. Otherwise, it redirects to the login page.
-     */
-    public function calendar() {
-        if (Session::isLoggedIn()) {
-            $this->view('pages/calendar');
-        } else {
-            Redirect::to('users/login');
-        }
+        Redirect::to('users/login');
     }
 
     /**

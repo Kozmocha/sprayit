@@ -3,8 +3,8 @@
 // MySqlTranslator Parameters
 define('DB_HOST', 'localhost');
 define('DB_USER', 'root');
-define('DB_PASS', '');
-define('DB_NAME', 'bookit');
+define('DB_PASS', '123456');
+define('DB_NAME', 'sprayit');
 
 // App Root
 define('APP_ROOT', dirname(dirname(__FILE__)));
@@ -16,13 +16,10 @@ define('URL_ROOT', 'http://localhost/bookit');
 define('DB_TRANSLATOR', 'MySqlTranslator');
 
 // Site Name
-define('SITE_NAME', 'BookIt');
+define('SITE_NAME', 'SprayIt');
 
 // Site Motto
-define('MOTTO', 'Let us set the <span class="red">appointments</span> so you have more time to do the things you <span class="green">need </span>to.');
+define('MOTTO', 'We don\'t moderate like those panzies <span class="pink"> Facebook </span>and <span class="pink">Twitter!</span><br/> <span class="red">SPRAY</span> whatever you <span class="green">WANT!</span>');
 
-// Pick Type Instructions
-define('TYPE_INSTRUCTIONS', '<span class="blue">Select</span> the type of <span class="pink">account</span> you\'ll be using <span class="purple">BookIt</span> for.');
-
-// Coming soon!
 define('COMING_SOON', 'This page is under construction!');
+

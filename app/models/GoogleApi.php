@@ -1,25 +1,66 @@
 <?php
-
+require_once __DIR__ . '/app/gm_setup.php';
 //This class is used to make the API calls to Google and handles events such as login and calendar manipulation.
 class GoogleApi {
 
+    public function testCheck(){
+        return true;
+    }
     //Function used to grab an access token using the credentials data and the authorization code provided by Google for the user.
     public function GetAccessToken($client_id, $redirect_uri, $client_secret, $code) {
-        $url = 'https://accounts.google.com/o/oauth2/token';
+        try{
+            $client = new Google_Client();
+            //check if google is sending back a code
+            if(isset($_GET['code'])){
+                $client->fetchAccessTokenWithAuthCode($_GET['code']);
 
-        $curlPost = 'client_id=' . $client_id . '&redirect_uri=' . $redirect_uri . '&client_secret=' . $client_secret . '&code=' . $code . '&grant_type=authorization_code';
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $curlPost);
-        $data = json_decode(curl_exec($ch), true);
-        $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        if ($http_code != 200)
-            throw new Exception('Error : Failed to receieve access token');
+                if($client->getAccessToken()){
+                    $_SESSION['google_access_token'] = $client->getAccessToken();
+                    $user = $client->verifyIdToken();
 
-        return $data;
+                    $exists = $db->prepare("SELECT * FROM users WHERE provider_id = :pid OR email = :email");
+                    $user['email'] != "" ? $email = $user['email'] : $email = "xxxx";
+                    $exists->execute([':pid' => $user['sub'], ':email' => $email]);
+
+                    if($rs = $exists->fetch()){
+                        $_SESSION['username'] = $rs['username'];
+                        $_SESSION['id'] = $rs['id'];
+
+                        if(isset($_SESSION['errors'])) unset($_SESSION['errors']);
+                        header('Location: index.php');
+                    }
+                    //register user
+                    else{
+                        $insertQuery = "INSERT INTO users (username, email, provider, provider_id, avatar)
+                        VALUES(:username, :email, :provider, :provider_id, :avatar)";
+
+                        $statement = $db->prepare($insertQuery);
+
+                        $statement->execute([
+                            ':username' => $user['name'], ':email' => $user['email'], ':provider' => 'Google',
+                            ':provider_id' => $user['sub'], ':avatar' => $user['picture']
+                        ]);
+
+                        if($statement->rowCount() == 1) {
+                            $_SESSION['username'] = $user['name'];
+                            $_SESSION['id'] = $user['sub'];
+
+                            if(isset($_SESSION['errors'])) unset($_SESSION['errors']);
+                            header('Location: index.php');
+                        }
+                    }
+                }
+            }
+        }catch (PDOException $ex){
+            $errors = "PDO Error: " . $ex->getMessage();
+        }catch (Exception $ex){
+            $errors = "General Exception: " . $ex->getMessage();
+        }
+
+        if($errors != ''){
+            $_SESSION['errors'] = $errors;
+            header('Location: index.php');
+        }
     }
 
     //Function that gets the user's calendar's timezone; this information is accessed with an access token.

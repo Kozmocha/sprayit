@@ -1,6 +1,6 @@
 <?php
 
-class Session {
+class Session{
     /**
      * Sanitize POST: Returns a sanitized version of the $_POST associative array without overriding it.
      *
@@ -16,7 +16,7 @@ class Session {
      * @return bool
      */
     public static function isLoggedIn() {
-        if(isset($_SESSION['user_id'])){
+        if (isset($_SESSION['user_id'])) {
             return true;
         } else {
             return false;

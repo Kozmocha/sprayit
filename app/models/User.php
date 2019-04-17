@@ -13,6 +13,23 @@ class User {
      */
     protected $dataTable = 'user';
 
+
+//  TODO: DO NOT DELETE THIS CODE. It is not necessary at the moment, but might be necessary later.
+//    public function __construct($data = []) {
+//        foreach ($data as $key => $value) {
+//            $this->$key = $value;
+//        };
+//    }
+
+    /**
+     * Sanitize POST: Returns a sanitized version of the $_POST associative array without overriding it.
+     *
+     * @return mixed
+     */
+//    public static function sanitizePost() {
+//        return filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+//    }
+
     /**
      * Authenticate User Login: Checks the credentials that are passed in as parameters and proceeds to perform
      * the login flow.
@@ -37,6 +54,9 @@ class User {
 
                 // Passwords matched, commence login.
                 self::createSession($user);
+
+                // TODO: FLASH MESSAGE
+
                 return true;
             } else {
 
@@ -47,20 +67,14 @@ class User {
         return false;
     }
 
-    public static function isClient() {
-        if (Session::isPost() && Session::fieldIsSet("user_type")) {
-            return $_POST["user_type"] == "client";
-        } else {
-            return false;
-        }
-    }
-
-    public static function isContractor() {
-        if (Session::isPost() && Session::fieldIsSet("user_type")) {
-            return $_POST["user_type"] == "contractor";
-        } else {
-            return false;
-        }
+    /**
+     * Get User Email: Returns the email of the passed in user.
+     *
+     * @param $user
+     * @return mixed
+     */
+    public function getEmail($user) {
+        return $user->email;
     }
 
     /**
