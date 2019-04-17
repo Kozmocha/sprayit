@@ -50,8 +50,9 @@ class Users extends Controller {
      * 3. Destroy session
      * 4. Controller gets logout==true and redirects to user/login page
      */
-    public function logout() {
+    public static function logout() {
         User::destroySession();
+        Redirect::to("users/login");
     }
 
     /*
