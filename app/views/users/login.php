@@ -10,7 +10,7 @@
     <div class="row">
         <div class="col-lg-4"></div>
         <div class="form-group col-lg-4">
-            <input type="email" class="form-control" id="email" placeholder="email">
+            <input name="email" type="email" class="form-control" id="email" placeholder="email">
         </div>
         <div class="col-lg-4"></div>
     </div>

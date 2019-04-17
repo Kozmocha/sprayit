@@ -41,7 +41,7 @@ class User {
      */
     public static function authenticate($_email = null, $_password = null, $_errors = []) {
         if ($_email != '' && $_email != null && $_password != '' && $_password != null) {
-            $user = Database::findUserByEmail($_email);
+            $user = DatabaseConnector::findUserByEmail($_email);
         } else {
             return false;
         }
