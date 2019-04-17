@@ -10,7 +10,14 @@
     <div class="row">
         <div class="col-lg-4"></div>
         <div class="form-group col-lg-4">
-            <input type="name" class="form-control" id="email" placeholder="Name">
+            <input type="name" class="form-control" id="fname" placeholder="First Name">
+        </div>
+        <div class="col-lg-4"></div>
+    </div>
+    <div class="row">
+        <div class="col-lg-4"></div>
+        <div class="form-group col-lg-4">
+            <input type="name" class="form-control" id="lname" placeholder="Last Name">
         </div>
         <div class="col-lg-4"></div>
     </div>
@@ -31,7 +38,7 @@
     <div class="row">
         <div class="col-lg-4"></div>
         <div class="form-group col-lg-4">
-            <input type="confirm_password" name="confirm_password" class="form-control" id="confirm_password" placeholder="Confirm Password">
+            <input type="password" name="confirm_password" class="form-control" id="confirm_password" placeholder="Confirm Password">
         </div>
         <div class="col-lg-4"></div>
     </div>
