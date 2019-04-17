@@ -19,7 +19,7 @@
     <body>
     <?php require APP_ROOT . '/views/inc/navbar.php'; ?>
         <div class="container">
-            <div class="wrap">
+            <div class="wrap" style="margin-top: -75px;">
                 <div class="row">
                     <div class="col-lg-12">
                         <h1><?php echo SITE_NAME ?></h1>

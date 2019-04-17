@@ -17,18 +17,6 @@ class Pages extends Controller {
     }
 
     /**
-     * Calendar: Loads the calendar view with any data that is necessary. Note, this class is only accessible if the
-     * user is logged in. Otherwise, it redirects to the login page.
-     */
-    public function calendar() {
-        if (Session::isLoggedIn()) {
-            $this->view('pages/calendar');
-        } else {
-            Redirect::to('users/login');
-        }
-    }
-
-    /**
      * 404: Loads the 404 page not found view.
      */
     public function not_found() {
