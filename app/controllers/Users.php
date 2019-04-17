@@ -26,8 +26,6 @@ class Users extends Controller {
         if (Session::isLoggedIn()) {
             Redirect::to('pages/calendar');
         }
-
-
         if (Session::isPost()) {
             $post = Session::sanitizePost();
             $data = [
@@ -80,7 +78,6 @@ class Users extends Controller {
         if(isset($pay_load)){
 
         }
-
         $this->view('users/contractor_register');
     }
 }

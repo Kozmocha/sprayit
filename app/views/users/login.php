@@ -7,28 +7,17 @@
     <div class="col-lg-3"></div>
 </div>
 <form action="<?php echo URL_ROOT; ?>/users/login" method="post" style="padding-top: 25px;">
-<<<<<<< HEAD
     <div class="row">
         <div class="col-lg-4"></div>
         <div class="form-group col-lg-4">
-            <input type="email" class="form-control" id="email">
-=======
-    <div class="form-row">
-        <div class="col-lg-4"></div>
-        <div class="form-group col-lg-4">
-            <input type="email" name="email" class="form-control" id="email" placeholder="Email">
->>>>>>> 7aee0329b603842ae9a36944b3956e7c950aee86
+            <input type="email" class="form-control" id="email" placeholder="email">
         </div>
         <div class="col-lg-4"></div>
     </div>
     <div class="row">
         <div class="col-lg-4"></div>
         <div class="form-group col-lg-4">
-<<<<<<< HEAD
-            <input type="password" class="form-control" id="password">
-=======
             <input type="password" name="password" class="form-control" id="password" placeholder="Password">
->>>>>>> 7aee0329b603842ae9a36944b3956e7c950aee86
         </div>
         <div class="col-lg-4"></div>
     </div>

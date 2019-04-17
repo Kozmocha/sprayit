@@ -1,25 +1,4 @@
 <?php
-<<<<<<< HEAD
-class Pages extends Controller {
-    public function __construct() {
-    }
-    public function index() {
-        $data = [
-            'title' => SITE_NAME,
-            'description' => MOTTO
-        ];
-        $this->view('pages/index', $data);
-    }
-    public function calendar() {
-        if (!Session::isLoggedIn()) {
-            Redirect::to('users/login');
-        }
-        $data = [
-            'title' => SITE_NAME,
-            'description' => COMING_SOON
-        ];
-        $this->view('pages/calendar', $data);
-=======
 
 /**
  * Pages controller: This controller handles all data transfers for any view within the 'pages' directory. Each method
@@ -54,12 +33,5 @@ class Pages extends Controller {
      */
     public function not_found() {
         $this->view('pages/not_found');
->>>>>>> 7aee0329b603842ae9a36944b3956e7c950aee86
-    }
-    public function not_found() {
-        $data = [
-            'title' => SITE_NAME
-        ];
-        $this->view('pages/not_found', $data);
     }
 }

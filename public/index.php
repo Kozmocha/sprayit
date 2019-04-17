@@ -2,7 +2,7 @@
 
     require_once '../app/bootstrap.php';
 
-    // Init BookitCore Library
-    $init = new BookitCore;
+    // Init SprayItCore Library
+    $init = new SprayItCore;
 
 ?>

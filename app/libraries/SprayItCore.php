@@ -6,7 +6,7 @@
  * URL Format -/controller/method/params
  */
 
-class BookitCore {
+class SprayItCore {
 
     protected $currentController = 'Pages';
     protected $currentMethod = 'index';
@@ -43,20 +43,14 @@ class BookitCore {
 
         // Get params
         $this->params = $url ? array_values($url) : [];
-<<<<<<< HEAD:app/libraries/BookitCore.php
-=======
 
->>>>>>> 7aee0329b603842ae9a36944b3956e7c950aee86:app/libraries/BookitCore.php
         try {
             // Call a callback with array of params
             call_user_func_array([$this->currentController, $this->currentMethod], $this->params);
         } catch (\Exception $e) {
             Redirect::to('pages/not_found');
         }
-<<<<<<< HEAD:app/libraries/BookitCore.php
-=======
 
->>>>>>> 7aee0329b603842ae9a36944b3956e7c950aee86:app/libraries/BookitCore.php
     }
 
     // Method to fetch URL and create array
