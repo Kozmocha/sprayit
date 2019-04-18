@@ -9,5 +9,3 @@ require_once 'config/config.php';
 spl_autoload_register(function($_className) {
     require_once 'libraries/' . $_className . '.php';
 });
-
-

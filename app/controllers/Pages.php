@@ -13,7 +13,14 @@ class Pages extends Controller {
      * an index method would not be found. Use this method to redirect to another page.
      */
     public function index() {
-        Redirect::to('users/login');
+        Redirect::to('pages/posts');
+    }
+
+    /**
+     * Posts: Loads the posts view with any data that is necessary.
+     */
+    public function posts() {
+        $this->view('pages/posts');
     }
 
     /**

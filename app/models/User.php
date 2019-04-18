@@ -90,7 +90,7 @@ class User {
     /**
      * Destroy User Session: Un-sets all of the session variables for the logged in user.
      */
-    public function destroySession() {
+    public static function destroySession() {
         unset($_SESSION['user_id']);
         unset($_SESSION['user_email']);
         session_destroy();

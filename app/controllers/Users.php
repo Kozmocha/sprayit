@@ -34,78 +34,22 @@ class Users extends Controller {
             ];
             if (User::authenticate($post['email'], $post['password'])) {
                 Redirect::to('pages/posts');
-            } else {
-                $this->view('users/login', $data);
+
             }
-        } else {
-            $this->view('users/login');
+            $this->view('users/login', $data);
         }
+        $this->view('users/login');
     }
 
-    /*
-     * This method is for the Navbar.
-     * TODO:
-     * 1. If link is clicked, access logout function on view controller
-     * 2. Call lougout method in the User model
-     * 3. Destroy session
-     * 4. Controller gets logout==true and redirects to user/login page
+    public static function register() {
+        Redirect::to('pages/not_found');
+    }
+
+    /**
+     * Log user out: Destroys the local session variable, which logs the user out.
      */
     public static function logout() {
         User::destroySession();
-        Redirect::to("users/login");
-    }
-
-    /*
-     * Register: Registers new users. No need to check if user is logged in because the login function would have redirected
-     * them already.
-     */
-
-    /*
-     * 1. Get Data
-     * 2. Sanitize it
-     * 3. Make sure there aren't duplicated users by checking email
-     * 4. Redirect them to their userpage
-     */
-    public function register(){
-        $this->view("users/register");
-    }
-
-
-    public function google_login(){
-
-        require ("../vendor/autoload.php");
-        $scope = 'https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/calendar';
-
-        $client = new Google_Client();
-        $client->setApplicationName('BookIt');
-        $client->setClientId("601469690265-ur4a5vfj2mkpeim0lhik9pjrvu4lruj1.apps.googleusercontent.com");
-        $client->setClientSecret('erGg1m-Msi8kxG93GwHnwNfP');
-        $client->setScopes($scope);
-        $client->setRedirectUri('http://localhost/bookit/users/user_type');
-
-        $auth_url = $client->createAuthUrl();
-        //$auth_url = $client->createAuthUrl($_SERVER['REQUEST_METHOD'] == 'POST');
-        echo "<a href='$auth_url'>Login Through Google </a>";
-        $code = isset($_GET['code']) ? $_GET['code'] : NULL;
-        //prepare callback Login URL with permission
-        if(isset($code)) {
-            try {
-                $token = $client->fetchAccessTokenWithAuthCode($code);
-                $client->setAccessToken($token);
-            }catch (Exception $e){
-                echo $e->getMessage();
-            }
-            try {
-                $pay_load = $client->verifyIdToken();
-            }catch (Exception $e) {
-                echo $e->getMessage();
-            }
-        } else{
-            $pay_load = null;
-        }
-        if(isset($pay_load)){
-
-        }
-        $this->view('users/contractor_register');
+        Redirect::to('users/login');
     }
 }

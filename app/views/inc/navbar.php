@@ -6,23 +6,20 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="<?php echo URL_ROOT; ?>">Home</a>
-                </li>
-            </ul>
-
             <ul class="navbar-nav ml-auto">
-                    <li>
-                        <a class="nav-link" href="<?php echo URL_ROOT; ?>/users/register">Register</a>
+                <?php if(Session::isLoggedIn()) : ?>
+                    <li class="nav-item">
+                        Hello, <?php echo Session::getField('user_email'); ?>
                     </li>
-                <?php if (Session::fieldIsSet("user_id")): ?>
                     <li class="nav-item">
                         <a class="nav-link" href="<?php echo URL_ROOT; ?>/users/logout">Logout</a>
                     </li>
                 <?php else : ?>
                     <li class="nav-item">
                         <a class="nav-link" href="<?php echo URL_ROOT; ?>/users/login">Login</a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="<?php echo URL_ROOT; ?>/users/register">Register</a>
                     </li>
                 <?php endif; ?>
             </ul>
