@@ -1,3 +1,4 @@
+<!--Author: Ioannis Batsios-->
 <?php require APP_ROOT . '/views/inc/header.php'; ?>
 <div class="row" style="padding-top: 25px;">
     <div class="col-lg-3"></div>

@@ -18,6 +18,8 @@ class MySqlTranslator {
     /**
      * MySqlTranslator constructor: Establishes the connection to the database upon instantiation using
      * config-defined credentials.
+     *
+     * @author Christopher Thacker, Ioannis Batsios
      */
     public function __construct() {
 
@@ -41,8 +43,7 @@ class MySqlTranslator {
      * Find a User by Email: Takes an email address parameter and tries to match it with one in the database. If
      * a match is found, it returns the corresponding row. If not, it returns false.
      *
-     * @param $_email
-     * @return bool
+     * @author Christopher Thacker
      */
     public static function findUserByEmail($_email) {
 
@@ -69,7 +70,7 @@ class MySqlTranslator {
     /**
      * Query SQL: Prepares the passed in SQL code for database use.
      *
-     * @param $_sql
+     * @author Christopher Thacker, Ioannis Batsios
      */
     public function query($_sql) {
         $this->stmt = $this->dbh->prepare($_sql);
@@ -80,9 +81,7 @@ class MySqlTranslator {
      * safely use it. This process defaults to string if no other type can be determined. A type can be passed in to
      * automatically bind the value as that type without checking for a matching one.
      *
-     * @param $_param
-     * @param $_value
-     * @param null $_type
+     * @author Christopher Thacker, Ioannis Batsios
      */
     public function bind($_param, $_value, $_type = null) {
         if (is_null($_type)) {
@@ -107,7 +106,7 @@ class MySqlTranslator {
     /**
      * Execute statement: Runs the stmt property against the database.
      *
-     * @return mixed
+     * @author Christopher Thacker, Ioannis Batsios
      */
     public function execute() {
         return $this->stmt->execute();
@@ -116,7 +115,7 @@ class MySqlTranslator {
     /**
      * Return single result: Returns a single row from the database if it matches the stmt property's query code.
      *
-     * @return mixed
+     * @author Christopher Thacker, Ioannis Batsios
      */
     public function single() {
         $this->execute();
@@ -127,7 +126,7 @@ class MySqlTranslator {
      * Get row count: Returns the number of rows in the database that were affected by the execution of the stmt
      * property.
      *
-     * @return mixed
+     * @author Christopher Thacker, Ioannis Batsios
      */
     public function rowCount() {
         return $this->stmt->rowCount();

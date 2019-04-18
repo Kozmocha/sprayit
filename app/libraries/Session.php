@@ -1,10 +1,13 @@
 <?php
 
-class Session{
+/**
+ * Session class: This is a helper class used to manage session-related operations.
+ */
+class Session {
+
     /**
      * Sanitize POST: Returns a sanitized version of the $_POST associative array without overriding it.
      *
-     * @return mixed
      * @author Christopher Thacker
      */
     public static function sanitizePost() {
@@ -14,7 +17,6 @@ class Session{
     /**
      * Check if User is Logged In: Checks if a a user is logged in; returns true if they are, false if not.
      *
-     * @return bool
      * @author Christopher Thacker
      */
     public static function isLoggedIn() {
@@ -28,7 +30,6 @@ class Session{
     /**
      * If the request method is POST: Returns true if the server's request method is 'POST', false if not.
      *
-     * @return bool
      * @author Christopher Thacker
      */
     public static function isPost() {
@@ -38,8 +39,6 @@ class Session{
     /**
      * Returns true if a given field within the $_SESSION array is set, false otherwise.
      *
-     * @param $_field
-     * @return bool
      * @author Christopher Thacker
      */
     public static function fieldIsSet($_field) {
@@ -49,8 +48,6 @@ class Session{
     /**
      * Returns the specified field if found, false if otherwise.
      *
-     * @param $_field
-     * @return bool
      * @author Christopher Thacker
      */
     public static function getField($_field) {
