@@ -1,12 +1,12 @@
 <?php
 
 /*
- * App BookitCore Class
- * Creates URL and loads BookitCore controller
+ * App SprayitCore Class
+ * Creates URL and loads SprayitCore controller
  * URL Format -/controller/method/params
  */
 
-class BookitCore {
+class SprayitCore {
 
     protected $currentController = 'Pages';
     protected $currentMethod = 'index';

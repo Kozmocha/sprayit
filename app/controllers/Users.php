@@ -24,9 +24,8 @@ class Users extends Controller {
      */
     public function login() {
         if (Session::isLoggedIn()) {
-            Redirect::to('pages/calendar');
+            Redirect::to('pages/posts');
         }
-
         if (Session::isPost()) {
             $post = Session::sanitizePost();
             $data = [
@@ -34,50 +33,17 @@ class Users extends Controller {
                 'password' => trim($post['password'])
             ];
             if (User::authenticate($post['email'], $post['password'])) {
-                Redirect::to('pages/calendar');
-            } else {
-                $this->view('users/login', $data);
+                Redirect::to('pages/posts');
             }
-        } else {
-            $this->view('users/login');
+            $this->view('users/login', $data);
         }
-    }
-
-    /**
-     * Contractor registration: Transfers registration form data (contractor-specific) from the contractor_register
-     * view to the User model to be handled. NOT YET IMPLEMENTED.
-     */
-    public function contractor_register() {
-        $this->view('users/contractor_register');
-    }
-
-    /**
-     * Client registration: Transfers registration form data (client-specific) from the client_register view to the
-     * User model to be handled. NOT YET IMPLEMENTED.
-     */
-    public function client_register() {
-        $this->view('users/client_register');
-    }
-
-    /**
-     * User type: Gets the data from the user_type view and asks the User model which type of user they are. The
-     * response determines which redirect to use or if the view is to be loaded again.
-     */
-    public function user_type() {
-        if (Session::isPost()) {
-            if (User::isClient()) {
-                Redirect::to('users/client_register');
-            } else if (User::isContractor()) {
-                Redirect::to('users/contractor_register');
-            }
-        }
-        $this->view('users/user_type');
+        $this->view('users/login');
     }
 
     /**
      * Log user out: Destroys the local session variable, which logs the user out.
      */
-    public function logout() {
+    public static function logout() {
         User::destroySession();
         Redirect::to('users/login');
     }

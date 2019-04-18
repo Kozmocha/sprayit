@@ -34,7 +34,7 @@
 </div>
 <div class="row">
     <div class="col-lg-4"></div>
-    <div class="col-lg-4"><a href="<?php echo URL_ROOT; ?>/users/user_type" class="red">Register Here</a></div>
+    <div class="col-lg-4"><a href="<?php echo URL_ROOT; ?>/pages/not_found" class="red">Register Here</a></div>
     <div class="col-lg-4"></div>
 </div>
 <div class="row" style="padding-top: 50px;">

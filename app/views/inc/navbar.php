@@ -7,7 +7,10 @@
 
         <div class="collapse navbar-collapse" id="navbarsExampleDefault">
             <ul class="navbar-nav ml-auto">
-                <?php if(isset($_SESSION['user_id'])) : ?>
+                <?php if(Session::isLoggedIn()) : ?>
+                    <li class="nav-item">
+                        Hello, <?php echo Session::getField('user_email'); ?>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="<?php echo URL_ROOT; ?>/users/logout">Logout</a>
                     </li>
