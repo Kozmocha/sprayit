@@ -13,7 +13,7 @@ class Pages extends Controller {
      * an index method would not be found. Use this method to redirect to another page.
      */
     public function index() {
-        Redirect::to('pages/calendar');
+        Redirect::to('users/login');
     }
 
     /**

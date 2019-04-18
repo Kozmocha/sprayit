@@ -1,0 +1,31 @@
+DATE: 4/17/2019
+
+1. Fixed a ton of merge conflicts
+2. Prepped new application for SprayIt
+	a) renamed controllers
+	b) deleted unneeded pages
+	c) changed database
+	d) changed the motto
+		TO DO:
+		i) Change file name on Github
+		ii) Change folder name on local environment
+		iii) Redo database requirements
+3. Made google login an a href
+	TO DO:
+	a) fix the redirect
+	b) style the a href to match bootstrap danger
+	c) figure out how to pull name and email from Google API to register it in our database
+4. Added a logout method in the Navbar
+	TO DO:
+	a) actually destroy the session to get method to work and redirect to users/login
+5. Created a registration page
+	TO DO:
+	a) Ask Ike about the redirects:		Should login redirect to register function on controller AND register.php redirect to register funtion on controller? 
+						Or should they seperated?
+	b) Get $_POST data and use the User model to get the data and pass it to database translator.
+	c) Create the User -- pass it to the controller to 	(if user exits) generate a User Post page
+								(else) error page //figure out what errors may arise in process
+6. Added a Register link to navbar
+7. Fixed the index function to redirect to login page
+	TO DO:
+	a) Have the index function on the pages controller redirect to pages/post IF user logged in ELSE users/login if user not logged in.

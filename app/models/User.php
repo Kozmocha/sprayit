@@ -41,7 +41,7 @@ class User {
      */
     public static function authenticate($_email = null, $_password = null, $_errors = []) {
         if ($_email != '' && $_email != null && $_password != '' && $_password != null) {
-            $user = Database::findUserByEmail($_email);
+            $user = DatabaseConnector::findUserByEmail($_email);
         } else {
             return false;
         }
@@ -90,7 +90,7 @@ class User {
     /**
      * Destroy User Session: Un-sets all of the session variables for the logged in user.
      */
-    public function destroySession() {
+    public static function destroySession() {
         unset($_SESSION['user_id']);
         unset($_SESSION['user_email']);
         session_destroy();
