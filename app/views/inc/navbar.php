@@ -1,3 +1,4 @@
+<!--Author: Ioannis Batsios-->
 <nav class="navbar navbar-expand-lg navbar-dark mb-3" style="background-color: rebeccapurple;">
     <div class="container" style="padding: 0 150px">
         <a class="navbar-brand" href="<?php echo URL_ROOT; ?>"><?php echo SITE_NAME; ?></a>

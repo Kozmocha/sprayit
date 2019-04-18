@@ -8,15 +8,14 @@ class DatabaseConnector {
     /**
      * The translator class's name (defined in config/config.php).
      *
-     * @var string
+     * @author Christopher Thacker
      */
     private static $translator = DB_TRANSLATOR;
 
     /**
      * Passes the email value to the specified database translator's findUserByEmail method.
      *
-     * @param $_email
-     * @return mixed
+     * @author Christopher Thacker
      */
     public static function findUserByEmail($_email) {
         $dbTranslator = static::$translator;

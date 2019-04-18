@@ -1,59 +1,67 @@
 <?php
 
-/*
- * App BookitCore Class
- * Creates URL and loads BookitCore controller
- * URL Format -/controller/method/params
+/**
+ * SprayIt Core: This is used to perform controllers and view rendering based off of what's in the URL.
+ * Format: http://localhost/sprayit/{controller}/{method}/{params}
  */
-
 class SprayItCore {
 
-    protected $currentController = 'Pages';
-    protected $currentMethod = 'index';
-    protected $params = [];
+    private $currentController = 'Pages';
+    private $currentMethod = 'index';
+    private $params = [];
 
+    /**
+     * SprayIt Core constructor: This is the constructor for the core class, which ends up directing the rest
+     * of the program.
+     *
+     * @author Christopher Thacker, Ioannis Batsios
+     */
     public function __construct() {
 
-        // print_r($this->getURL());
         $url = $this->getURL();
 
-        // Look in controllers for first value
+        // Looks in 'controllers' for first value.
         if (file_exists('../app/controllers/' . ucwords($url[0]) . '.php')) {
             // If exists, set as controller
             $this->currentController = ucwords($url[0]);
-            // Unset 0 Index
             unset($url[0]);
         }
 
-        // Require the controller
+        // Requires in the specified controller.
         require_once '../app/controllers/' . $this->currentController . '.php';
 
-        // Instantiate the controller class
+        // Instantiates the controller class.
         $this->currentController = new $this->currentController;
 
-        // Check for second part of url
+        // Checks for the second part of the URL for a method.
         if (isset($url[1])) {
-            // Check to see if method exists in controller
+
+            // Checks to see if the specified method exists in the specified controller.
             if (method_exists($this->currentController, $url[1])) {
                 $this->currentMethod = $url[1];
-                // Unset 1 index.php
                 unset($url[1]);
             }
         }
 
-        // Get params
+        // Gets the parameters from what's left of the URL.
         $this->params = $url ? array_values($url) : [];
 
         try {
-            // Call a callback with array of params
+
+            // Calls the specified method within the specified controller with any given parameters.
             call_user_func_array([$this->currentController, $this->currentMethod], $this->params);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             Redirect::to('pages/not_found');
         }
-
     }
 
     // Method to fetch URL and create array
+
+    /**
+     * Get URL: This fetches the URL, sanitizes it, then returns the prepared URL.
+     *
+     * @author Christopher Thacker, Ioannis Batsios
+     */
     public function getURL() {
         if (isset($_GET['url'])) {
             $url = rtrim($_GET['url'], '/');

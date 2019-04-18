@@ -3,6 +3,8 @@
 /**
  * Pages controller: This controller handles all data transfers for any view within the 'pages' directory. Each method
  * corresponds to a view (the name must be EXACTLY the same).
+ *
+ * @author Christopher Thacker, Ioannis Batsios
  */
 class Pages extends Controller {
 
@@ -18,6 +20,8 @@ class Pages extends Controller {
 
     /**
      * Posts: Loads the posts view with any data that is necessary.
+     *
+     * @author Christopher Thacker, Ioannis Batsios
      */
     public function posts() {
         $this->view('pages/posts');
@@ -25,6 +29,8 @@ class Pages extends Controller {
 
     /**
      * 404: Loads the 404 page not found view.
+     *
+     * @author Christopher Thacker
      */
     public function not_found() {
         $this->view('pages/not_found');

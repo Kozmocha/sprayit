@@ -1,3 +1,4 @@
+<!--Author: Ioannis Batsios-->
 <?php require APP_ROOT . '/views/inc/header.php'; ?>
 <div class="row">
     <div class="col-md-12">
