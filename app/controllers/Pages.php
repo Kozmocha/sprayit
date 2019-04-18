@@ -17,11 +17,10 @@ class Pages extends Controller {
     }
 
     /**
-     * Calendar: Loads the calendar view with any data that is necessary. Note, this class is only accessible if the
-     * user is logged in. Otherwise, it redirects to the login page.
+     * Posts: Loads the posts view with any data that is necessary.
      */
     public function posts() {
-            $this->view('pages/posts');
+        $this->view('pages/posts');
     }
 
     /**

@@ -1,18 +1,19 @@
 <?php
 
 /*
- * App SprayitCore Class
- * Creates URL and loads SprayitCore controller
+ * App BookitCore Class
+ * Creates URL and loads BookitCore controller
  * URL Format -/controller/method/params
  */
 
-class SprayitCore {
+class SprayItCore {
 
     protected $currentController = 'Pages';
     protected $currentMethod = 'index';
     protected $params = [];
 
     public function __construct() {
+
         // print_r($this->getURL());
         $url = $this->getURL();
 
@@ -35,7 +36,6 @@ class SprayitCore {
             // Check to see if method exists in controller
             if (method_exists($this->currentController, $url[1])) {
                 $this->currentMethod = $url[1];
-
                 // Unset 1 index.php
                 unset($url[1]);
             }

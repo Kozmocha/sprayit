@@ -18,6 +18,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="<?php echo URL_ROOT; ?>/users/login">Login</a>
                     </li>
+                    <li>
+                        <a class="nav-link" href="<?php echo URL_ROOT; ?>/users/register">Register</a>
+                    </li>
                 <?php endif; ?>
             </ul>
         </div>

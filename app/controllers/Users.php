@@ -34,10 +34,15 @@ class Users extends Controller {
             ];
             if (User::authenticate($post['email'], $post['password'])) {
                 Redirect::to('pages/posts');
+
             }
             $this->view('users/login', $data);
         }
         $this->view('users/login');
+    }
+
+    public static function register() {
+        Redirect::to('pages/not_found');
     }
 
     /**
