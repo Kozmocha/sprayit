@@ -10,7 +10,7 @@ define('DB_NAME', 'sprayit');
 define('APP_ROOT', dirname(dirname(__FILE__)));
 
 // URL Root
-define('URL_ROOT', 'http://localhost/bookit');
+define('URL_ROOT', 'http://localhost/sprayit');
 
 // DB Translator Name
 define('DB_TRANSLATOR', 'MySqlTranslator');
