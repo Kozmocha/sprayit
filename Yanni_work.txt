@@ -29,3 +29,8 @@ DATE: 4/17/2019
 7. Fixed the index function to redirect to login page
 	TO DO:
 	a) Have the index function on the pages controller redirect to pages/post IF user logged in ELSE users/login if user not logged in.
+	
+4/18/2019
+
+1. Worked with Chris resolving a login loop function.
+2. Resolved xamp on local machine having conflicts with ports and other instances.
