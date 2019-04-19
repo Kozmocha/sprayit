@@ -17,7 +17,7 @@ class Users extends Controller {
      * @author Christopher Thacker
      */
     public function index() {
-        Redirect::to('users/login');
+        Redirect::to(LOGIN_PATH);
     }
 
     /**
@@ -28,7 +28,7 @@ class Users extends Controller {
      */
     public function login() {
         if (Session::isLoggedIn()) {
-            Redirect::to('pages/posts');
+            Redirect::to(POSTS_HOME);
         }
         if (Session::isPost()) {
             $post = Session::sanitizePost();
@@ -37,19 +37,19 @@ class Users extends Controller {
                 'password' => trim($post['password'])
             ];
             if (User::authenticate($post['email'], $post['password'])) {
-                Redirect::to('pages/posts');
+                Redirect::to(POSTS_HOME);
 
             }
-            $this->view('users/login', $data);
+            $this->view(LOGIN_PATH, $data);
         }
-        $this->view('users/login');
+        $this->view(LOGIN_PATH);
     }
 
     /**
      *
      */
-    public static function register() {
-        Redirect::to('pages/not_found');
+    public function register() {
+        $this->view(REGISTER_PATH);
     }
 
     /**
@@ -58,7 +58,7 @@ class Users extends Controller {
      * @author Christopher Thacker
      */
     public static function logout() {
-        User::destroySession();
-        Redirect::to('users/login');
+        User::destroyUserSession();
+        Redirect::to(LOGIN_PATH);
     }
 }

@@ -7,8 +7,6 @@ class DatabaseConnector {
 
     /**
      * The translator class's name (defined in config/config.php).
-     *
-     * @author Christopher Thacker
      */
     private static $translator = DB_TRANSLATOR;
 
@@ -20,5 +18,15 @@ class DatabaseConnector {
     public static function findUserByEmail($_email) {
         $dbTranslator = static::$translator;
         return $dbTranslator::findUserByEmail($_email);
+    }
+
+    public static function getAll($_table) {
+        $dbTranslator = static::$translator;
+        return $dbTranslator::getAll($_table);
+    }
+
+    public static function getAllPosts() {
+        $dbTranslator = static::$translator;
+        return $dbTranslator::getAllPosts();
     }
 }

@@ -6,7 +6,7 @@
  */
 class SprayItCore {
 
-    private $currentController = 'Pages';
+    private $currentController = 'Posts';
     private $currentMethod = 'index';
     private $params = [];
 
@@ -51,7 +51,7 @@ class SprayItCore {
             // Calls the specified method within the specified controller with any given parameters.
             call_user_func_array([$this->currentController, $this->currentMethod], $this->params);
         } catch (Exception $e) {
-            Redirect::to('pages/not_found');
+            Redirect::to(NOT_FOUND_PATH);
         }
     }
 

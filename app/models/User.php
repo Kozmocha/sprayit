@@ -9,7 +9,7 @@ class User {
     /**
      * The table that this particular object belongs to within the database.
      */
-    protected $dataTable = 'user';
+    private $dataTable = 'user';
 
 
 //  TODO: DO NOT DELETE THIS CODE. It is not necessary at the moment, but might be necessary later.
@@ -39,8 +39,7 @@ class User {
             if ($_password == $user->password) {
 
                 // Passwords matched, commence login.
-                self::createSession($user);
-
+                self::createUserSession($user);
                 return true;
             } else {
 
@@ -65,9 +64,11 @@ class User {
      *
      * @author Christopher Thacker
      */
-    protected static function createSession($_user) {
+    protected static function createUserSession($_user) {
         $_SESSION['user_id'] = $_user->id;
         $_SESSION['user_email'] = $_user->email;
+        $_SESSION['user_fname'] = $_user->fname;
+        Redirect::to(POSTS_HOME);
     }
 
     /**
@@ -75,10 +76,12 @@ class User {
      *
      * @author Christopher Thacker
      */
-    public static function destroySession() {
+    public static function destroyUserSession() {
         unset($_SESSION['user_id']);
         unset($_SESSION['user_email']);
+        unset($_SESSION['user_fname']);
         session_destroy();
+        Redirect::to(LOGIN_PATH);
     }
 }
 ?>

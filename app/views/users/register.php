@@ -7,7 +7,7 @@
     </div>
     <div class="col-lg-3"></div>
 </div>
-<form action="<?php echo URL_ROOT; ?>/users/register" method="post" style="padding-top: 25px;">
+<form action="<?php echo URL_ROOT . '/' . REGISTER_PATH; ?>" method="post" style="padding-top: 25px;">
     <div class="row">
         <div class="col-lg-4"></div>
         <div class="form-group col-lg-4">
