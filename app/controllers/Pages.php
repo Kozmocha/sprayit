@@ -15,16 +15,7 @@ class Pages extends Controller {
      * an index method would not be found. Use this method to redirect to another page.
      */
     public function index() {
-        Redirect::to('pages/posts');
-    }
-
-    /**
-     * Posts: Loads the posts view with any data that is necessary.
-     *
-     * @author Christopher Thacker, Ioannis Batsios
-     */
-    public function posts() {
-        $this->view('pages/posts');
+        Redirect::to(POSTS_HOME);
     }
 
     /**
@@ -33,6 +24,6 @@ class Pages extends Controller {
      * @author Christopher Thacker
      */
     public function not_found() {
-        $this->view('pages/not_found');
+        $this->view(NOT_FOUND_PATH);
     }
 }

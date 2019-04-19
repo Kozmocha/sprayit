@@ -47,24 +47,55 @@ class MySqlTranslator {
      */
     public static function findUserByEmail($_email) {
 
-        // Establishes connection to the database.
+        // Establishes a connection to the database.
         $db = new MySqlTranslator;
 
         // Sends the SQL to be prepared for database use.
-        $db->query('SELECT * FROM `user` WHERE email = :email');
+        $db->query("SELECT * FROM `user` WHERE email = :email");
 
         // Bind the email value (expected string) to the prepared variable.
         $db->bind(':email', $_email);
 
-        // Get a single row for the matching email.
+        // Gets a single row for the matching email.
         $row = $db->single();
 
-        // Checks row.
+        // Checks the number of rows.
         if($db->rowCount() > 0){
             return $row;
         } else {
             return false;
         }
+    }
+
+    /**
+     * Get all records from a table: Returns all of the rows within a specified table.
+     *
+     * @author Christopher Thacker
+     */
+    public static function getAll($_table) {
+        $db = new MySqlTranslator();
+
+        $db->query("SELECT * FROM `{$_table}`");
+
+        $results = $db->resultSet();
+        return $results;
+    }
+
+    public static function getAllPosts() {
+        $db = new MySqlTranslator();
+
+        $db->query('SELECT *,
+                         `posts`.id as postId,
+                         `user`.id as userId,
+                         `posts`.created_at as postCreated
+                         FROM `posts`
+                         INNER JOIN `user`
+                         ON posts.user_id = `user`.id
+                         ORDER BY `posts`.created_at DESC
+                         ');
+
+        $results = $db->resultSet();
+        return $results;
     }
 
     /**
@@ -120,6 +151,16 @@ class MySqlTranslator {
     public function single() {
         $this->execute();
         return $this->stmt->fetch(PDO::FETCH_OBJ);
+    }
+
+    /**
+     * Return set of results: Returns all results of the SQL statement.
+     *
+     * @author Christopher Thacker, Ioannis Batsios
+     */
+    public function resultSet() {
+        $this->execute();
+        return $this->stmt->fetchAll(PDO::FETCH_OBJ);
     }
 
     /**

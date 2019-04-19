@@ -15,7 +15,7 @@ class Redirect {
         if ($_page != null && $_page != '') {
             header('location: ' . URL_ROOT . '/' . $_page);
         } else {
-            header('location: ' . URL_ROOT . '/pages/not_found');
+            header('location: ' . URL_ROOT . '/' . NOT_FOUND_PATH);
         }
     }
 }
