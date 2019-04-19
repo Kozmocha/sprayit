@@ -1,3 +1,4 @@
+<!--Author: Ioannis Batsios-->
 <?php require APP_ROOT . '/views/inc/header.php'; ?>
 <div class="row" style="padding-top: 25px;">
     <div class="col-lg-3"></div>
@@ -6,7 +7,7 @@
     </div>
     <div class="col-lg-3"></div>
 </div>
-<form action="<?php echo URL_ROOT; ?>/users/login" method="post" style="padding-top: 25px;">
+<form action="<?php echo URL_ROOT . '/' . LOGIN_PATH; ?>" method="post" style="padding-top: 25px;">
     <div class="row">
         <div class="col-lg-4"></div>
         <div class="form-group col-lg-4">
@@ -29,15 +30,6 @@
         <div class="col-lg-4"></div>
     </div>
 </form>
-<div class="row">
-    <div class="col-lg-4 col-md-4"></div>
-    <div class="col-lg-4 col-md-4"><br>
-        <a href="<?php echo URL_ROOT; ?>/users/google_login">
-            <span class="fab fa-google"></span>&nbsp;&nbsp;<div class="vl"></div>&nbsp; Log In With Google
-        </a>
-    </div>
-    <div class="col-lg-4 col-md-4"></div>
-</div>
 <div class="row" style="padding-top: 25px;">
     <div class="col-lg-4"></div>
     <br>
@@ -46,12 +38,7 @@
 </div>
 <div class="row">
     <div class="col-lg-4"></div>
-    <div class="col-lg-4"><a href="<?php echo URL_ROOT; ?>/users/register" class="red">Register Here</a></div>
-    <div class="col-lg-4"></div>
-</div>
-<div class="row" style="padding-top: 50px;">
-    <div class="col-lg-4"></div>
-    <div class="col-lg-4"><h6><a href="#">Forgot password?</a></h6></div>
+    <div class="col-lg-4"><a href="<?php echo URL_ROOT . '/' . REGISTER_PATH; ?>" class="red">Register Here</a></div>
     <div class="col-lg-4"></div>
 </div>
 <?php require APP_ROOT . '/views/inc/footer.php'; ?>

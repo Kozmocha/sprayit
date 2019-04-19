@@ -8,10 +8,8 @@ class User {
 
     /**
      * The table that this particular object belongs to within the database.
-     *
-     * @var string
      */
-    protected $dataTable = 'user';
+    private $dataTable = 'user';
 
 
 //  TODO: DO NOT DELETE THIS CODE. It is not necessary at the moment, but might be necessary later.
@@ -22,22 +20,10 @@ class User {
 //    }
 
     /**
-     * Sanitize POST: Returns a sanitized version of the $_POST associative array without overriding it.
-     *
-     * @return mixed
-     */
-//    public static function sanitizePost() {
-//        return filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-//    }
-
-    /**
      * Authenticate User Login: Checks the credentials that are passed in as parameters and proceeds to perform
      * the login flow.
      *
-     * @param null $_email
-     * @param null $_password
-     * @param array $_errors
-     * @return bool
+     * @author Christopher Thacker
      */
     public static function authenticate($_email = null, $_password = null, $_errors = []) {
         if ($_email != '' && $_email != null && $_password != '' && $_password != null) {
@@ -53,10 +39,7 @@ class User {
             if ($_password == $user->password) {
 
                 // Passwords matched, commence login.
-                self::createSession($user);
-
-                // TODO: FLASH MESSAGE
-
+                self::createUserSession($user);
                 return true;
             } else {
 
@@ -70,8 +53,7 @@ class User {
     /**
      * Get User Email: Returns the email of the passed in user.
      *
-     * @param $user
-     * @return mixed
+     * @author Christopher Thacker
      */
     public function getEmail($user) {
         return $user->email;
@@ -80,20 +62,26 @@ class User {
     /**
      * Create User Session: Sets the session variables to the passed in user's properties or values.
      *
-     * @param $user
+     * @author Christopher Thacker
      */
-    protected static function createSession($user) {
-        $_SESSION['user_id'] = $user->id;
-        $_SESSION['user_email'] = $user->email;
+    protected static function createUserSession($_user) {
+        $_SESSION['user_id'] = $_user->id;
+        $_SESSION['user_email'] = $_user->email;
+        $_SESSION['user_fname'] = $_user->fname;
+        Redirect::to(POSTS_HOME);
     }
 
     /**
      * Destroy User Session: Un-sets all of the session variables for the logged in user.
+     *
+     * @author Christopher Thacker
      */
-    public static function destroySession() {
+    public static function destroyUserSession() {
         unset($_SESSION['user_id']);
         unset($_SESSION['user_email']);
+        unset($_SESSION['user_fname']);
         session_destroy();
+        Redirect::to(LOGIN_PATH);
     }
 }
 ?>

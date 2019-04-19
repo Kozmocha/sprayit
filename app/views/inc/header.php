@@ -1,3 +1,4 @@
+<!--Author: Ioannis Batsios-->
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -23,7 +24,6 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h1><?php echo SITE_NAME ?></h1>
-
                     </div>
                 </div>
 	

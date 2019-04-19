@@ -18,6 +18,8 @@ class MySqlTranslator {
     /**
      * MySqlTranslator constructor: Establishes the connection to the database upon instantiation using
      * config-defined credentials.
+     *
+     * @author Christopher Thacker, Ioannis Batsios
      */
     public function __construct() {
 
@@ -41,24 +43,23 @@ class MySqlTranslator {
      * Find a User by Email: Takes an email address parameter and tries to match it with one in the database. If
      * a match is found, it returns the corresponding row. If not, it returns false.
      *
-     * @param $_email
-     * @return bool
+     * @author Christopher Thacker
      */
     public static function findUserByEmail($_email) {
 
-        // Establishes connection to the database.
+        // Establishes a connection to the database.
         $db = new MySqlTranslator;
 
         // Sends the SQL to be prepared for database use.
-        $db->query('SELECT * FROM `user` WHERE email = :email');
+        $db->query("SELECT * FROM `user` WHERE email = :email");
 
         // Bind the email value (expected string) to the prepared variable.
         $db->bind(':email', $_email);
 
-        // Get a single row for the matching email.
+        // Gets a single row for the matching email.
         $row = $db->single();
 
-        // Checks row.
+        // Checks the number of rows.
         if($db->rowCount() > 0){
             return $row;
         } else {
@@ -67,9 +68,40 @@ class MySqlTranslator {
     }
 
     /**
+     * Get all records from a table: Returns all of the rows within a specified table.
+     *
+     * @author Christopher Thacker
+     */
+    public static function getAll($_table) {
+        $db = new MySqlTranslator();
+
+        $db->query("SELECT * FROM `{$_table}`");
+
+        $results = $db->resultSet();
+        return $results;
+    }
+
+    public static function getAllPosts() {
+        $db = new MySqlTranslator();
+
+        $db->query('SELECT *,
+                         `posts`.id as postId,
+                         `user`.id as userId,
+                         `posts`.created_at as postCreated
+                         FROM `posts`
+                         INNER JOIN `user`
+                         ON posts.user_id = `user`.id
+                         ORDER BY `posts`.created_at DESC
+                         ');
+
+        $results = $db->resultSet();
+        return $results;
+    }
+
+    /**
      * Query SQL: Prepares the passed in SQL code for database use.
      *
-     * @param $_sql
+     * @author Christopher Thacker, Ioannis Batsios
      */
     public function query($_sql) {
         $this->stmt = $this->dbh->prepare($_sql);
@@ -80,9 +112,7 @@ class MySqlTranslator {
      * safely use it. This process defaults to string if no other type can be determined. A type can be passed in to
      * automatically bind the value as that type without checking for a matching one.
      *
-     * @param $_param
-     * @param $_value
-     * @param null $_type
+     * @author Christopher Thacker, Ioannis Batsios
      */
     public function bind($_param, $_value, $_type = null) {
         if (is_null($_type)) {
@@ -107,7 +137,7 @@ class MySqlTranslator {
     /**
      * Execute statement: Runs the stmt property against the database.
      *
-     * @return mixed
+     * @author Christopher Thacker, Ioannis Batsios
      */
     public function execute() {
         return $this->stmt->execute();
@@ -116,7 +146,7 @@ class MySqlTranslator {
     /**
      * Return single result: Returns a single row from the database if it matches the stmt property's query code.
      *
-     * @return mixed
+     * @author Christopher Thacker, Ioannis Batsios
      */
     public function single() {
         $this->execute();
@@ -124,10 +154,20 @@ class MySqlTranslator {
     }
 
     /**
+     * Return set of results: Returns all results of the SQL statement.
+     *
+     * @author Christopher Thacker, Ioannis Batsios
+     */
+    public function resultSet() {
+        $this->execute();
+        return $this->stmt->fetchAll(PDO::FETCH_OBJ);
+    }
+
+    /**
      * Get row count: Returns the number of rows in the database that were affected by the execution of the stmt
      * property.
      *
-     * @return mixed
+     * @author Christopher Thacker, Ioannis Batsios
      */
     public function rowCount() {
         return $this->stmt->rowCount();

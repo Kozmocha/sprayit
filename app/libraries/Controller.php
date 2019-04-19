@@ -1,14 +1,20 @@
 <?php
 
-/*
- * Base Controller
- * Loads the models and views
+/**
+ * Base Controller: The parent controller to all subsequent controllers which allows each child to load models
+ * and render views.
  */
-
 class Controller {
 
-    // Load the model
-    public function model($_model) {
+    /**
+     * Model function: Allows a controller to load a model and send data to it.
+     *
+     * @param $_model
+     * @return mixed
+     *
+     * @author Christopher Thacker, Ioannis Batsios
+     */
+    protected function model($_model) {
         // Require model file
         require_once '../app/models/' . $_model . '.php';
 
@@ -16,14 +22,19 @@ class Controller {
         return new $_model();
     }
 
-    // Load the view
-    public function view($_view, $_data = [], $_error = []) {
+    /**
+     * View function: Allows a controller to render a view by passing any data into it.
+     *
+     * @author Christopher Thacker, Ioannis Batsios
+     */
+    protected function view($_view, $_data = []) {
         // Check for view file
         if (file_exists('../app/views/' . $_view . '.php')) {
             require_once '../app/views/' . $_view . '.php';
         } else {
+
             // View does not exist
-            die('View does not exist');
+            Redirect::to(NOT_FOUND_PATH);
         }
     }
 }
