@@ -1,11 +1,11 @@
 <!--Author: Ioannis Batsios-->
 <?php require APP_ROOT . '/views/inc/header.php'; ?>
 <div class="row" style="padding-top: 25px;">
-    <div class="col-lg-3"></div>
-    <div class="col-lg-6">
+    <div class="col-lg-2"></div>
+    <div class="col-lg-8">
         <h3><?php echo MOTTO; ?></h3>
     </div>
-    <div class="col-lg-3"></div>
+    <div class="col-lg-2"></div>
 </div>
 <form action="<?php echo URL_ROOT . '/' . LOGIN_PATH; ?>" method="post" style="padding-top: 25px;">
     <div class="row">

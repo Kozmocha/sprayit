@@ -46,11 +46,43 @@ class Users extends Controller {
     }
 
     /**
+     * Register: This registers new users. It transfers the form data to the User model to sanitize and add to the
+     * database. Once registered, takes them to the login page.
      *
+     * @author Ioannis Batsios
      */
     public function register() {
-        $this->view(REGISTER_PATH);
+        // If user is already logged in, this doesn't allow them to re-register unless they are logged out.
+        if (Session::isLoggedIn()) {
+            Redirect::to(POSTS_HOME);
+        }
+
+        // Check if Register button is clicked
+        if(Session::isPost()) {
+            $post = Session::sanitizePost();
+//            $data = [
+//                'fname' => trim($post['fname']),
+//                'lname' => trim($post['lname']),
+//                'email' => trim($post['email']),
+//                'confirm_email' => trim($post['confirm_email']),
+//                'password' => trim($post['password']),
+//                'confirm_password' => trim($post['confirm_password'])
+//            ];
+            //Passes data to the User model
+            $user = User::registerUser($post['fname'], $post['lname'], $post['email'], $post['confirm_email'], $post['password'], $post['confirm_password']);
+            //If the data is returned true
+            if ($user){
+                //Go to the login screen
+                $this->view(LOGIN_PATH);
+                //Else send back to the registration page.
+            } else {
+                $this->view(REGISTER_PATH);
+            }
+        } else {
+            $this->view(REGISTER_PATH);
+        }
     }
+
 
     /**
      * Log user out: Destroys the local session variable, which logs the user out.

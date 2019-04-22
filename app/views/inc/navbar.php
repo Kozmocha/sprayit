@@ -10,7 +10,7 @@
             <ul class="navbar-nav ml-auto">
                 <?php if(Session::isLoggedIn()) : ?>
                     <li class="nav-item">
-                        Hello, <?php echo Session::getField('user_email'); ?>
+                        <h4 class="greeting">Hello, <?php echo Session::getField('user_fname'); ?></h4>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="<?php echo URL_ROOT . '/' . LOGOUT_PATH; ?>">Logout</a>

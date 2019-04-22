@@ -39,4 +39,7 @@
     border-left: 1px solid white;
 }
 
-
+h4.greeting {
+    color: #fff;
+    margin: 5px 300px auto auto;
+}
