@@ -12,4 +12,5 @@
 3. Created a createUser PDO function in mysqliTranslator
     a) If created, sends user to login
 4. Started redoing REQUIREMENT DOCS to illustrate SprayIt instead of BookIt
-
+5. Formated the post page
+6. Started working on the create post feature.

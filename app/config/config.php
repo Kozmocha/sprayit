@@ -37,4 +37,6 @@ define('REGISTER_PATH', 'users/register');
 
 define('NOT_FOUND_PATH', 'pages/not_found');
 
+define('UPDATE_USER', 'users/update');
+
 
