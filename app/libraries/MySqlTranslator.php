@@ -68,6 +68,29 @@ class MySqlTranslator {
     }
 
     /**
+     * Checks to make sure User isn't adding same email to the database.
+     *
+     * @author Ioannis Batsios
+     */
+    public static function checkDuplicateEmails($_email) {
+        // Establishes a connection to the database.
+        $db = new MySqlTranslator;
+
+        // Sends the SQL to be prepared for database use.
+        $db->query("SELECT * FROM `user` WHERE email = :email");
+
+        // Gets a single row for the matching email.
+        $row = $db->single();
+
+        // Checks the number of rows.
+        if($db->rowCount() > 0){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
      * Get all records from a table: Returns all of the rows within a specified table.
      *
      * @author Christopher Thacker
@@ -171,5 +194,30 @@ class MySqlTranslator {
      */
     public function rowCount() {
         return $this->stmt->rowCount();
+    }
+
+    /**
+     * MySQL to create a new user from the Registration page
+     *
+     * @author Ioannis Batsios
+     */
+    public static function createUser($_fname, $_lname, $_email, $_password) {
+        try {
+            $host = DB_HOST;
+            $dbname = DB_NAME;
+            $dsn = "mysql:host=$host;dbname=$dbname";
+            $conn = new PDO($dsn, DB_USER, DB_PASS);
+            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $firstName = $_fname;
+            $lastName = $_lname;
+            $email = $_email;
+            $password = $_password;
+            $query = "INSERT INTO user (fname, lname, email, password) VALUES ('$firstName ','$lastName','$email','$password')";
+            $conn->exec($query);
+            echo "New record created successfully";
+        } catch(PDOException $e) {
+             echo $query . "<br>" . $e->getMessage();
+        }
+            $conn = null;
     }
 }

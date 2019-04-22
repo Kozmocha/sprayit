@@ -3,7 +3,7 @@
 // MySqlTranslator Parameters
 define('DB_HOST', 'localhost');
 define('DB_USER', 'root');
-define('DB_PASS', '');
+define('DB_PASS', '123456');
 define('DB_NAME', 'sprayit');
 
 // App Root
@@ -19,7 +19,7 @@ define('DB_TRANSLATOR', 'MySqlTranslator');
 define('SITE_NAME', 'SprayIt');
 
 // Site Motto
-define('MOTTO', 'We don\'t moderate like those panzies <span class="pink"> Facebook </span>and <span class="pink">Twitter!</span><br/> <span class="red">SPRAY</span> whatever you <span class="green">WANT!</span>');
+define('MOTTO', 'We don\'t moderate like those panzies <span class="pink"> Facebook </span>and <span class="pink">Twitter</span>!<br/> <span class="red">SPRAY</span> whatever you <span class="green">WANT!</span>');
 
 // REDIRECT AND RENDER VIEW PATHS BELOW
 

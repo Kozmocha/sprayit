@@ -13,11 +13,11 @@ class User {
 
 
 //  TODO: DO NOT DELETE THIS CODE. It is not necessary at the moment, but might be necessary later.
-//    public function __construct($data = []) {
-//        foreach ($data as $key => $value) {
-//            $this->$key = $value;
-//        };
-//    }
+    public function __construct($data = []) {
+        foreach ($data as $key => $value) {
+            $this->$key = $value;
+        };
+    }
 
     /**
      * Authenticate User Login: Checks the credentials that are passed in as parameters and proceeds to perform
@@ -82,6 +82,62 @@ class User {
         unset($_SESSION['user_fname']);
         session_destroy();
         Redirect::to(LOGIN_PATH);
+    }
+
+    /*
+     * Function to see if emails typed match.
+     * Returns false if not.
+     *
+     * @author Ioannis Batsios
+     */
+    public static function confirmEmail($_email, $_emailToConfirm) {
+        if ($_email != $_emailToConfirm){
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    /**
+     * Function to see if passwords match.
+     * Returns false if not
+     *
+     * @author Ioannis Batsios
+     */
+    public static function checkPasswords($_password, $_samePassword){
+        if ($_password != $_samePassword){
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    /**
+     *
+     * Function registers user. Gets sanitized data from the controller, calls the Database Connector, and passes to database.
+     *
+     * @author Ioannis Batsios
+     *
+     * To Do: split if statements into their own functions so if Registrations changes, easy to change function.
+     */
+    public static function registerUser($_fname, $_lname, $_email, $_confirmEmail, $_password, $_confirmPassword){
+        // Checks to make sure emails match. If not, returns false
+        if (self::confirmEmail($_email, $_confirmEmail) && self::checkPasswords($_password, $_confirmPassword)){
+            DatabaseConnector::createUser($_fname, $_lname, $_email, $_password);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * A function that returns a salted hash for a password. Used to make database more secure from outside threats.
+     *
+     * @author Ioannis Batsios
+     */
+    public static function saltPassword($_password){
+        $salt = random_bytes(16);
+        return $password_hash = crypt($_password, $salt);
     }
 }
 ?>
