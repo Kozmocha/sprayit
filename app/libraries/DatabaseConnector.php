@@ -21,9 +21,6 @@ class DatabaseConnector {
     }
 
     /**
-     * @param $_email
-     * @return mixed
-     *
      * Checks to make sure User isn't adding same email to the database.
      *
      * @author Ioannis Batsios
@@ -51,5 +48,10 @@ class DatabaseConnector {
     public static function createUser($_fname, $_lname, $_email, $_password){
         $dbTranslator = static::$translator;
         return $dbTranslator::createUser($_fname, $_lname, $_email, $_password);
+    }
+
+    public static function createPost($_title, $_body) {
+        $dbTranslator = static::$translator;
+        return $dbTranslator::createPost($_title, $_body);
     }
 }
