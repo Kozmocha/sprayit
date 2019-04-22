@@ -104,6 +104,11 @@ class MySqlTranslator {
         return $results;
     }
 
+    /**
+     * Returns all posts within the database with the poster's information.
+     *
+     * @author Christopher Thacker
+     */
     public static function getAllPosts() {
         $db = new MySqlTranslator();
 
