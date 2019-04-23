@@ -113,14 +113,14 @@ class MySqlTranslator {
         $db = new MySqlTranslator();
 
         $db->query('SELECT *,
-                         `posts`.id as postId,
-                         `user`.id as userId,
-                         `posts`.created_at as postCreated
-                         FROM `posts`
-                         INNER JOIN `user`
-                         ON posts.user_id = `user`.id
-                         ORDER BY `posts`.created_at DESC
-                         ');
+                     `posts`.id as postId,
+                     `user`.id as userId,
+                     `posts`.created_at as postCreated
+                     FROM `posts`
+                     INNER JOIN `user`
+                     ON posts.user_id = `user`.id
+                     ORDER BY `posts`.created_at DESC
+                     ');
 
         $results = $db->resultSet();
         return $results;
