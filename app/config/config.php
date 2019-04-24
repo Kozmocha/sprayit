@@ -3,7 +3,7 @@
 // MySqlTranslator Parameters
 define('DB_HOST', 'localhost');
 define('DB_USER', 'root');
-define('DB_PASS', '123456');
+define('DB_PASS', '');
 define('DB_NAME', 'sprayit');
 
 // App Root
@@ -20,6 +20,20 @@ define('SITE_NAME', 'SprayIt');
 
 // Site Motto
 define('MOTTO', 'We don\'t moderate like those panzies <span class="pink"> Facebook </span>and <span class="pink">Twitter</span>!<br/> <span class="red">SPRAY</span> whatever you <span class="green">WANT!</span>');
+
+// MAIL API CONFIG
+
+define('MAIL_TRANSLATOR', 'Mail');
+
+define('SENDGRID_KEY', '');
+
+define('NOREPLY_ADDRESS', 'noreply@sprayit.com');
+
+define('NOREPLY_NAME', 'noreply');
+
+define('REGISTRATION_EMAIL_SUBJECT', 'Welcome to SprayIt!');
+
+define('REGISTRATON_EMAIL_BODY', 'Thank you for signing up for SprayIt. Your account has been verified and saved! You can now log in.');
 
 // REDIRECT AND RENDER VIEW PATHS BELOW
 

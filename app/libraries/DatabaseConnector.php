@@ -53,13 +53,13 @@ class DatabaseConnector {
     /**
      *
      */
-    public static function rowCount(){
+    public static function rowCount() {
         $dbTranslator = static::$translator;
         return $dbTranslator::rowCount();
     }
 
 
-    public static function createUser($_fname, $_lname, $_email, $_password, $_uuid){
+    public static function createUser($_fname, $_lname, $_email, $_password, $_uuid) {
         $dbTranslator = static::$translator;
         return $dbTranslator::createUser($_fname, $_lname, $_email, $_password, $_uuid);
     }
@@ -69,7 +69,7 @@ class DatabaseConnector {
         return $dbTranslator::createPost($_title, $_body, $_uuid);
     }
 
-    public static function getUuid($_userId){
+    public static function getUuid($_userId) {
         $dbTranslator = static::$translator;
         return $dbTranslator::getUuid($_userId);
     }
