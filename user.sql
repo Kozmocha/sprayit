@@ -25,26 +25,29 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `posts`
+-- Table structure for table `user`
 --
 
-CREATE TABLE `posts` (
+CREATE TABLE `user` (
   `id` int(11) NOT NULL,
-  `title` varchar(255) NOT NULL,
-  `body` text NOT NULL,
+  `fname` varchar(255) NOT NULL,
+  `lname` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `uuid` varchar(20) NOT NULL,
-  `active_flag` tinyint(1) NOT NULL,
-  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `active_flag` tinyint(1) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `posts`
+-- Indexes for table `user`
 --
-ALTER TABLE `posts`
+ALTER TABLE `user`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -52,10 +55,10 @@ ALTER TABLE `posts`
 --
 
 --
--- AUTO_INCREMENT for table `posts`
+-- AUTO_INCREMENT for table `user`
 --
-ALTER TABLE `posts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+ALTER TABLE `user`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
