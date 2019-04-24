@@ -58,23 +58,19 @@ class DatabaseConnector {
         return $dbTranslator::rowCount();
     }
 
-    /**
-     *
-     *
-     * @author Ioannis Batsios
-     */
-    public static function createUser($_fname, $_lname, $_email, $_password){
+
+    public static function createUser($_fname, $_lname, $_email, $_password, $_uuid){
         $dbTranslator = static::$translator;
-        return $dbTranslator::createUser($_fname, $_lname, $_email, $_password);
+        return $dbTranslator::createUser($_fname, $_lname, $_email, $_password, $_uuid);
     }
 
-    /**
-     *
-     *
-     * @author Ioannis Batsios
-     */
-    public static function createPost($_title, $_body) {
+    public static function createPost($_title, $_body, $_uuid) {
         $dbTranslator = static::$translator;
-        return $dbTranslator::createPost($_title, $_body);
+        return $dbTranslator::createPost($_title, $_body, $_uuid);
+    }
+
+    public static function getUuid($_userId){
+        $dbTranslator = static::$translator;
+        return $dbTranslator::getUuid($_userId);
     }
 }
