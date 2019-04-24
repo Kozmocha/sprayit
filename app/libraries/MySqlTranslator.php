@@ -104,6 +104,11 @@ class MySqlTranslator {
         return $results;
     }
 
+    /**
+     * Returns all posts within the database with the poster's information.
+     *
+     * @author Christopher Thacker
+     */
     public static function getAllPosts() {
         $db = new MySqlTranslator();
 
@@ -238,6 +243,11 @@ class MySqlTranslator {
         }
     }
 
+    /**
+     * MySQL statement to create a post.
+     *
+     * @author Ioannis Batsios
+     */
     public static function createPost($_title, $_body, $_uuid){
         try {
             $host = DB_HOST;
@@ -251,7 +261,7 @@ class MySqlTranslator {
                 $conn = null;
                 return true;
             } else {
-                echo "Error posting. Please try again.";
+                ?><script>alert("Error posting. Please try again.")</script><?php
                 $conn = null;
                 return false;
             }

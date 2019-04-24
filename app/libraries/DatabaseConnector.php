@@ -30,20 +30,34 @@ class DatabaseConnector {
         return $dbTranslator::checkDuplicateEmails($_email);
     }
 
+    /**
+     * Returns all records from a specified table.
+     *
+     * @author Christopher Thacker
+     */
     public static function getAll($_table) {
         $dbTranslator = static::$translator;
         return $dbTranslator::getAll($_table);
     }
 
+    /**
+     * Returns all posts from the `posts` table in the database.
+     *
+     * @author Christopher Thacker
+     */
     public static function getAllPosts() {
         $dbTranslator = static::$translator;
         return $dbTranslator::getAllPosts();
     }
 
+    /**
+     *
+     */
     public static function rowCount(){
         $dbTranslator = static::$translator;
         return $dbTranslator::rowCount();
     }
+
 
     public static function createUser($_fname, $_lname, $_email, $_password, $_uuid){
         $dbTranslator = static::$translator;
