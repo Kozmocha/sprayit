@@ -25,7 +25,7 @@
         <div class="row">
             <div class="card card-body mb-3">
             <div class="bg-light p-2 mb-3" style="text-align: left;">
-                Written by <?php echo $post->fname; ?> on <?php echo $post->postCreated; ?>
+                Written by <?php echo $post->fname; echo " " . $post->lname; ?> on <?php echo $post->postCreated; ?>
                 <div class="delete" style="float: right;">
                     <div class="btn-group open">
                         <a class="btn btn-secondary" href="#"><i class="icon-user">Edit</i></a>
