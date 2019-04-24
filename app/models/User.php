@@ -80,14 +80,7 @@ class User {
         return DatabaseConnector::getUuid($userId);
     }
 
-    /*
-     * Function to see if emails typed match.
-     * Returns false if not.
-     *
-     * @author Ioannis Batsios
-     */
-
-    /**     *
+    /**
      * Function registers user. Gets sanitized data from the controller, calls the Database Connector, and passes to database.
      *
      * @author Ioannis Batsios
@@ -107,6 +100,12 @@ class User {
         }
     }
 
+    /*
+     * Function to see if emails typed match.
+     * Returns false if not.
+     *
+     * @author Ioannis Batsios
+     */
     public static function confirmEmail($_email, $_emailToConfirm) {
         if ($_email != $_emailToConfirm) {
             ?>
