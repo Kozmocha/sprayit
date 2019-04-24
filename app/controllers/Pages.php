@@ -1,5 +1,7 @@
 <?php
 
+//require '../vendor/autoload.php';
+
 /**
  * Pages controller: This controller handles all data transfers for any view within the 'pages' directory. Each method
  * corresponds to a view (the name must be EXACTLY the same).
@@ -17,6 +19,8 @@ class Pages extends Controller {
      * @author Christopher Thacker
      */
     public function index() {
+        Mail::sendTestEmail();
+        die();
         Redirect::to(POSTS_HOME);
     }
 
