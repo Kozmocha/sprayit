@@ -29,7 +29,7 @@ define('MOTTO', 'We don\'t moderate like those panzies <span class="pink"> Faceb
 
 define('MAIL_TRANSLATOR', 'Mail');
 
-define('SENDGRID_KEY', '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');
+define('SENDGRID_KEY', '');
 
 define('NOREPLY_ADDRESS', 'noreply@sprayit.com');
 
