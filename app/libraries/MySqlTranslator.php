@@ -229,7 +229,7 @@ class MySqlTranslator {
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $query = "INSERT INTO user (fname, lname, email, password, uuid) VALUES ('{$_fname}','{$_lname}','{$_email}','{$_password}', '$_uuid')";
             if ($conn->exec($query)){
-                ?><script>alert('You are registered!')</script><?php
+                ?><script>alert('You are registered! An email will be sent to the specified address.')</script><?php
                 $conn = null;
                 return true;
             } else {

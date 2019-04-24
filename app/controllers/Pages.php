@@ -19,8 +19,6 @@ class Pages extends Controller {
      * @author Christopher Thacker
      */
     public function index() {
-        Mail::sendTestEmail();
-        die();
         Redirect::to(POSTS_HOME);
     }
 

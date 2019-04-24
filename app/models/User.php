@@ -133,6 +133,7 @@ class User {
             //creates a unique user id
             $uuid = uniqid();
             DatabaseConnector::createUser($_fname, $_lname, $_email, $_password, $uuid);
+            Mail::send($_email, $_fname, REGISTRATION_EMAIL_SUBJECT, REGISTRATON_EMAIL_BODY);
             return true;
         } else {
             return false;

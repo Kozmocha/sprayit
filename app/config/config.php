@@ -3,7 +3,7 @@
 // MySqlTranslator Parameters
 define('DB_HOST', 'localhost');
 define('DB_USER', 'root');
-define('DB_PASS', '123456');
+define('DB_PASS', '');
 define('DB_NAME', 'sprayit');
 
 // App Root
@@ -21,17 +21,17 @@ define('SITE_NAME', 'SprayIt');
 // Site Motto
 define('MOTTO', 'We don\'t moderate like those panzies <span class="pink"> Facebook </span>and <span class="pink">Twitter</span>!<br/> <span class="red">SPRAY</span> whatever you <span class="green">WANT!</span>');
 
-// MAILGUN API CONFIG
+// SENDGRID API CONFIG
 
-define('MAILGUN_API_KEY', 'pubkey-bb2b4211a26b64d8ad7e0f75999244c0');
+define('SENDGRID_KEY', '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');
 
-define('MAILGUN_API_PUBKEY', 'pubkey-bb2b4211a26b64d8ad7e0f75999244c0');
+define('NOREPLY_ADDRESS', 'noreply@sprayit.com');
 
-define('MAILGUN_DOMAIN', 'sandbox75886ec4e1654bcf8899d6e3528f9405.mailgun.org');
+define('NOREPLY_NAME', 'noreply');
 
-define('MAILGUN_LIST', 'test@sandbox75886ec4e1654bcf8899d6e3528f9405.mailgun.org');
+define('REGISTRATION_EMAIL_SUBJECT', 'Welcome to SprayIt!');
 
-define('MAILGUN_SECRET', 'secret');
+define('REGISTRATON_EMAIL_BODY', 'Thank you for signing up for SprayIt. Your account has been verified and saved! You can now log in.');
 
 // REDIRECT AND RENDER VIEW PATHS BELOW
 
