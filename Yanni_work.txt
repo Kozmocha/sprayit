@@ -1,16 +1,8 @@
-4/18/2019
+4/23/2019
 
-1. Worked with Chris resolving a login loop function.
-2. Resolved xamp on local machine having conflicts with ports and other instances.
-
-4/19/2019 - 4/21/2019
-
-1. Removed all instances of bookit
-2. Received data from register.php to the view and passed it to the model
-    a) Created a checkEmail function to make sure they match
-    b) Created a checkPassword function to make sure they match
-3. Created a createUser PDO function in mysqliTranslator
-    a) If created, sends user to login
-4. Started redoing REQUIREMENT DOCS to illustrate SprayIt instead of BookIt
-5. Formated the post page
-6. Started working on the create post feature.
+1. Fixed the createUser method in the MySqlTranslator to return true or false.
+2. Modified the SQL to reflect an active flag int boolean and changed user_id to uuid in posts table.
+    a) Fixed the getAllPosts function in mysqlconnector to reflect these changes
+3. Added js alerts for several features...confirming passwords and emails, registration...
+4. Created the createPost function
+5. Put the application onto Google Cloud Platform https://sprayit.appspot.com, but redirects to my localhost for some reason...

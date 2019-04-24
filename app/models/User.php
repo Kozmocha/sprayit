@@ -92,6 +92,7 @@ class User {
      */
     public static function confirmEmail($_email, $_emailToConfirm) {
         if ($_email != $_emailToConfirm){
+            ?><script>alert("Emails do not match!")</script><?php
             return false;
         } else {
             return true;
@@ -106,10 +107,16 @@ class User {
      */
     public static function checkPasswords($_password, $_samePassword){
         if ($_password != $_samePassword){
+            ?><script>alert("Passwords do not match!")</script><?php
             return false;
         } else {
             return true;
         }
+    }
+
+    public static function getUuid(){
+        $userId = Session::getField('user_id');
+        return DatabaseConnector::getUuid($userId);
     }
 
     /**
@@ -123,7 +130,9 @@ class User {
     public static function registerUser($_fname, $_lname, $_email, $_confirmEmail, $_password, $_confirmPassword){
         // Checks to make sure emails match. If not, returns false
         if (self::confirmEmail($_email, $_confirmEmail) && self::checkPasswords($_password, $_confirmPassword)){
-            DatabaseConnector::createUser($_fname, $_lname, $_email, $_password);
+            //creates a unique user id
+            $uuid = uniqid();
+            DatabaseConnector::createUser($_fname, $_lname, $_email, $_password, $uuid);
             return true;
         } else {
             return false;

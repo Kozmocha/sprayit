@@ -113,14 +113,14 @@ class MySqlTranslator {
         $db = new MySqlTranslator();
 
         $db->query('SELECT *,
-                     `posts`.id as postId,
-                     `user`.id as userId,
-                     `posts`.created_at as postCreated
-                     FROM `posts`
-                     INNER JOIN `user`
-                     ON posts.user_id = `user`.id
-                     ORDER BY `posts`.created_at DESC
-                     ');
+                        `posts`.id as postId,
+                        `user`.id as userId,
+                        `posts`.created_at as postCreated
+                        FROM `posts`
+                        INNER JOIN `user`
+                        ON posts.uuid = `user`.uuid
+                        ORDER BY `posts`.created_at DESC 
+                        ');
 
         $results = $db->resultSet();
         return $results;
@@ -202,27 +202,72 @@ class MySqlTranslator {
     }
 
     /**
+     * A function to get the User's UUID.
+     *
+     * @author Christopher Thacker
+     */
+    public function getUuid($_userId){
+        $db = new MySqlTranslator();
+
+        $db->query("SELECT uuid FROM `user` WHERE id = '{$_userId}'");
+
+        $results = $db->single();
+        return $results->uuid;
+    }
+
+    /**
      * MySQL to create a new user from the Registration page
      *
      * @author Ioannis Batsios
      */
-    public static function createUser($_fname, $_lname, $_email, $_password) {
+    public static function createUser($_fname, $_lname, $_email, $_password, $_uuid) {
         try {
             $host = DB_HOST;
             $dbname = DB_NAME;
             $dsn = "mysql:host=$host;dbname=$dbname";
             $conn = new PDO($dsn, DB_USER, DB_PASS);
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $firstName = $_fname;
-            $lastName = $_lname;
-            $email = $_email;
-            $password = $_password;
-            $query = "INSERT INTO user (fname, lname, email, password) VALUES ('$firstName ','$lastName','$email','$password')";
-            $conn->exec($query);
-            echo "New record created successfully";
+            $query = "INSERT INTO user (fname, lname, email, password, uuid) VALUES ('{$_fname}','{$_lname}','{$_email}','{$_password}', '$_uuid')";
+            if ($conn->exec($query)){
+                ?><script>alert('You are registered!')</script><?php
+                $conn = null;
+                return true;
+            } else {
+                echo "Error registering. Please try again.";
+                $conn = null;
+                return false;
+            }
         } catch(PDOException $e) {
-             echo $query . "<br>" . $e->getMessage();
+            echo $query . "<br>" . $e->getMessage();
+            die();
         }
-            $conn = null;
+    }
+
+    /**
+     * MySQL statement to create a post.
+     *
+     * @author Ioannis Batsios
+     */
+    public static function createPost($_title, $_body, $_uuid){
+        try {
+            $host = DB_HOST;
+            $dbname = DB_NAME;
+            $dsn = "mysql:host=$host;dbname=$dbname";
+            $conn = new PDO($dsn, DB_USER, DB_PASS);
+            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $query = "INSERT INTO posts (title, body, uuid) VALUES ('{$_title}','{$_body}','{$_uuid}')";
+            if ($conn->exec($query)){
+                ?><script>alert('Post created!')</script><?php
+                $conn = null;
+                return true;
+            } else {
+                ?><script>alert("Error posting. Please try again.")</script><?php
+                $conn = null;
+                return false;
+            }
+        } catch(PDOException $e) {
+            echo $query . "<br>" . $e->getMessage();
+            die();
+        }
     }
 }
