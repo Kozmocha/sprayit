@@ -193,7 +193,7 @@ class MySqlTranslator {
                         `posts`.created_at as postCreated
                         FROM `posts`
                         INNER JOIN `user`
-                        ON posts.uuid = `user`.uuid
+                        ON posts.uuid = `user`.uuid AND posts.active_flag = ' . TRUE . '
                         ORDER BY `posts`.created_at DESC 
                         ');
 
@@ -258,6 +258,10 @@ class MySqlTranslator {
             echo $query . "<br>" . $e->getMessage();
             die();
         }
+    }
+
+    public static function deletePost($_uuid) {
+        // TODO: Implement by turning the active flag to the constant FALSE.
     }
 
     /**

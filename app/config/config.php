@@ -6,6 +6,10 @@ define('DB_USER', 'root');
 define('DB_PASS', '');
 define('DB_NAME', 'sprayit');
 
+// TRUE FALSE
+define('TRUE', 0);
+define('FALSE', 1);
+
 // App Root
 define('APP_ROOT', dirname(dirname(__FILE__)));
 
@@ -25,7 +29,7 @@ define('MOTTO', 'We don\'t moderate like those panzies <span class="pink"> Faceb
 
 define('MAIL_TRANSLATOR', 'Mail');
 
-define('SENDGRID_KEY', '');
+define('SENDGRID_KEY', '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');
 
 define('NOREPLY_ADDRESS', 'noreply@sprayit.com');
 
