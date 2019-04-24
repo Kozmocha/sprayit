@@ -21,9 +21,11 @@ define('SITE_NAME', 'SprayIt');
 // Site Motto
 define('MOTTO', 'We don\'t moderate like those panzies <span class="pink"> Facebook </span>and <span class="pink">Twitter</span>!<br/> <span class="red">SPRAY</span> whatever you <span class="green">WANT!</span>');
 
-// SENDGRID API CONFIG
+// MAIL API CONFIG
 
-define('SENDGRID_KEY', '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');
+define('MAIL_TRANSLATOR', 'Mail');
+
+define('SENDGRID_KEY', '');
 
 define('NOREPLY_ADDRESS', 'noreply@sprayit.com');
 

@@ -32,14 +32,14 @@ class Posts extends Controller {
         $this->view(POSTS_HOME, $data);
     }
 
-    public function add(){
+    public function add() {
         // Check if Register button is clicked
-        if(Session::isPost()) {
+        if (Session::isPost()) {
             $newpost = Session::sanitizePost();
 
             $newpost = Post::createPost($newpost['title'], $newpost['body']);
             //If the data is returned true
-            if ($newpost){
+            if ($newpost) {
                 $posts = Post::getPosts();
                 $data = [
                     'posts' => $posts

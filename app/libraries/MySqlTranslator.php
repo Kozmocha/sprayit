@@ -60,70 +60,11 @@ class MySqlTranslator {
         $row = $db->single();
 
         // Checks the number of rows.
-        if($db->rowCount() > 0){
+        if ($db->rowCount() > 0) {
             return $row;
         } else {
             return false;
         }
-    }
-
-    /**
-     * Checks to make sure User isn't adding same email to the database.
-     *
-     * @author Ioannis Batsios
-     */
-    public static function checkDuplicateEmails($_email) {
-        // Establishes a connection to the database.
-        $db = new MySqlTranslator;
-
-        // Sends the SQL to be prepared for database use.
-        $db->query("SELECT * FROM `user` WHERE email = :email");
-
-        // Gets a single row for the matching email.
-        $row = $db->single();
-
-        // Checks the number of rows.
-        if($db->rowCount() > 0){
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    /**
-     * Get all records from a table: Returns all of the rows within a specified table.
-     *
-     * @author Christopher Thacker
-     */
-    public static function getAll($_table) {
-        $db = new MySqlTranslator();
-
-        $db->query("SELECT * FROM `{$_table}`");
-
-        $results = $db->resultSet();
-        return $results;
-    }
-
-    /**
-     * Returns all posts within the database with the poster's information.
-     *
-     * @author Christopher Thacker
-     */
-    public static function getAllPosts() {
-        $db = new MySqlTranslator();
-
-        $db->query('SELECT *,
-                        `posts`.id as postId,
-                        `user`.id as userId,
-                        `posts`.created_at as postCreated
-                        FROM `posts`
-                        INNER JOIN `user`
-                        ON posts.uuid = `user`.uuid
-                        ORDER BY `posts`.created_at DESC 
-                        ');
-
-        $results = $db->resultSet();
-        return $results;
     }
 
     /**
@@ -163,15 +104,6 @@ class MySqlTranslator {
     }
 
     /**
-     * Execute statement: Runs the stmt property against the database.
-     *
-     * @author Christopher Thacker, Ioannis Batsios
-     */
-    public function execute() {
-        return $this->stmt->execute();
-    }
-
-    /**
      * Return single result: Returns a single row from the database if it matches the stmt property's query code.
      *
      * @author Christopher Thacker, Ioannis Batsios
@@ -182,13 +114,12 @@ class MySqlTranslator {
     }
 
     /**
-     * Return set of results: Returns all results of the SQL statement.
+     * Execute statement: Runs the stmt property against the database.
      *
      * @author Christopher Thacker, Ioannis Batsios
      */
-    public function resultSet() {
-        $this->execute();
-        return $this->stmt->fetchAll(PDO::FETCH_OBJ);
+    public function execute() {
+        return $this->stmt->execute();
     }
 
     /**
@@ -202,17 +133,72 @@ class MySqlTranslator {
     }
 
     /**
-     * A function to get the User's UUID.
+     * Checks to make sure User isn't adding same email to the database.
+     *
+     * @author Ioannis Batsios
+     */
+    public static function checkDuplicateEmails($_email) {
+        // Establishes a connection to the database.
+        $db = new MySqlTranslator;
+
+        // Sends the SQL to be prepared for database use.
+        $db->query("SELECT * FROM `user` WHERE email = :email");
+
+        // Gets a single row for the matching email.
+        $row = $db->single();
+
+        // Checks the number of rows.
+        if ($db->rowCount() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Get all records from a table: Returns all of the rows within a specified table.
      *
      * @author Christopher Thacker
      */
-    public function getUuid($_userId){
+    public static function getAll($_table) {
         $db = new MySqlTranslator();
 
-        $db->query("SELECT uuid FROM `user` WHERE id = '{$_userId}'");
+        $db->query("SELECT * FROM `{$_table}`");
 
-        $results = $db->single();
-        return $results->uuid;
+        $results = $db->resultSet();
+        return $results;
+    }
+
+    /**
+     * Return set of results: Returns all results of the SQL statement.
+     *
+     * @author Christopher Thacker, Ioannis Batsios
+     */
+    public function resultSet() {
+        $this->execute();
+        return $this->stmt->fetchAll(PDO::FETCH_OBJ);
+    }
+
+    /**
+     * Returns all posts within the database with the poster's information.
+     *
+     * @author Christopher Thacker
+     */
+    public static function getAllPosts() {
+        $db = new MySqlTranslator();
+
+        $db->query('SELECT *,
+                        `posts`.id as postId,
+                        `user`.id as userId,
+                        `posts`.created_at as postCreated
+                        FROM `posts`
+                        INNER JOIN `user`
+                        ON posts.uuid = `user`.uuid
+                        ORDER BY `posts`.created_at DESC 
+                        ');
+
+        $results = $db->resultSet();
+        return $results;
     }
 
     /**
@@ -228,8 +214,9 @@ class MySqlTranslator {
             $conn = new PDO($dsn, DB_USER, DB_PASS);
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $query = "INSERT INTO user (fname, lname, email, password, uuid) VALUES ('{$_fname}','{$_lname}','{$_email}','{$_password}', '$_uuid')";
-            if ($conn->exec($query)){
-                ?><script>alert('You are registered! An email will be sent to the specified address.')</script><?php
+            if ($conn->exec($query)) {
+                ?>
+                <script>alert('You are registered! An email will be sent to the specified address.')</script><?php
                 $conn = null;
                 return true;
             } else {
@@ -237,7 +224,7 @@ class MySqlTranslator {
                 $conn = null;
                 return false;
             }
-        } catch(PDOException $e) {
+        } catch (PDOException $e) {
             echo $query . "<br>" . $e->getMessage();
             die();
         }
@@ -248,7 +235,7 @@ class MySqlTranslator {
      *
      * @author Ioannis Batsios
      */
-    public static function createPost($_title, $_body, $_uuid){
+    public static function createPost($_title, $_body, $_uuid) {
         try {
             $host = DB_HOST;
             $dbname = DB_NAME;
@@ -256,18 +243,34 @@ class MySqlTranslator {
             $conn = new PDO($dsn, DB_USER, DB_PASS);
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $query = "INSERT INTO posts (title, body, uuid) VALUES ('{$_title}','{$_body}','{$_uuid}')";
-            if ($conn->exec($query)){
-                ?><script>alert('Post created!')</script><?php
+            if ($conn->exec($query)) {
+                ?>
+                <script>alert('Post created!')</script><?php
                 $conn = null;
                 return true;
             } else {
-                ?><script>alert("Error posting. Please try again.")</script><?php
+                ?>
+                <script>alert("Error posting. Please try again.")</script><?php
                 $conn = null;
                 return false;
             }
-        } catch(PDOException $e) {
+        } catch (PDOException $e) {
             echo $query . "<br>" . $e->getMessage();
             die();
         }
+    }
+
+    /**
+     * A function to get the User's UUID.
+     *
+     * @author Christopher Thacker
+     */
+    public function getUuid($_userId) {
+        $db = new MySqlTranslator();
+
+        $db->query("SELECT uuid FROM `user` WHERE id = '{$_userId}'");
+
+        $results = $db->single();
+        return $results->uuid;
     }
 }

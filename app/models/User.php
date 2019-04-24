@@ -51,15 +51,6 @@ class User {
     }
 
     /**
-     * Get User Email: Returns the email of the passed in user.
-     *
-     * @author Christopher Thacker
-     */
-    public function getEmail($user) {
-        return $user->email;
-    }
-
-    /**
      * Create User Session: Sets the session variables to the passed in user's properties or values.
      *
      * @author Christopher Thacker
@@ -84,15 +75,42 @@ class User {
         Redirect::to(LOGIN_PATH);
     }
 
+    public static function getUuid() {
+        $userId = Session::getField('user_id');
+        return DatabaseConnector::getUuid($userId);
+    }
+
     /*
      * Function to see if emails typed match.
      * Returns false if not.
      *
      * @author Ioannis Batsios
      */
+
+    /**     *
+     * Function registers user. Gets sanitized data from the controller, calls the Database Connector, and passes to database.
+     *
+     * @author Ioannis Batsios
+     *
+     * To Do: split if statements into their own functions so if Registrations changes, easy to change function.
+     */
+    public static function registerUser($_fname, $_lname, $_email, $_confirmEmail, $_password, $_confirmPassword) {
+        // Checks to make sure emails match. If not, returns false
+        if (self::confirmEmail($_email, $_confirmEmail) && self::checkPasswords($_password, $_confirmPassword)) {
+            //creates a unique user id
+            $uuid = uniqid();
+            DatabaseConnector::createUser($_fname, $_lname, $_email, $_password, $uuid);
+            MailConnector::send($_email, $_fname, REGISTRATION_EMAIL_SUBJECT, REGISTRATON_EMAIL_BODY);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public static function confirmEmail($_email, $_emailToConfirm) {
-        if ($_email != $_emailToConfirm){
-            ?><script>alert("Emails do not match!")</script><?php
+        if ($_email != $_emailToConfirm) {
+            ?>
+            <script>alert("Emails do not match!")</script><?php
             return false;
         } else {
             return true;
@@ -105,38 +123,13 @@ class User {
      *
      * @author Ioannis Batsios
      */
-    public static function checkPasswords($_password, $_samePassword){
-        if ($_password != $_samePassword){
-            ?><script>alert("Passwords do not match!")</script><?php
+    public static function checkPasswords($_password, $_samePassword) {
+        if ($_password != $_samePassword) {
+            ?>
+            <script>alert("Passwords do not match!")</script><?php
             return false;
         } else {
             return true;
-        }
-    }
-
-    public static function getUuid(){
-        $userId = Session::getField('user_id');
-        return DatabaseConnector::getUuid($userId);
-    }
-
-    /**
-     *
-     * Function registers user. Gets sanitized data from the controller, calls the Database Connector, and passes to database.
-     *
-     * @author Ioannis Batsios
-     *
-     * To Do: split if statements into their own functions so if Registrations changes, easy to change function.
-     */
-    public static function registerUser($_fname, $_lname, $_email, $_confirmEmail, $_password, $_confirmPassword){
-        // Checks to make sure emails match. If not, returns false
-        if (self::confirmEmail($_email, $_confirmEmail) && self::checkPasswords($_password, $_confirmPassword)){
-            //creates a unique user id
-            $uuid = uniqid();
-            DatabaseConnector::createUser($_fname, $_lname, $_email, $_password, $uuid);
-            Mail::send($_email, $_fname, REGISTRATION_EMAIL_SUBJECT, REGISTRATON_EMAIL_BODY);
-            return true;
-        } else {
-            return false;
         }
     }
 
@@ -145,9 +138,19 @@ class User {
      *
      * @author Ioannis Batsios
      */
-    public static function saltPassword($_password){
+    public static function saltPassword($_password) {
         $salt = random_bytes(16);
         return $password_hash = crypt($_password, $salt);
     }
+
+    /**
+     * Get User Email: Returns the email of the passed in user.
+     *
+     * @author Christopher Thacker
+     */
+    public function getEmail($user) {
+        return $user->email;
+    }
 }
+
 ?>

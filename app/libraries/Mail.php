@@ -21,7 +21,7 @@ class Mail {
             $email->addContent("text/plain", $_text);
             //$email->addContent("text/html", $_html);
             $sendgrid = new \SendGrid(SENDGRID_KEY);
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             die('Problem creating email');
         }
         try {

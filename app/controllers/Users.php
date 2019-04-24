@@ -9,6 +9,16 @@ require_once APP_ROOT . '/models/User.php';
 class Users extends Controller {
 
     /**
+     * Log user out: Destroys the local session variable, which logs the user out.
+     *
+     * @author Christopher Thacker
+     */
+    public static function logout() {
+        User::destroyUserSession();
+        Redirect::to(LOGIN_PATH);
+    }
+
+    /**
      * Index: THIS METHOD IS REQUIRED. It helps prevent access to the application directory index and is the
      * default method that is called when no method is specified in the URL. For example, without this method, if
      * someone typed "localhost/sprayit/users" into the browser, without a method, THE PROGRAM WOULD CRASH because
@@ -58,7 +68,7 @@ class Users extends Controller {
         }
 
         // Check if Register button is clicked
-        if(Session::isPost()) {
+        if (Session::isPost()) {
             $post = Session::sanitizePost();
 //            $data = [
 //                'fname' => trim($post['fname']),
@@ -71,7 +81,7 @@ class Users extends Controller {
             //Passes data to the User model
             $user = User::registerUser($post['fname'], $post['lname'], $post['email'], $post['confirm_email'], $post['password'], $post['confirm_password']);
             //If the data is returned true
-            if ($user){
+            if ($user) {
                 //Go to the login screen
                 $this->view(LOGIN_PATH);
                 //Else send back to the registration page.
@@ -81,16 +91,5 @@ class Users extends Controller {
         } else {
             $this->view(REGISTER_PATH);
         }
-    }
-
-
-    /**
-     * Log user out: Destroys the local session variable, which logs the user out.
-     *
-     * @author Christopher Thacker
-     */
-    public static function logout() {
-        User::destroyUserSession();
-        Redirect::to(LOGIN_PATH);
     }
 }

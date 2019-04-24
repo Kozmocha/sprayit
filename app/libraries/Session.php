@@ -37,15 +37,6 @@ class Session {
     }
 
     /**
-     * Returns true if a given field within the $_SESSION array is set, false otherwise.
-     *
-     * @author Christopher Thacker
-     */
-    public static function fieldIsSet($_field) {
-        return (isset($_SESSION["{$_field}"]));
-    }
-
-    /**
      * Returns the specified field if found, false if otherwise.
      *
      * @author Christopher Thacker
@@ -55,5 +46,14 @@ class Session {
             return ($_SESSION["{$_field}"]);
         }
         return false;
+    }
+
+    /**
+     * Returns true if a given field within the $_SESSION array is set, false otherwise.
+     *
+     * @author Christopher Thacker
+     */
+    public static function fieldIsSet($_field) {
+        return (isset($_SESSION["{$_field}"]));
     }
 }
