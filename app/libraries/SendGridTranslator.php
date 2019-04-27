@@ -3,9 +3,9 @@
 require __DIR__ . '/../../vendor/autoload.php';
 
 /**
- * Mail class: This class talks to the mailing API to send emails from the program.
+ * SendGridTranslator class: This class talks to the mailing API to send emails from the program.
  */
-class Mail {
+class SendGridTranslator {
 
     /**
      * Send method: This is used to send an email message to a specified user.
