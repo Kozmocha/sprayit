@@ -32,6 +32,11 @@ class Posts extends Controller {
         $this->view(POSTS_HOME, $data);
     }
 
+    /**
+     * Controller to add new posts.
+     *
+     * @author Ioannis Batsios
+     */
     public function add() {
         // Check if Register button is clicked
         if (Session::isPost()) {
@@ -44,11 +49,20 @@ class Posts extends Controller {
                 $data = [
                     'posts' => $posts
                 ];
-
                 $this->view(POSTS_HOME, $data);
             }
         } else {
             $this->view(NOT_FOUND_PATH);
+        }
+    }
+
+    public function edit() {
+        //Redirect to the edit post page
+        $this->view(POSTS_EDIT);
+
+        // Check if Edit button is clicked
+        if (Session::isPost()) {
+            $editedPost = Session::sanitizePost();
         }
     }
 }

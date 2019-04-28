@@ -3,8 +3,12 @@
 // MySqlTranslator Parameters
 define('DB_HOST', 'localhost');
 define('DB_USER', 'root');
-define('DB_PASS', '');
+define('DB_PASS', '123456');
 define('DB_NAME', 'sprayit');
+
+// TRUE FALSE
+define('TRUE', 1);
+define('FALSE', 0);
 
 // App Root
 define('APP_ROOT', dirname(dirname(__FILE__)));
@@ -36,6 +40,7 @@ define('REGISTRATION_EMAIL_SUBJECT', 'Welcome to SprayIt!');
 define('REGISTRATON_EMAIL_BODY', 'Thank you for signing up for SprayIt. Your account has been verified and saved! You can now log in.');
 
 // REDIRECT AND RENDER VIEW PATHS BELOW
+define ('POSTS_EDIT', 'posts/edit');
 
 define('POSTS_HOME', 'posts/index');
 
@@ -52,5 +57,9 @@ define('REGISTER_PATH', 'users/register');
 define('NOT_FOUND_PATH', 'pages/not_found');
 
 define('UPDATE_USER', 'users/update');
+
+define ('ERROR_PATH', 'users/error');
+
+
 
 
