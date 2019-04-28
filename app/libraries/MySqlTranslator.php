@@ -193,8 +193,8 @@ class MySqlTranslator {
                         `posts`.created_at as postCreated
                         FROM `posts`
                         INNER JOIN `user`
-                        ON posts.active_flag = TRUE
-                        ORDER BY `posts`.created_at DESC 
+                        ON posts.user_uuid = `user`.user_uuid AND posts.active_flag = ' . TRUE . '
+                        ORDER BY `posts`.created_at DESC
                         ');
 
         $results = $db->resultSet();
@@ -215,11 +215,9 @@ class MySqlTranslator {
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $query = "INSERT INTO user (fname, lname, email, password, user_uuid) VALUES ('{$_fname}','{$_lname}','{$_email}','{$_password}', '$_uuid')";
             if ($conn->exec($query)) {
-                echo "New user created";
                 $conn = null;
                 return true;
             } else {
-                echo "Error registering. Please try again.";
                 $conn = null;
                 return false;
             }

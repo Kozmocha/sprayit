@@ -56,9 +56,9 @@ class User {
      * @author Christopher Thacker
      */
     protected static function createUserSession($_user) {
-        $_SESSION['user_id'] = $_user->id;
         $_SESSION['user_email'] = $_user->email;
         $_SESSION['user_fname'] = $_user->fname;
+        $_SESSION['user_id'] = $_user->id;
         Redirect::to(POSTS_HOME);
     }
 
@@ -68,9 +68,9 @@ class User {
      * @author Christopher Thacker
      */
     public static function destroyUserSession() {
-        unset($_SESSION['user_id']);
         unset($_SESSION['user_email']);
         unset($_SESSION['user_fname']);
+        unset($_SESSION['user_id']);
         session_destroy();
         Redirect::to(LOGIN_PATH);
     }
@@ -92,9 +92,19 @@ class User {
         if (self::confirmEmail($_email, $_confirmEmail) && self::checkPasswords($_password, $_confirmPassword)) {
             //creates a unique user id
             $uuid = uniqid();
-            DatabaseConnector::createUser($_fname, $_lname, $_email, $_password, $uuid);
-            MailConnector::send($_email, $_fname, REGISTRATION_EMAIL_SUBJECT, REGISTRATON_EMAIL_BODY);
-            return true;
+            if (DatabaseConnector::createUser($_fname, $_lname, $_email, $_password, $uuid)){
+                if (MailConnector::send($_email, $_fname, REGISTRATION_EMAIL_SUBJECT, REGISTRATON_EMAIL_BODY)){
+                    return true;
+                } else {
+                    echo 'api registration not sent';
+                    return false;
+                }
+
+                return true;
+            } else {
+                echo 'error. user not created';
+                return false;
+            }
         } else {
             return false;
         }

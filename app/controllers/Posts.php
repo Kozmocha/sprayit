@@ -25,11 +25,11 @@ class Posts extends Controller {
     public function index() {
         $posts = Post::getPosts();
 
-        $data = [
+        $_data = [
             'posts' => $posts
         ];
 
-        $this->view(POSTS_HOME, $data);
+        $this->view(POSTS_HOME, $_data);
     }
 
     /**
