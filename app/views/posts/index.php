@@ -32,7 +32,7 @@
                         <a class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" href="#">
                             <span class="icon-caret-down"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#"><i class="icon-fixed-width icon-pencil"></i> Edit</a></li>
+                            <li><a href="<?php echo URL_ROOT . '/' . EDIT_POST; ?>"><i class="icon-fixed-width icon-pencil"></i> Edit</a></li>
                             <li><a href="#"><i class="icon-fixed-width icon-trash"></i> Delete</a></li>
                         </ul>
                     </div>
