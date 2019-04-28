@@ -108,8 +108,7 @@ class User {
      */
     public static function confirmEmail($_email, $_emailToConfirm) {
         if ($_email != $_emailToConfirm) {
-            ?>
-            <script>alert("Emails do not match!")</script><?php
+            echo "Emails do not match!";
             return false;
         } else {
             return true;
@@ -124,8 +123,7 @@ class User {
      */
     public static function checkPasswords($_password, $_samePassword) {
         if ($_password != $_samePassword) {
-            ?>
-            <script>alert("Passwords do not match!")</script><?php
+            echo "Passwords do not match!";
             return false;
         } else {
             return true;

@@ -57,6 +57,12 @@ class Posts extends Controller {
     }
 
     public function edit() {
+        //Redirect to the edit post page
+        $this->view(POSTS_EDIT);
 
+        // Check if Edit button is clicked
+        if (Session::isPost()) {
+            $editedPost = Session::sanitizePost();
+        }
     }
 }
