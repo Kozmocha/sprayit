@@ -1,8 +1,6 @@
 <!--Author: Christopher Thacker-->
 <?php require APP_ROOT . '/views/inc/header.php'; ?>
 <h2><span class="blue">Water</span><span class="green">cooler</span></h2>
-<div class="row" style="padding-bottom: 50px;">
-    <div class="col-md-12">
         <form action="<?php echo URL_ROOT . '/' . POSTS_ADD; ?>" method="post" style="padding-top: 25px;">
             <div class="row" style="margin-bottom: -40px;">
                 <div class="form-group col-lg-12">
@@ -11,16 +9,16 @@
                     <input name="body" class="form-control" id="body" placeholder="Spray It">
                 </div>
             </div>
-    </div>
-</div>
-<div class="row" style="padding-bottom: 25px;">
-    <div class="col-lg-4"></div>
-    <div class="col-lg-4">
-        <button class="btn btn-secondary" style="width: 100%;" type="submit">Add Post</button>
-    </div>
-    <div class="col-lg-4"></div>
-</div>
-</form>
+            <div class="row" style="padding-bottom: 25px;"><div class="col-lg-12"></div> </div>
+            <div class="row" style="padding-bottom: 25px;"><div class="col-lg-12"></div> </div>
+            <div class="row" style="padding-bottom: 25px;">
+                <div class="col-lg-4"></div>
+                <div class="col-lg-4">
+                    <button class="btn btn-secondary" style="width: 100%;" type="submit">Add Post</button>
+                </div>
+                <div class="col-lg-4"></div>
+            </div>
+        </form>
 <?php foreach($_data['posts'] as $post) : ?>
     <div class="row">
         <div class="card card-body mb-3">

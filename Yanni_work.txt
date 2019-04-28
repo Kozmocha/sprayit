@@ -1,8 +1,9 @@
-4/23/2019
+4/28/2019
 
-1. Fixed the createUser method in the MySqlTranslator to return true or false.
-2. Modified the SQL to reflect an active flag int boolean and changed user_id to uuid in posts table.
+1. Fixed the createPost method to return true or false in the Post model
+2. Modified the SQL to reflect an active flag int boolean with default set to 1 and made a user_uuid and post_uuid in their respective tables.
     a) Fixed the getAllPosts function in mysqlconnector to reflect these changes
-3. Added js alerts for several features...confirming passwords and emails, registration...
-4. Created the createPost function
-5. Put the application onto Google Cloud Platform https://sprayit.appspot.com, but redirects to my localhost for some reason...
+    b) Fixed the createUser function to reflect changes
+    c) Fixed the createPost to reflect changes
+3. Removed js alerts
+
