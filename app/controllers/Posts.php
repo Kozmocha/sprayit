@@ -23,13 +23,14 @@ class Posts extends Controller {
      * @author Christopher Thacker
      */
     public function index() {
+        //die('In Posts/index');
         $posts = Post::getPosts();
 
-        $_data = [
+        $data = [
             'posts' => $posts
         ];
 
-        $this->view(POSTS_HOME, $_data);
+        $this->view(POSTS_HOME, $data);
     }
 
     /**

@@ -3,7 +3,7 @@
 // MySqlTranslator Parameters
 define('DB_HOST', 'localhost');
 define('DB_USER', 'root');
-define('DB_PASS', '123456');
+define('DB_PASS', '');
 define('DB_NAME', 'sprayit');
 
 // TRUE FALSE
@@ -27,9 +27,9 @@ define('MOTTO', 'We don\'t moderate like those panzies <span class="pink"> Faceb
 
 // MAIL API CONFIG
 
-define('MAIL_TRANSLATOR', 'Mail');
+define('MAIL_TRANSLATOR', 'SendGridTranslator');
 
-define('SENDGRID_KEY', '');
+define('SENDGRID_KEY', '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');
 
 define('NOREPLY_ADDRESS', 'noreply@sprayit.com');
 

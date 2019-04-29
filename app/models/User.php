@@ -93,16 +93,10 @@ class User {
             //creates a unique user id
             $uuid = uniqid();
             if (DatabaseConnector::createUser($_fname, $_lname, $_email, $_password, $uuid)){
-                if (MailConnector::send($_email, $_fname, REGISTRATION_EMAIL_SUBJECT, REGISTRATON_EMAIL_BODY)){
-                    return true;
-                } else {
-                    echo 'api registration not sent';
-                    return false;
-                }
-
+                MailConnector::send($_email, $_fname, REGISTRATION_EMAIL_SUBJECT, REGISTRATON_EMAIL_BODY);
                 return true;
             } else {
-                echo 'error. user not created';
+                echo 'Error: user not created!';
                 return false;
             }
         } else {
