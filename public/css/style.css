@@ -43,3 +43,11 @@ h4.greeting {
     color: #fff;
     margin: 5px 200px auto auto;
 }
+
+.dropdown-item a{
+    color: darkslategray;
+}
+
+.dropdown-item a:hover {
+    text-decoration: none;
+}
