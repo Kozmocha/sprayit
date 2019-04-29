@@ -24,6 +24,7 @@
         <div class="card card-body mb-3">
             <div class="bg-light p-2 mb-3" style="text-align: left;">
                 Written by <?php echo $post->fname; echo " " . $post->lname; ?> on <?php echo $post->postCreated; ?>
+                <?php if ($post->user_uuid == Session::getField('user_uuid')) :?>
                 <div class="delete" style="float: right;">
                     <div class="btn-group open">
                         <a class="btn btn-secondary" href="<?php echo URL_ROOT . '/' . POSTS_EDIT; ?>"><i class="icon-user"><i class="far fa-edit"></i>&nbsp;&nbsp;Edit</i></a>
@@ -33,8 +34,8 @@
                             <li class="dropdown-item"><a href="#"><i class="far fa-trash-alt"></i>&nbsp;&nbsp;Delete</a></li>
                         </ul>
                     </div>
-
                 </div>
+                <?php endif; ?>
             </div>
             <h4 class="card-title"><?php echo $post->title; ?></h4>
             <p class="card-text">

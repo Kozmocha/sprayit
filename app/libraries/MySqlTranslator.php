@@ -253,6 +253,10 @@ class MySqlTranslator {
         }
     }
 
+    public static function deletePost($_uuid) {
+        // TODO: Implement by turning the active flag to the constant FALSE.
+    }
+
     /**
      * A function to get the User's UUID.
      *

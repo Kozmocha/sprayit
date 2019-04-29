@@ -27,7 +27,7 @@ define('MOTTO', 'We don\'t moderate like those panzies <span class="pink"> Faceb
 
 // MAIL API CONFIG
 
-define('MAIL_TRANSLATOR', 'Mail');
+define('MAIL_TRANSLATOR', 'SendGridTranslator');
 
 define('SENDGRID_KEY', '');
 

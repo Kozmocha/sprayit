@@ -41,7 +41,7 @@ class Post {
         return DatabaseConnector::getUuid($userId);
     }
 
-    public function getPosts() {
+    public static function getPosts() {
         return DatabaseConnector::getAllPosts();
     }
 
