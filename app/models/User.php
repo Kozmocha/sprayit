@@ -59,6 +59,7 @@ class User {
         $_SESSION['user_email'] = $_user->email;
         $_SESSION['user_fname'] = $_user->fname;
         $_SESSION['user_id'] = $_user->id;
+        $_SESSION['user_uuid'] = $_user->user_uuid;
         Redirect::to(POSTS_HOME);
     }
 
@@ -71,6 +72,7 @@ class User {
         unset($_SESSION['user_email']);
         unset($_SESSION['user_fname']);
         unset($_SESSION['user_id']);
+        unset($_SESSION['user_uuid']);
         session_destroy();
         Redirect::to(LOGIN_PATH);
     }
