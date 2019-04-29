@@ -73,4 +73,9 @@ class DatabaseConnector {
         $dbTranslator = static::$translator;
         return $dbTranslator::getUuid($_userId);
     }
+
+    public static function deletePost($_postUuid) {
+        $dbTranslator = static::$translator;
+        return $dbTranslator::deletePost($_postUuid);
+    }
 }

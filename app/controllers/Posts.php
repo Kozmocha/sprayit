@@ -71,4 +71,20 @@ class Posts extends Controller {
             $editedPost = Session::sanitizePost();
         }
     }
+
+    public function delete($_postUuid) {
+        if(Post::deletePost($_postUuid)) {
+            Redirect::to(POSTS_DELETE_SUCCESS);
+        } else {
+            Redirect::to(POSTS_DELETE_ERROR);
+        }
+    }
+
+    public function delete_error() {
+        $this->view(POSTS_DELETE_ERROR);
+    }
+
+    public function delete_success() {
+        $this->view(POSTS_DELETE_SUCCESS);
+    }
 }
