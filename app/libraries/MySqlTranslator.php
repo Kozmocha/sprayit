@@ -142,13 +142,13 @@ class MySqlTranslator {
         $db = new MySqlTranslator;
 
         // Sends the SQL to be prepared for database use.
-        $db->query("SELECT * FROM `user` WHERE email = :email");
+        $db->query("SELECT * FROM `user` WHERE $_email = :email");
 
         // Gets a single row for the matching email.
         $row = $db->single();
 
         // Checks the number of rows.
-        if ($db->rowCount() > 0) {
+        if ($row > 0) {
             return true;
         } else {
             return false;
@@ -193,8 +193,8 @@ class MySqlTranslator {
                         `posts`.created_at as postCreated
                         FROM `posts`
                         INNER JOIN `user`
-                        ON posts.uuid = `user`.uuid AND posts.active_flag = ' . TRUE . '
-                        ORDER BY `posts`.created_at DESC 
+                        ON posts.user_uuid = `user`.user_uuid AND posts.active_flag = ' . TRUE . '
+                        ORDER BY `posts`.created_at DESC
                         ');
 
         $results = $db->resultSet();
@@ -213,14 +213,11 @@ class MySqlTranslator {
             $dsn = "mysql:host=$host;dbname=$dbname";
             $conn = new PDO($dsn, DB_USER, DB_PASS);
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $query = "INSERT INTO user (fname, lname, email, password, uuid) VALUES ('{$_fname}','{$_lname}','{$_email}','{$_password}', '$_uuid')";
+            $query = "INSERT INTO user (fname, lname, email, password, user_uuid) VALUES ('{$_fname}','{$_lname}','{$_email}','{$_password}', '$_uuid')";
             if ($conn->exec($query)) {
-                ?>
-                <script>alert('You are registered! An email will be sent to the specified address.')</script><?php
                 $conn = null;
                 return true;
             } else {
-                echo "Error registering. Please try again.";
                 $conn = null;
                 return false;
             }
@@ -235,22 +232,18 @@ class MySqlTranslator {
      *
      * @author Ioannis Batsios
      */
-    public static function createPost($_title, $_body, $_uuid) {
+    public static function createPost($_title, $_body, $_userUuid, $_postUuid) {
         try {
             $host = DB_HOST;
             $dbname = DB_NAME;
             $dsn = "mysql:host=$host;dbname=$dbname";
             $conn = new PDO($dsn, DB_USER, DB_PASS);
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $query = "INSERT INTO posts (title, body, uuid) VALUES ('{$_title}','{$_body}','{$_uuid}')";
+            $query = "INSERT INTO posts (title, body, user_uuid, post_uuid) VALUES ('{$_title}','{$_body}','{$_userUuid}', '{$_postUuid}')";
             if ($conn->exec($query)) {
-                ?>
-                <script>alert('Post created!')</script><?php
                 $conn = null;
                 return true;
             } else {
-                ?>
-                <script>alert("Error posting. Please try again.")</script><?php
                 $conn = null;
                 return false;
             }
@@ -272,9 +265,9 @@ class MySqlTranslator {
     public function getUuid($_userId) {
         $db = new MySqlTranslator();
 
-        $db->query("SELECT uuid FROM `user` WHERE id = '{$_userId}'");
+        $db->query("SELECT user_uuid FROM `user` WHERE id = '{$_userId}'");
 
         $results = $db->single();
-        return $results->uuid;
+        return $results->user_uuid;
     }
 }

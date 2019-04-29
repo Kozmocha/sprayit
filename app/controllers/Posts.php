@@ -25,13 +25,18 @@ class Posts extends Controller {
     public function index() {
         $posts = Post::getPosts();
 
-        $data = [
+        $_data = [
             'posts' => $posts
         ];
 
-        $this->view(POSTS_HOME, $data);
+        $this->view(POSTS_HOME, $_data);
     }
 
+    /**
+     * Controller to add new posts.
+     *
+     * @author Ioannis Batsios
+     */
     public function add() {
         // Check if Register button is clicked
         if (Session::isPost()) {
@@ -44,11 +49,25 @@ class Posts extends Controller {
                 $data = [
                     'posts' => $posts
                 ];
-
                 $this->view(POSTS_HOME, $data);
             }
         } else {
             $this->view(NOT_FOUND_PATH);
+        }
+    }
+
+    public function edit() {
+        $posts = Post::getPosts();
+
+        $_data = [
+            'posts' => $posts
+        ];
+
+        $this->view(POSTS_EDIT, $_data);
+
+        // Check if Edit button is clicked
+        if (Session::isPost()) {
+            $editedPost = Session::sanitizePost();
         }
     }
 }

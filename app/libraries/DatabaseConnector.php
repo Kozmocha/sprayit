@@ -64,9 +64,9 @@ class DatabaseConnector {
         return $dbTranslator::createUser($_fname, $_lname, $_email, $_password, $_uuid);
     }
 
-    public static function createPost($_title, $_body, $_uuid) {
+    public static function createPost($_title, $_body, $_userUuid, $_postUuid) {
         $dbTranslator = static::$translator;
-        return $dbTranslator::createPost($_title, $_body, $_uuid);
+        return $dbTranslator::createPost($_title, $_body, $_userUuid, $_postUuid);
     }
 
     public static function getUuid($_userId) {
