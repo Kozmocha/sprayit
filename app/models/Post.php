@@ -32,6 +32,10 @@ class Post {
         }
     }
 
+    public static function getSinglePost(){
+
+    }
+
     public static function getUuid() {
         $userId = Session::getField('user_id');
         return DatabaseConnector::getUuid($userId);
@@ -39,5 +43,9 @@ class Post {
 
     public function getPosts() {
         return DatabaseConnector::getAllPosts();
+    }
+
+    public static function getPostUuid(){
+
     }
 }
