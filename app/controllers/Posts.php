@@ -58,13 +58,9 @@ class Posts extends Controller {
     }
 
     public function edit() {
-        $posts = Post::getPosts();
+        $posts = Post::getSinglePost('5cc74cddbbd1c');
 
-        $_data = [
-            'posts' => $posts
-        ];
-
-        $this->view(POSTS_EDIT, $_data);
+        $this->view(POSTS_EDIT, $posts);
 
         // Check if Edit button is clicked
         if (Session::isPost()) {

@@ -32,8 +32,15 @@ class Post {
         }
     }
 
-    public static function getSinglePost(){
-
+    public static function getSinglePost($postUuid){
+        $_postUuid = (self::getPostUuid($postUuid));
+        $_data = (DatabaseConnector::getSinglePost($_postUuid));
+        if ($_data) {
+            return $_data;
+        } else {
+            "Unable to get the post data.";
+            return false;
+        }
     }
 
     public static function getUuid() {
@@ -45,7 +52,7 @@ class Post {
         return DatabaseConnector::getAllPosts();
     }
 
-    public static function getPostUuid(){
-
+    public static function getPostUuid($postUuid){
+        return DatabaseConnector::getPostUuid($postUuid);
     }
 }

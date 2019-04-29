@@ -270,4 +270,32 @@ class MySqlTranslator {
         $results = $db->single();
         return $results->user_uuid;
     }
+
+    /**
+     * A function to get the Post's UUID
+     *
+     * @author Ioannis Batsios
+     */
+    public static function getPostUuid($_postUuid) {
+        $db = new MySqlTranslator();
+
+        $db->query("SELECT post_uuid FROM `posts` WHERE post_uuid = '{$_postUuid}'");
+
+        $results = $db->single();
+        return $results->post_uuid;
+    }
+
+    /**
+     * A function that only returns the title and body from a selected postUuid
+     *
+     * @author Ioannis Batsios
+     */
+    public static function getSinglePost($_postUuid) {
+        $db = new MySqlTranslator();
+
+        $db->query("SELECT body, title FROM `posts` WHERE post_uuid = '{$_postUuid}' ");
+
+        $results = $db->single();
+        return $results;
+    }
 }

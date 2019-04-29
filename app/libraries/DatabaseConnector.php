@@ -73,4 +73,14 @@ class DatabaseConnector {
         $dbTranslator = static::$translator;
         return $dbTranslator::getUuid($_userId);
     }
+
+    public static function getPostUuid($_postUuid) {
+        $dbTranslator = static::$translator;
+        return $dbTranslator::getPostUuid($_postUuid);
+    }
+
+    public static function getSinglePost($_postUuid) {
+        $dbTranslator = static::$translator;
+        return $dbTranslator::getSinglePost($_postUuid);
+    }
 }
