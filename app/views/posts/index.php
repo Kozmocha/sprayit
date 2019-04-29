@@ -26,12 +26,11 @@
                 Written by <?php echo $post->fname; echo " " . $post->lname; ?> on <?php echo $post->postCreated; ?>
                 <div class="delete" style="float: right;">
                     <div class="btn-group open">
-                        <a class="btn btn-secondary" href="#"><i class="icon-user">Edit</i></a>
+                        <a class="btn btn-secondary" href="<?php echo URL_ROOT . '/' . POSTS_EDIT; ?>"><i class="icon-user"><i class="far fa-edit"></i>&nbsp;&nbsp;Edit</i></a>
                         <a class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" href="#">
                             <span class="icon-caret-down"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#"><i class="icon-fixed-width icon-pencil"></i> Edit</a></li>
-                            <li><a href="#"><i class="icon-fixed-width icon-trash"></i> Delete</a></li>
+                            <li class="dropdown-item"><a href="#"><i class="far fa-trash-alt"></i>&nbsp;&nbsp;Delete</a></li>
                         </ul>
                     </div>
 
@@ -41,7 +40,7 @@
             <p class="card-text">
                 <?php echo $post->body; ?>
             </p>
-            <a href="<?php echo URL_ROOT . '/' . POSTS_SHOW . '/' . $post->postId; ?>" class="btn btn-dark">More</a>
+<!--            <a href="--><?php //echo URL_ROOT . '/' . POSTS_SHOW . '/' . $post->postId; ?><!--" class="btn btn-dark">More</a>-->
         </div>
     </div>
 <?php endforeach; ?>

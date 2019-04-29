@@ -57,8 +57,13 @@ class Posts extends Controller {
     }
 
     public function edit() {
-        //Redirect to the edit post page
-        $this->view(POSTS_EDIT);
+        $posts = Post::getPosts();
+
+        $_data = [
+            'posts' => $posts
+        ];
+
+        $this->view(POSTS_EDIT, $_data);
 
         // Check if Edit button is clicked
         if (Session::isPost()) {
