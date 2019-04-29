@@ -253,8 +253,14 @@ class MySqlTranslator {
         }
     }
 
-    public static function deletePost($_uuid) {
-        // TODO: Implement by turning the active flag to the constant FALSE.
+    public static function deletePost($_postUuid) {
+        $db = new MySqlTranslator();
+        try {
+            $db->query("UPDATE `posts` SET `posts`.active_flag = " . FALSE . " WHERE `posts`.post_uuid = '{$_postUuid}'");
+            return $db->execute();
+        } catch (PDOException $e) {
+            return false;
+        }
     }
 
     /**

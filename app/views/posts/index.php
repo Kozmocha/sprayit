@@ -31,7 +31,7 @@
                         <a class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" href="#">
                             <span class="icon-caret-down"></span></a>
                         <ul class="dropdown-menu">
-                            <li class="dropdown-item"><a href="#"><i class="far fa-trash-alt"></i>&nbsp;&nbsp;Delete</a></li>
+                            <li class="dropdown-item"><a href="<?php echo URL_ROOT . '/' . POSTS_DELETE . '/' . $post->post_uuid; ?>"><i class="far fa-trash-alt"></i>&nbsp;&nbsp;Delete</a></li>
                         </ul>
                     </div>
                 </div>

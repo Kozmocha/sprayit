@@ -29,7 +29,7 @@ define('MOTTO', 'We don\'t moderate like those panzies <span class="pink"> Faceb
 
 define('MAIL_TRANSLATOR', 'SendGridTranslator');
 
-define('SENDGRID_KEY', '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');
+define('SENDGRID_KEY', '');
 
 define('NOREPLY_ADDRESS', 'noreply@sprayit.com');
 
@@ -47,6 +47,12 @@ define('POSTS_HOME', 'posts/index');
 define('POSTS_SHOW', 'posts/show');
 
 define('POSTS_ADD', 'posts/add');
+
+define('POSTS_DELETE', 'posts/delete');
+
+define('POSTS_DELETE_SUCCESS', 'posts/delete_success');
+
+define('POSTS_DELETE_ERROR', 'posts/delete_error');
 
 define('LOGIN_PATH', 'users/login');
 

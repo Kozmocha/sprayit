@@ -40,4 +40,8 @@ class Post {
     public static function getPosts() {
         return DatabaseConnector::getAllPosts();
     }
+
+    public static function deletePost($_postUuid) {
+        return DatabaseConnector::deletePost($_postUuid);
+    }
 }
