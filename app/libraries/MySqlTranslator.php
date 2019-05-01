@@ -299,8 +299,6 @@ class MySqlTranslator {
         try {
             $db->query( "SELECT * FROM `posts` WHERE `posts`.post_uuid = '{$_postUuid}'");
             $results = $db->single();
-//            var_dump($results);
-//            die();
             return $results;
         } catch (PDOException $e){
             return false;
