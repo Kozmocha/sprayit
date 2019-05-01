@@ -23,6 +23,7 @@ class Posts extends Controller {
      * @author Christopher Thacker
      */
     public function index() {
+        //die('In Posts/index');
         $posts = Post::getPosts();
 
         $data = [
@@ -32,6 +33,11 @@ class Posts extends Controller {
         $this->view(POSTS_HOME, $data);
     }
 
+    /**
+     * Controller to add new posts.
+     *
+     * @author Ioannis Batsios
+     */
     public function add() {
         // Check if Register button is clicked
         if (Session::isPost()) {
@@ -44,11 +50,54 @@ class Posts extends Controller {
                 $data = [
                     'posts' => $posts
                 ];
-
                 $this->view(POSTS_HOME, $data);
             }
         } else {
             $this->view(NOT_FOUND_PATH);
         }
+    }
+
+    public function edit($_postUuid) {
+        $post = Post::getPostByPostUuid($_postUuid);
+        $data = [
+            'posts' => $post
+        ];
+        $this->view(POSTS_EDIT, $data);
+    }
+
+    public function edited($_postUuid) {
+
+        if (Session::isPost()) {
+            $editedPost = Session::sanitizePost();
+
+            $editedPost = Post::editPost($_postUuid, $editedPost['title'], $editedPost['body']);
+
+            if ($editedPost) {
+                $posts = Post::getPosts();
+                $data = [
+                    'posts' => $posts
+                ];
+                $this->view(POSTS_HOME, $data);
+            }
+        } else {
+            $this->view(NOT_FOUND_PATH);
+        }
+    }
+
+
+    public function delete($_postUuid) {
+        if(Post::deletePost($_postUuid)) {
+            Redirect::to(POSTS_DELETE_SUCCESS);
+        } else {
+            Redirect::to(POSTS_DELETE_ERROR);
+        }
+    }
+
+    public function delete_error() {
+        $this->view(POSTS_DELETE_ERROR);
+    }
+
+    public function delete_success() {
+        $this->view(POSTS_DELETE_SUCCESS);
     }
 }

@@ -3,8 +3,12 @@
 // MySqlTranslator Parameters
 define('DB_HOST', 'localhost');
 define('DB_USER', 'root');
-define('DB_PASS', '');
+define('DB_PASS', '123456');
 define('DB_NAME', 'sprayit');
+
+// TRUE FALSE
+define('TRUE', 1);
+define('FALSE', 0);
 
 // App Root
 define('APP_ROOT', dirname(dirname(__FILE__)));
@@ -23,7 +27,7 @@ define('MOTTO', 'We don\'t moderate like those panzies <span class="pink"> Faceb
 
 // MAIL API CONFIG
 
-define('MAIL_TRANSLATOR', 'Mail');
+define('MAIL_TRANSLATOR', 'SendGridTranslator');
 
 define('SENDGRID_KEY', '');
 
@@ -36,12 +40,21 @@ define('REGISTRATION_EMAIL_SUBJECT', 'Welcome to SprayIt!');
 define('REGISTRATON_EMAIL_BODY', 'Thank you for signing up for SprayIt. Your account has been verified and saved! You can now log in.');
 
 // REDIRECT AND RENDER VIEW PATHS BELOW
+define ('POSTS_EDIT', 'posts/edit');
+
+define ('POSTS_EDITED', 'posts/edited');
 
 define('POSTS_HOME', 'posts/index');
 
 define('POSTS_SHOW', 'posts/show');
 
 define('POSTS_ADD', 'posts/add');
+
+define('POSTS_DELETE', 'posts/delete');
+
+define('POSTS_DELETE_SUCCESS', 'posts/delete_success');
+
+define('POSTS_DELETE_ERROR', 'posts/delete_error');
 
 define('LOGIN_PATH', 'users/login');
 
@@ -52,5 +65,9 @@ define('REGISTER_PATH', 'users/register');
 define('NOT_FOUND_PATH', 'pages/not_found');
 
 define('UPDATE_USER', 'users/update');
+
+define ('ERROR_PATH', 'users/error');
+
+
 
 

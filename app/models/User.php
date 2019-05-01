@@ -56,9 +56,10 @@ class User {
      * @author Christopher Thacker
      */
     protected static function createUserSession($_user) {
-        $_SESSION['user_id'] = $_user->id;
         $_SESSION['user_email'] = $_user->email;
         $_SESSION['user_fname'] = $_user->fname;
+        $_SESSION['user_id'] = $_user->id;
+        $_SESSION['user_uuid'] = $_user->user_uuid;
         Redirect::to(POSTS_HOME);
     }
 
@@ -68,9 +69,10 @@ class User {
      * @author Christopher Thacker
      */
     public static function destroyUserSession() {
-        unset($_SESSION['user_id']);
         unset($_SESSION['user_email']);
         unset($_SESSION['user_fname']);
+        unset($_SESSION['user_id']);
+        unset($_SESSION['user_uuid']);
         session_destroy();
         Redirect::to(LOGIN_PATH);
     }
@@ -90,13 +92,21 @@ class User {
     public static function registerUser($_fname, $_lname, $_email, $_confirmEmail, $_password, $_confirmPassword) {
         // Checks to make sure emails match. If not, returns false
         if (self::confirmEmail($_email, $_confirmEmail) && self::checkPasswords($_password, $_confirmPassword)) {
-            //creates a unique user id
-            $uuid = uniqid();
-            DatabaseConnector::createUser($_fname, $_lname, $_email, $_password, $uuid);
-            MailConnector::send($_email, $_fname, REGISTRATION_EMAIL_SUBJECT, REGISTRATON_EMAIL_BODY);
-            return true;
-        } else {
-            return false;
+            if (DatabaseConnector::checkDuplicateEmails($_email)) {
+                //creates a unique user id
+                $uuid = uniqid();
+                if (DatabaseConnector::createUser($_fname, $_lname, $_email, $_password, $uuid)) {
+                    //Api call
+                    MailConnector::send($_email, $_fname, REGISTRATION_EMAIL_SUBJECT, REGISTRATON_EMAIL_BODY);
+                    return true;
+                } else {
+                    echo 'Error: user not created!';
+                    return false;
+                }
+            } else {
+                echo "Email already exists in our database.";
+                return false;
+            }
         }
     }
 
@@ -108,8 +118,7 @@ class User {
      */
     public static function confirmEmail($_email, $_emailToConfirm) {
         if ($_email != $_emailToConfirm) {
-            ?>
-            <script>alert("Emails do not match!")</script><?php
+            echo "Emails do not match!";
             return false;
         } else {
             return true;
@@ -124,8 +133,7 @@ class User {
      */
     public static function checkPasswords($_password, $_samePassword) {
         if ($_password != $_samePassword) {
-            ?>
-            <script>alert("Passwords do not match!")</script><?php
+            echo "Passwords do not match!";
             return false;
         } else {
             return true;
