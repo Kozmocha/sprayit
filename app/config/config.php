@@ -1,14 +1,22 @@
 <?php
 
-// MySqlTranslator Parameters
+// MYSQLTRANSLATOR PARAMETERS ==========================================================================================
+
 define('DB_HOST', 'localhost');
 define('DB_USER', 'root');
 define('DB_PASS', '123456');
 define('DB_NAME', 'sprayit');
 
-// TRUE FALSE
+//======================================================================================================================
+
+// TRUE FALSE ==========================================================================================================
+
 define('TRUE', 1);
 define('FALSE', 0);
+
+//======================================================================================================================
+
+// APPLICATION DIRECTORY INFORMATION ===================================================================================
 
 // App Root
 define('APP_ROOT', dirname(dirname(__FILE__)));
@@ -25,21 +33,8 @@ define('SITE_NAME', 'SprayIt');
 // Site Motto
 define('MOTTO', 'We don\'t moderate like those panzies <span class="pink"> Facebook </span>and <span class="pink">Twitter</span>!<br/> <span class="red">SPRAY</span> whatever you <span class="green">WANT!</span>');
 
-// MAIL API CONFIG
+// CONSTANT PATHS BELOW (for easy refactor / link changes)
 
-define('MAIL_TRANSLATOR', 'SendGridTranslator');
-
-define('SENDGRID_KEY', '');
-
-define('NOREPLY_ADDRESS', 'noreply@sprayit.com');
-
-define('NOREPLY_NAME', 'noreply');
-
-define('REGISTRATION_EMAIL_SUBJECT', 'Welcome to SprayIt!');
-
-define('REGISTRATON_EMAIL_BODY', 'Thank you for signing up for SprayIt. Your account has been verified and saved! You can now log in.');
-
-// REDIRECT AND RENDER VIEW PATHS BELOW
 define ('POSTS_EDIT', 'posts/edit');
 
 define ('POSTS_EDITED', 'posts/edited');
@@ -68,6 +63,20 @@ define('UPDATE_USER', 'users/update');
 
 define ('ERROR_PATH', 'users/error');
 
+//======================================================================================================================
 
+// MAIL API CONFIG =====================================================================================================
 
+define('MAIL_TRANSLATOR', 'SendGridTranslator');
 
+define('SENDGRID_KEY', '');
+
+define('NOREPLY_ADDRESS', 'noreply@sprayit.com');
+
+define('NOREPLY_NAME', 'noreply');
+
+define('REGISTRATION_EMAIL_SUBJECT', 'Welcome to SprayIt!');
+
+define('REGISTRATON_EMAIL_BODY', 'Thank you for signing up for SprayIt. Your account has been verified and saved! You can now log in.');
+
+//======================================================================================================================

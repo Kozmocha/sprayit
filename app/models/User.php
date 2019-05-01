@@ -11,13 +11,30 @@ class User {
      */
     private $dataTable = 'user';
 
+    //==================================================================================================================
 
-//  TODO: DO NOT DELETE THIS CODE. It is not necessary at the moment, but might be necessary later.
-    public function __construct($data = []) {
-        foreach ($data as $key => $value) {
-            $this->$key = $value;
-        };
+    /**
+     * Get User UUID: Returns the user's UUID based on his/her session ID.
+     *
+     * @return mixed
+     *
+     * @author Ioannis Batsios
+     */
+    public static function getUuid() {
+        $userId = Session::getField('user_id');
+        return DatabaseConnector::getUuid($userId);
     }
+
+    /**
+     * Get User Email: Returns the email of the passed in user.
+     *
+     * @author Christopher Thacker
+     */
+    public function getEmail($user) {
+        return $user->email;
+    }
+
+    //==================================================================================================================
 
     /**
      * Authenticate User Login: Checks the credentials that are passed in as parameters and proceeds to perform
@@ -48,38 +65,6 @@ class User {
             }
         }
         return false;
-    }
-
-    /**
-     * Create User Session: Sets the session variables to the passed in user's properties or values.
-     *
-     * @author Christopher Thacker
-     */
-    protected static function createUserSession($_user) {
-        $_SESSION['user_email'] = $_user->email;
-        $_SESSION['user_fname'] = $_user->fname;
-        $_SESSION['user_id'] = $_user->id;
-        $_SESSION['user_uuid'] = $_user->user_uuid;
-        Redirect::to(POSTS_HOME);
-    }
-
-    /**
-     * Destroy User Session: Un-sets all of the session variables for the logged in user.
-     *
-     * @author Christopher Thacker
-     */
-    public static function destroyUserSession() {
-        unset($_SESSION['user_email']);
-        unset($_SESSION['user_fname']);
-        unset($_SESSION['user_id']);
-        unset($_SESSION['user_uuid']);
-        session_destroy();
-        Redirect::to(LOGIN_PATH);
-    }
-
-    public static function getUuid() {
-        $userId = Session::getField('user_id');
-        return DatabaseConnector::getUuid($userId);
     }
 
     /**
@@ -151,13 +136,29 @@ class User {
     }
 
     /**
-     * Get User Email: Returns the email of the passed in user.
+     * Create User Session: Sets the session variables to the passed in user's properties or values.
      *
      * @author Christopher Thacker
      */
-    public function getEmail($user) {
-        return $user->email;
+    protected static function createUserSession($_user) {
+        $_SESSION['user_email'] = $_user->email;
+        $_SESSION['user_fname'] = $_user->fname;
+        $_SESSION['user_id'] = $_user->id;
+        $_SESSION['user_uuid'] = $_user->user_uuid;
+        Redirect::to(POSTS_HOME);
+    }
+
+    /**
+     * Destroy User Session: Un-sets all of the session variables for the logged in user.
+     *
+     * @author Christopher Thacker
+     */
+    public static function destroyUserSession() {
+        unset($_SESSION['user_email']);
+        unset($_SESSION['user_fname']);
+        unset($_SESSION['user_id']);
+        unset($_SESSION['user_uuid']);
+        session_destroy();
+        Redirect::to(LOGIN_PATH);
     }
 }
-
-?>
