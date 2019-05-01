@@ -297,8 +297,10 @@ class MySqlTranslator {
     public function getPostByPostUuid($_postUuid) {
         $db = new MySqlTranslator();
         try {
-            $db->query( "SELECT `posts`.title,`posts`.body FROM `posts` WHERE `posts`.post_uuid = '{$_postUuid}'");
-            $results = $db->resultSet();
+            $db->query( "SELECT * FROM `posts` WHERE `posts`.post_uuid = '{$_postUuid}'");
+            $results = $db->single();
+//            var_dump($results);
+//            die();
             return $results;
         } catch (PDOException $e){
             return false;

@@ -65,12 +65,12 @@ class Posts extends Controller {
         $this->view(POSTS_EDIT, $data);
     }
 
-    public function edited() {
+    public function edited($_postUuid) {
 
         if (Session::isPost()) {
             $editedPost = Session::sanitizePost();
 
-            $editedPost = Post::editPost('5cc93bb8937ac', $editedPost['title'], $editedPost['body']);
+            $editedPost = Post::editPost($_postUuid, $editedPost['title'], $editedPost['body']);
 
             if ($editedPost) {
                 $posts = Post::getPosts();
