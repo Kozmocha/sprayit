@@ -3,7 +3,7 @@
 // MySqlTranslator Parameters
 define('DB_HOST', 'localhost');
 define('DB_USER', 'root');
-define('DB_PASS', '');
+define('DB_PASS', '123456');
 define('DB_NAME', 'sprayit');
 
 // TRUE FALSE
@@ -41,6 +41,8 @@ define('REGISTRATON_EMAIL_BODY', 'Thank you for signing up for SprayIt. Your acc
 
 // REDIRECT AND RENDER VIEW PATHS BELOW
 define ('POSTS_EDIT', 'posts/edit');
+
+define ('POSTS_EDITED', 'posts/edited');
 
 define('POSTS_HOME', 'posts/index');
 

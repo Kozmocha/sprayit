@@ -1,7 +1,7 @@
 <!--Author: Ioannis Batsios-->
 <?php require APP_ROOT . '/views/inc/header.php'; ?>
 <h2><span class="blue">Water</span><span class="green">cooler</span></h2>
-<form action="<?php echo URL_ROOT . '/' . POSTS_EDIT; ?>" method="post" style="padding-top: 25px;">
+<form action="<?php echo URL_ROOT . '/' . POSTS_EDITED . '/' . $post->post_uuid; ?>" method="post" style="padding-top: 25px;">
     <?php foreach($_data['posts'] as $post) : ?>
     <div class="row" style="margin-bottom: -40px;">
         <div class="form-group col-lg-12">
