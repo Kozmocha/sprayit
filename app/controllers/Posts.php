@@ -8,6 +8,11 @@ require_once APP_ROOT . '/models/Post.php';
  */
 class Posts extends Controller {
 
+    /**
+     * Posts constructor: Used to block unauthorized users from viewing the posts.
+     *
+     * @author Christopher Thacker
+     */
     public function __construct() {
         if (!Session::isLoggedIn()) {
             Redirect::to(LOGIN_PATH);
@@ -34,18 +39,18 @@ class Posts extends Controller {
     }
 
     /**
-     * Controller to add new posts.
+     * Action to add new posts.
      *
      * @author Ioannis Batsios
      */
     public function add() {
         // Check if Register button is clicked
         if (Session::isPost()) {
-            $newpost = Session::sanitizePost();
+            $newPost = Session::sanitizePost();
 
-            $newpost = Post::createPost($newpost['title'], $newpost['body']);
+            $newPost = Post::createPost($newPost['title'], $newPost['body']);
             //If the data is returned true
-            if ($newpost) {
+            if ($newPost) {
                 $posts = Post::getPosts();
                 $data = [
                     'posts' => $posts
@@ -57,6 +62,13 @@ class Posts extends Controller {
         }
     }
 
+    /**
+     * Transfers the post to be edited to the edit page.
+     *
+     * @param $_postUuid
+     *
+     * @author Ioannis Batsios
+     */
     public function edit($_postUuid) {
         $post = Post::getPostByPostUuid($_postUuid);
         $data = [
@@ -65,6 +77,13 @@ class Posts extends Controller {
         $this->view(POSTS_EDIT, $data);
     }
 
+    /**
+     * Transfers the sanitized, updated post data to the model to be updated.
+     *
+     * @param $_postUuid
+     *
+     * @author Ioannis Batsios
+     */
     public function edited($_postUuid) {
 
         if (Session::isPost()) {
@@ -84,7 +103,13 @@ class Posts extends Controller {
         }
     }
 
-
+    /**
+     * Transfers the post's uuid to the model to be deleted. If an error occurs, it redirects to the delete error page.
+     *
+     * @param $_postUuid
+     *
+     * @author Christopher Thacker
+     */
     public function delete($_postUuid) {
         if(Post::deletePost($_postUuid)) {
             Redirect::to(POSTS_DELETE_SUCCESS);
@@ -93,10 +118,20 @@ class Posts extends Controller {
         }
     }
 
+    /**
+     * Action for the delete error page, which simply loads the view for it.
+     *
+     * @author Christopher Thacker
+     */
     public function delete_error() {
         $this->view(POSTS_DELETE_ERROR);
     }
 
+    /**
+     * Action for the delete success page, which simply loads the view for it.
+     *
+     * @author Christopher Thacker
+     */
     public function delete_success() {
         $this->view(POSTS_DELETE_SUCCESS);
     }
