@@ -10,6 +10,12 @@ class MailConnector {
     /**
      * MailConnector send method: Bridge method to the email translator class's send method.
      *
+     * @param string $_to
+     * @param string $_toName
+     * @param string $_subject
+     * @param string $_text
+     * @param string $_html
+     *
      * @author Christopher Thacker
      */
     public static function send($_to = '', $_toName = '', $_subject = '', $_text = '', $_html = '') {

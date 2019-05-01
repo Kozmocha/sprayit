@@ -10,25 +10,7 @@ class DatabaseConnector {
      */
     private static $translator = DB_TRANSLATOR;
 
-    /**
-     * Passes the email value to the specified database translator's findUserByEmail method.
-     *
-     * @author Christopher Thacker
-     */
-    public static function findUserByEmail($_email) {
-        $dbTranslator = static::$translator;
-        return $dbTranslator::findUserByEmail($_email);
-    }
-
-    /**
-     * Checks to make sure User isn't adding same email to the database.
-     *
-     * @author Ioannis Batsios
-     */
-    public static function checkDuplicateEmails($_email) {
-        $dbTranslator = static::$translator;
-        return $dbTranslator::checkDuplicateEmails($_email);
-    }
+    //==================================================================================================================
 
     /**
      * Returns all records from a specified table.
@@ -50,23 +32,9 @@ class DatabaseConnector {
         return $dbTranslator::getAllPosts();
     }
 
-    /**
-     *
-     */
-    public static function rowCount() {
+    public static function getPostByPostUuid($_postUuid) {
         $dbTranslator = static::$translator;
-        return $dbTranslator::rowCount();
-    }
-
-
-    public static function createUser($_fname, $_lname, $_email, $_password, $_uuid) {
-        $dbTranslator = static::$translator;
-        return $dbTranslator::createUser($_fname, $_lname, $_email, $_password, $_uuid);
-    }
-
-    public static function createPost($_title, $_body, $_userUuid, $_postUuid) {
-        $dbTranslator = static::$translator;
-        return $dbTranslator::createPost($_title, $_body, $_userUuid, $_postUuid);
+        return $dbTranslator::getPostByPostUuid($_postUuid);
     }
 
     public static function getUuid($_userId) {
@@ -74,19 +42,88 @@ class DatabaseConnector {
         return $dbTranslator::getUuid($_userId);
     }
 
-    public static function deletePost($_postUuid) {
+    /**
+     * Passes the email value to the specified database translator's findUserByEmail method.
+     *
+     * @author Christopher Thacker
+     */
+    public static function findUserByEmail($_email) {
         $dbTranslator = static::$translator;
-        return $dbTranslator::deletePost($_postUuid);
+        return $dbTranslator::findUserByEmail($_email);
     }
 
-    public static function getPostByPostUuid($_postUuid) {
+    //==================================================================================================================
+
+    /**
+     * Checks to make sure User isn't adding same email to the database.
+     *
+     * @author Ioannis Batsios
+     */
+    public static function checkDuplicateEmails($_email) {
         $dbTranslator = static::$translator;
-        return $dbTranslator::getPostByPostUuid($_postUuid);
+        return $dbTranslator::checkDuplicateEmails($_email);
     }
 
+    /**
+     * Calls the database translator to pass the user's credentials to be added to the database.
+     *
+     * @param $_fname
+     * @param $_lname
+     * @param $_email
+     * @param $_password
+     * @param $_uuid
+     * @return mixed
+     *
+     * @author Christopher Thacker
+     */
+    public static function createUser($_fname, $_lname, $_email, $_password, $_uuid) {
+        $dbTranslator = static::$translator;
+        return $dbTranslator::createUser($_fname, $_lname, $_email, $_password, $_uuid);
+    }
+
+    /**
+     * Calls the database translator to pass the post information to be added to the database.
+     *
+     * @param $_title
+     * @param $_body
+     * @param $_userUuid
+     * @param $_postUuid
+     * @return mixed
+     *
+     * @author Christopher Thacker
+     */
+    public static function createPost($_title, $_body, $_userUuid, $_postUuid) {
+        $dbTranslator = static::$translator;
+        return $dbTranslator::createPost($_title, $_body, $_userUuid, $_postUuid);
+    }
+
+    /**
+     * Calls the database translator to pass the updated post information to be edited within the database.
+     *
+     * @param $_postUuid
+     * @param $_title
+     * @param $_body
+     * @return mixed
+     *
+     * @author Ioannis Batsios
+     */
     public static function editPost($_postUuid, $_title, $_body) {
         $dbTranslator = static::$translator;
         return $dbTranslator::editPost($_postUuid, $_title, $_body);
 
+    }
+
+    /**
+     * Calls the database translator to pass the post's uuid so that the post can be "deleted" from the database (simply
+     * sets the active flag to 'false').
+     *
+     * @param $_postUuid
+     * @return mixed
+     *
+     * @author Christopher Thacker
+     */
+    public static function deletePost($_postUuid) {
+        $dbTranslator = static::$translator;
+        return $dbTranslator::deletePost($_postUuid);
     }
 }

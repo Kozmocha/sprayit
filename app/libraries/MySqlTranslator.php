@@ -15,28 +15,34 @@ class MySqlTranslator {
     private $stmt;
     private $error;
 
+    //==================================================================================================================
+
     /**
-     * MySqlTranslator constructor: Establishes the connection to the database upon instantiation using
-     * config-defined credentials.
+     * Get all records from a table: Returns all of the rows within a specified table.
      *
-     * @author Christopher Thacker, Ioannis Batsios
+     * @author Christopher Thacker
      */
-    public function __construct() {
+    public static function getAll($_table) {
+        $db = new MySqlTranslator();
 
-        // Sets up DSN
-        $dsn = 'mysql:host=' . $this->host . ';dbname=' . $this->dbname;
-        $options = array(
-            PDO::ATTR_PERSISTENT => true,
-            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
-        );
+        $db->query("SELECT * FROM `{$_table}`");
 
-        // Creates a PDO instance.
-        try {
-            $this->dbh = new PDO($dsn, $this->user, $this->pass, $options);
-        } catch (PDOException $e) {
-            $this->error = $e->getMessage();
-            echo $this->error;
-        }
+        $results = $db->resultSet();
+        return $results;
+    }
+
+    /**
+     * A function to get the User's UUID.
+     *
+     * @author Christopher Thacker
+     */
+    public function getUuid($_userId) {
+        $db = new MySqlTranslator();
+
+        $db->query("SELECT user_uuid FROM `user` WHERE id = '{$_userId}'");
+
+        $results = $db->single();
+        return $results->user_uuid;
     }
 
     /**
@@ -68,68 +74,70 @@ class MySqlTranslator {
     }
 
     /**
-     * Query SQL: Prepares the passed in SQL code for database use.
+     * Returns all posts within the database with the poster's information.
      *
-     * @author Christopher Thacker, Ioannis Batsios
+     * @author Christopher Thacker
      */
-    public function query($_sql) {
-        $this->stmt = $this->dbh->prepare($_sql);
+    public static function getAllPosts() {
+        $db = new MySqlTranslator();
+
+        $db->query('SELECT *,
+                        `posts`.id as postId,
+                        `user`.id as userId,
+                        `posts`.created_at as postCreated
+                        FROM `posts`
+                        INNER JOIN `user`
+                        ON posts.user_uuid = `user`.user_uuid AND posts.active_flag = ' . TRUE . '
+                        ORDER BY `posts`.created_at DESC
+                        ');
+
+        $results = $db->resultSet();
+        return $results;
     }
 
     /**
-     * Bind value to parameter: Binds a given value to a given parameter based on its type so that the database can
-     * safely use it. This process defaults to string if no other type can be determined. A type can be passed in to
-     * automatically bind the value as that type without checking for a matching one.
+     * A function that gets a post from the database by using the posts uuid.
      *
-     * @author Christopher Thacker, Ioannis Batsios
+     * @param $_postUuid
+     * @return array with title,body
+     *
+     * @author Ioannis Batsios
      */
-    public function bind($_param, $_value, $_type = null) {
-        if (is_null($_type)) {
-            switch (true) {
-                case is_int($_value):
-                    $_type = PDO::PARAM_INT;
-                    break;
-                case is_bool($_value):
-                    $_type = PDO::PARAM_BOOL;
-                    break;
-                case is_null($_value):
-                    $_type = PDO::PARAM_NULL;
-                    break;
-                default:
-                    $_type = PDO::PARAM_STR;
-            }
+    public function getPostByPostUuid($_postUuid) {
+        $db = new MySqlTranslator();
+        try {
+            $db->query( "SELECT * FROM `posts` WHERE `posts`.post_uuid = '{$_postUuid}'");
+            $results = $db->single();
+            return $results;
+        } catch (PDOException $e){
+            return false;
         }
-
-        $this->stmt->bindValue($_param, $_value, $_type);
     }
 
+    //==================================================================================================================
+
     /**
-     * Return single result: Returns a single row from the database if it matches the stmt property's query code.
+     * MySqlTranslator constructor: Establishes the connection to the database upon instantiation using
+     * config-defined credentials.
      *
      * @author Christopher Thacker, Ioannis Batsios
      */
-    public function single() {
-        $this->execute();
-        return $this->stmt->fetch(PDO::FETCH_OBJ);
-    }
+    public function __construct() {
 
-    /**
-     * Execute statement: Runs the stmt property against the database.
-     *
-     * @author Christopher Thacker, Ioannis Batsios
-     */
-    public function execute() {
-        return $this->stmt->execute();
-    }
+        // Sets up DSN
+        $dsn = 'mysql:host=' . $this->host . ';dbname=' . $this->dbname;
+        $options = array(
+            PDO::ATTR_PERSISTENT => true,
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+        );
 
-    /**
-     * Get row count: Returns the number of rows in the database that were affected by the execution of the stmt
-     * property.
-     *
-     * @author Christopher Thacker, Ioannis Batsios
-     */
-    public function rowCount() {
-        return $this->stmt->rowCount();
+        // Creates a PDO instance.
+        try {
+            $this->dbh = new PDO($dsn, $this->user, $this->pass, $options);
+        } catch (PDOException $e) {
+            $this->error = $e->getMessage();
+            echo $this->error;
+        }
     }
 
     /**
@@ -154,52 +162,6 @@ class MySqlTranslator {
         } else {
             return false;
         }
-    }
-
-    /**
-     * Get all records from a table: Returns all of the rows within a specified table.
-     *
-     * @author Christopher Thacker
-     */
-    public static function getAll($_table) {
-        $db = new MySqlTranslator();
-
-        $db->query("SELECT * FROM `{$_table}`");
-
-        $results = $db->resultSet();
-        return $results;
-    }
-
-    /**
-     * Return set of results: Returns all results of the SQL statement.
-     *
-     * @author Christopher Thacker, Ioannis Batsios
-     */
-    public function resultSet() {
-        $this->execute();
-        return $this->stmt->fetchAll(PDO::FETCH_OBJ);
-    }
-
-    /**
-     * Returns all posts within the database with the poster's information.
-     *
-     * @author Christopher Thacker
-     */
-    public static function getAllPosts() {
-        $db = new MySqlTranslator();
-
-        $db->query('SELECT *,
-                        `posts`.id as postId,
-                        `user`.id as userId,
-                        `posts`.created_at as postCreated
-                        FROM `posts`
-                        INNER JOIN `user`
-                        ON posts.user_uuid = `user`.user_uuid AND posts.active_flag = ' . TRUE . '
-                        ORDER BY `posts`.created_at DESC
-                        ');
-
-        $results = $db->resultSet();
-        return $results;
     }
 
     /**
@@ -255,7 +217,28 @@ class MySqlTranslator {
     }
 
     /**
-     * Function to delete a Post
+     * MySQL statement to edit a post with new values.
+     *
+     * @param $_postUuid
+     * @param $_title
+     * @param $_body
+     * @return bool
+     *
+     * @author Ioannis Batsios
+     */
+    public function editPost($_postUuid, $_title, $_body) {
+        $db = new MySqlTranslator();
+        try {
+            $db->query( "UPDATE `posts` SET `posts`.title = '{$_title}', `posts`.body = '{$_body}' WHERE `posts`.post_uuid = '{$_postUuid}'");
+            $db->execute();
+            return true;
+        } catch (PDOException $e){
+            return false;
+        }
+    }
+
+    /**
+     * MySQL statement to delete a post.
      *
      * @param $_postUuid
      * @return bool
@@ -272,47 +255,82 @@ class MySqlTranslator {
         }
     }
 
+    // DATABASE FUNCTIONS ==============================================================================================
+
     /**
-     * A function to get the User's UUID.
+     * Query SQL: Prepares the passed in SQL code for database use.
      *
-     * @author Christopher Thacker
+     * @author Christopher Thacker, Ioannis Batsios
      */
-    public function getUuid($_userId) {
-        $db = new MySqlTranslator();
-
-        $db->query("SELECT user_uuid FROM `user` WHERE id = '{$_userId}'");
-
-        $results = $db->single();
-        return $results->user_uuid;
+    public function query($_sql) {
+        $this->stmt = $this->dbh->prepare($_sql);
     }
 
     /**
-     * A function that gets a post from the database by using the posts uuid.
+     * Bind value to parameter: Binds a given value to a given parameter based on its type so that the database can
+     * safely use it. This process defaults to string if no other type can be determined. A type can be passed in to
+     * automatically bind the value as that type without checking for a matching one.
      *
-     * @param $_postUuid
-     * @return array with title,body
-     *
-     * @author Ioannis Batsios
+     * @author Christopher Thacker, Ioannis Batsios
      */
-    public function getPostByPostUuid($_postUuid) {
-        $db = new MySqlTranslator();
-        try {
-            $db->query( "SELECT * FROM `posts` WHERE `posts`.post_uuid = '{$_postUuid}'");
-            $results = $db->single();
-            return $results;
-        } catch (PDOException $e){
-            return false;
+    public function bind($_param, $_value, $_type = null) {
+        if (is_null($_type)) {
+            switch (true) {
+                case is_int($_value):
+                    $_type = PDO::PARAM_INT;
+                    break;
+                case is_bool($_value):
+                    $_type = PDO::PARAM_BOOL;
+                    break;
+                case is_null($_value):
+                    $_type = PDO::PARAM_NULL;
+                    break;
+                default:
+                    $_type = PDO::PARAM_STR;
+            }
         }
+
+        $this->stmt->bindValue($_param, $_value, $_type);
     }
 
-    public function editPost($_postUuid, $_title, $_body) {
-        $db = new MySqlTranslator();
-        try {
-            $db->query( "UPDATE `posts` SET `posts`.title = '{$_title}', `posts`.body = '{$_body}' WHERE `posts`.post_uuid = '{$_postUuid}'");
-            $db->execute();
-            return true;
-        } catch (PDOException $e){
-            return false;
-        }
+    /**
+     * Return single result: Returns a single row from the database if it matches the stmt property's query code.
+     *
+     * @author Christopher Thacker, Ioannis Batsios
+     */
+    public function single() {
+        $this->execute();
+        return $this->stmt->fetch(PDO::FETCH_OBJ);
     }
+
+    /**
+     * Return set of results: Returns all results of the SQL statement.
+     *
+     * @author Christopher Thacker, Ioannis Batsios
+     */
+    public function resultSet() {
+        $this->execute();
+        return $this->stmt->fetchAll(PDO::FETCH_OBJ);
+    }
+
+    /**
+     * Execute statement: Runs the stmt property against the database.
+     *
+     * @author Christopher Thacker, Ioannis Batsios
+     */
+    public function execute() {
+        return $this->stmt->execute();
+    }
+
+    /**
+     * Get row count: Returns the number of rows in the database that were affected by the execution of the stmt
+     * property.
+     *
+     * @author Christopher Thacker, Ioannis Batsios
+     */
+    public function rowCount() {
+        return $this->stmt->rowCount();
+    }
+
+    //==================================================================================================================
 }
