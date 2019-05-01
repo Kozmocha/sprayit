@@ -92,18 +92,21 @@ class User {
     public static function registerUser($_fname, $_lname, $_email, $_confirmEmail, $_password, $_confirmPassword) {
         // Checks to make sure emails match. If not, returns false
         if (self::confirmEmail($_email, $_confirmEmail) && self::checkPasswords($_password, $_confirmPassword)) {
-            //creates a unique user id
-            $uuid = uniqid();
-            if (DatabaseConnector::createUser($_fname, $_lname, $_email, $_password, $uuid)) {
-                //Api call
-                MailConnector::send($_email, $_fname, REGISTRATION_EMAIL_SUBJECT, REGISTRATON_EMAIL_BODY);
-                return true;
+            if (DatabaseConnector::checkDuplicateEmails($_email)) {
+                //creates a unique user id
+                $uuid = uniqid();
+                if (DatabaseConnector::createUser($_fname, $_lname, $_email, $_password, $uuid)) {
+                    //Api call
+                    MailConnector::send($_email, $_fname, REGISTRATION_EMAIL_SUBJECT, REGISTRATON_EMAIL_BODY);
+                    return true;
+                } else {
+                    echo 'Error: user not created!';
+                    return false;
+                }
             } else {
-                echo 'Error: user not created!';
+                echo "Email already exists in our database.";
                 return false;
             }
-        } else {
-            return false;
         }
     }
 
