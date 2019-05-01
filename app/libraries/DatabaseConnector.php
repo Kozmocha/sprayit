@@ -87,5 +87,6 @@ class DatabaseConnector {
     public static function editPost($_postUuid, $_title, $_body) {
         $dbTranslator = static::$translator;
         return $dbTranslator::editPost($_postUuid, $_title, $_body);
+
     }
 }

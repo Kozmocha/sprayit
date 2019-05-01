@@ -66,6 +66,7 @@ class Posts extends Controller {
     }
 
     public function edited($_postUuid) {
+
         if (Session::isPost()) {
             $editedPost = Session::sanitizePost();
 

@@ -9,16 +9,15 @@
             <br>
             <input name="body" class="form-control" id="body" placeholder="<?php echo $post->body; ?>">
         </div>
-    </div>
-    <div class="row" style="padding-bottom: 25px;"><div class="col-lg-12"></div> </div>
-    <div class="row" style="padding-bottom: 25px;"><div class="col-lg-12"></div> </div>
-    <div class="row" style="padding-bottom: 25px;">
-        <div class="col-lg-4"></div>
-        <div class="col-lg-4">
-            <button class="btn btn-secondary" style="width: 100%;" type="submit">Edit Post</button>
+        <div class="row" style="padding-bottom: 25px;"><div class="col-lg-12"></div> </div>
+        <div class="row" style="padding-bottom: 25px;"><div class="col-lg-12"></div> </div>
+        <div class="row" style="padding-bottom: 25px;">
+            <div class="col-lg-4"></div>
+            <div class="col-lg-4">
+                <button class="btn btn-secondary" style="width: 100%;" type="submit">Edit Post</button>
+            </div>
+            <div class="col-lg-4"></div>
         </div>
-        <div class="col-lg-4"></div>
-    </div>
-</form>
+    </form>
 <?php endforeach; ?>
 <?php require APP_ROOT . '/views/inc/footer.php'; ?>

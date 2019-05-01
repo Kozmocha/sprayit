@@ -50,6 +50,7 @@ class Post {
         }
     }
 
+
     public static function editPost($_postUuid, $_title, $_body) {
         if (self::checkFields($_title, $_body)) {
             if (DatabaseConnector::editPost($_postUuid, $_title, $_body)) {
@@ -78,3 +79,4 @@ class Post {
         return DatabaseConnector::getPostByPostUuid($_postUuid);
     }
 }
+
