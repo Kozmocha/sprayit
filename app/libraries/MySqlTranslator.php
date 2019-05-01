@@ -145,6 +145,7 @@ class MySqlTranslator {
         $db->query("SELECT * FROM `user` WHERE $_email = :email");
 
         // Gets a single row for the matching email.
+        echo "Here";
         $row = $db->single();
 
         // Checks the number of rows.
@@ -253,12 +254,20 @@ class MySqlTranslator {
         }
     }
 
+    /**
+     * Function to delete a Post
+     *
+     * @param $_postUuid
+     * @return bool
+     *
+     * @author Christopher Thacker
+     */
     public static function deletePost($_postUuid) {
         $db = new MySqlTranslator();
         try {
             $db->query("UPDATE `posts` SET `posts`.active_flag = " . FALSE . " WHERE `posts`.post_uuid = '{$_postUuid}'");
             return $db->execute();
-        } catch (PDOException $e) {
+        } catch (PDOException $_e) {
             return false;
         }
     }
@@ -275,5 +284,35 @@ class MySqlTranslator {
 
         $results = $db->single();
         return $results->user_uuid;
+    }
+
+    /**
+     * A function that gets a post from the database by using the posts uuid.
+     *
+     * @param $_postUuid
+     * @return array with title,body
+     *
+     * @author Ioannis Batsios
+     */
+    public function getPostByPostUuid($_postUuid) {
+        $db = new MySqlTranslator();
+        try {
+            $db->query( "SELECT `posts`.title,`posts`.body FROM `posts` WHERE `posts`.post_uuid = '{$_postUuid}'");
+            $results = $db->resultSet();
+            return $results;
+        } catch (PDOException $e){
+            return false;
+        }
+    }
+
+    public function editPost($_postUuid, $_title, $_body) {
+        $db = new MySqlTranslator();
+        try {
+            $db->query( "UPDATE `posts` SET `posts`.title = '{$_title}', `posts`.body = '{$_body}' WHERE `posts`.post_uuid = '{$_postUuid}'");
+            $db->execute();
+            return true;
+        } catch (PDOException $e){
+            return false;
+        }
     }
 }

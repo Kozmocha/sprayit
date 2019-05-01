@@ -57,20 +57,33 @@ class Posts extends Controller {
         }
     }
 
-    public function edit() {
-        $posts = Post::getPosts();
-
-        $_data = [
-            'posts' => $posts
+    public function edit($_postUuid) {
+        $post = Post::getPostByPostUuid($_postUuid);
+        $data = [
+            'posts' => $post
         ];
+        $this->view(POSTS_EDIT, $data);
+    }
 
-        $this->view(POSTS_EDIT, $_data);
+    public function edited($_postUuid) {
 
-        // Check if Edit button is clicked
         if (Session::isPost()) {
             $editedPost = Session::sanitizePost();
+
+            $editedPost = Post::editPost($_postUuid, $editedPost['title'], $editedPost['body']);
+
+            if ($editedPost) {
+                $posts = Post::getPosts();
+                $data = [
+                    'posts' => $posts
+                ];
+                $this->view(POSTS_HOME, $data);
+            }
+        } else {
+            $this->view(NOT_FOUND_PATH);
         }
     }
+
 
     public function delete($_postUuid) {
         if(Post::deletePost($_postUuid)) {

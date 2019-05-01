@@ -94,7 +94,8 @@ class User {
         if (self::confirmEmail($_email, $_confirmEmail) && self::checkPasswords($_password, $_confirmPassword)) {
             //creates a unique user id
             $uuid = uniqid();
-            if (DatabaseConnector::createUser($_fname, $_lname, $_email, $_password, $uuid)){
+            if (DatabaseConnector::createUser($_fname, $_lname, $_email, $_password, $uuid)) {
+                //Api call
                 MailConnector::send($_email, $_fname, REGISTRATION_EMAIL_SUBJECT, REGISTRATON_EMAIL_BODY);
                 return true;
             } else {

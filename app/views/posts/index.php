@@ -27,7 +27,7 @@
                 <?php if ($post->user_uuid == Session::getField('user_uuid')) :?>
                 <div class="delete" style="float: right;">
                     <div class="btn-group open">
-                        <a class="btn btn-secondary" href="<?php echo URL_ROOT . '/' . POSTS_EDIT; ?>"><i class="icon-user"><i class="far fa-edit"></i>&nbsp;&nbsp;Edit</i></a>
+                        <a class="btn btn-secondary" href="<?php echo URL_ROOT . '/' . POSTS_EDIT . '/' . $post->post_uuid; ?>"><i class="icon-user"><i class="far fa-edit"></i>&nbsp;&nbsp;Edit</i></a>
                         <a class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" href="#">
                             <span class="icon-caret-down"></span></a>
                         <ul class="dropdown-menu">
