@@ -266,7 +266,7 @@ class MySqlTranslator
     {
         $db = new MySqlTranslator;
         try {
-            $db->query("SELECT `user`.id FROM `user` WHERE `user`.email = '{$_email}'");
+            $db->query("SELECT * FROM `user` WHERE `user`.email = '{$_email}'");
             $result = $db->resultSet();
             if ($result) {
                 return false;
