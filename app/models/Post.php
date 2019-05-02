@@ -4,27 +4,44 @@ class Post {
 
     private static $dataTable = 'posts';
 
+    //==================================================================================================================
+
     /**
-     * A function that checks to make sure the title and body are not empty.
+     * Returns the post's uuid based on the user's ID.
      *
-     * @param $_title
-     * @param $_body
-     * @return bool
+     * @return string
      *
      * @author Ioannis Batsios
      */
-    public static function checkFields($_title, $_body){
-        if ($_title == ""){
-            echo 'There must be a title';
-            return false;
-        } else {
-            if ($_body == ""){
-                echo "There must be a body";
-                return false;
-            }
-            else return true;
-        }
+    public static function getUuid() {
+        $userId = Session::getField('user_id');
+        return DatabaseConnector::getUuid($userId);
     }
+
+    /**
+     * Returns all posts within the database.
+     *
+     * @return array
+     *
+     * @author Christopher Thacker
+     */
+    public static function getPosts() {
+            return DatabaseConnector::getAllPosts();
+    }
+
+    /**
+     * Returns a post from the database based on its uuid.
+     *
+     * @param $_postUuid
+     * @return object
+     *
+     * @author Ioannis Batsios
+     */
+    public static function getPostByPostUuid($_postUuid) {
+            return DatabaseConnector::getPostByPostUuid($_postUuid);
+    }
+
+    //==================================================================================================================
 
     /**
      * A function that creates a new post.
@@ -50,7 +67,16 @@ class Post {
         }
     }
 
-
+    /**
+     * Edits an existing post by replacing its existing values (title and body) with the parameters passed in.
+     *
+     * @param $_postUuid
+     * @param $_title
+     * @param $_body
+     * @return bool
+     *
+     * @author Ioannis Batsios
+     */
     public static function editPost($_postUuid, $_title, $_body) {
         if (self::checkFields($_title, $_body)) {
             if (DatabaseConnector::editPost($_postUuid, $_title, $_body)) {
@@ -62,21 +88,43 @@ class Post {
         }
     }
 
-    public static function getUuid() {
-        $userId = Session::getField('user_id');
-        return DatabaseConnector::getUuid($userId);
-    }
-
-    public static function getPosts() {
-        return DatabaseConnector::getAllPosts();
-    }
-
+    /**
+     * "Deletes" a post based on the given uuid.
+     *
+     * @param $_postUuid
+     * @return mixed
+     *
+     * @author Christopher Thacker
+     */
     public static function deletePost($_postUuid) {
-        return DatabaseConnector::deletePost($_postUuid);
+        try {
+            return DatabaseConnector::deletePost($_postUuid);
+        } catch (Exception $e) {
+            return false;
+        }
     }
 
-    public static function getPostByPostUuid($_postUuid) {
-        return DatabaseConnector::getPostByPostUuid($_postUuid);
+
+    /**
+     * A function that checks to make sure the title and body are not empty.
+     *
+     * @param $_title
+     * @param $_body
+     * @return bool
+     *
+     * @author Ioannis Batsios
+     */
+    public static function checkFields($_title, $_body){
+        if ($_title == ""){
+            echo 'There must be a title';
+            return false;
+        } else {
+            if ($_body == ""){
+                echo "There must be a body";
+                return false;
+            }
+            else return true;
+        }
     }
 }
 
