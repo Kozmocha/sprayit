@@ -270,7 +270,8 @@ class MySqlTranslator
         $db = new MySqlTranslator;
         try {
             $db->query("SELECT * FROM `user` WHERE `user`.email = '{$_email}'");
-            if ($db) {
+            $result = $db->resultSet();
+            if ($result) {
                 return false;
             } else {
                 return true;
