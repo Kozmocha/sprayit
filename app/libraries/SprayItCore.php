@@ -69,5 +69,6 @@ class SprayItCore {
             $url = explode('/', $url);
             return $url;
         }
+        return false;
     }
 }
