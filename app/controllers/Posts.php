@@ -39,7 +39,7 @@ class Posts extends Controller {
     }
 
     /**
-     * Action to add new posts.
+     * Function to add new posts.
      *
      * @author Ioannis Batsios
      */
