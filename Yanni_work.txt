@@ -1,9 +1,0 @@
-4/28/2019
-
-1. Fixed the createPost method to return true or false in the Post model
-2. Modified the SQL to reflect an active flag int boolean with default set to 1 and made a user_uuid and post_uuid in their respective tables.
-    a) Fixed the getAllPosts function in mysqlconnector to reflect these changes
-    b) Fixed the createUser function to reflect changes
-    c) Fixed the createPost to reflect changes
-3. Removed js alerts
-

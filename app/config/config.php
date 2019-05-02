@@ -13,6 +13,7 @@ define('DB_NAME', 'sprayit');
 
 define('TRUE', 1);
 define('FALSE', 0);
+define('ZERO', 0);
 
 //======================================================================================================================
 
@@ -31,7 +32,7 @@ define('DB_TRANSLATOR', 'MySqlTranslator');
 define('SITE_NAME', 'SprayIt');
 
 // Site Motto
-define('MOTTO', 'We don\'t moderate like those panzies <span class="pink"> Facebook </span>and <span class="pink">Twitter</span>!<br/> <span class="red">SPRAY</span> whatever you <span class="green">WANT!</span>');
+define('MOTTO', 'We don\'t moderate like those panzies <br/><span class="pink"> Facebook </span>and <span class="pink">Twitter</span>!<br/> <span class="red">SPRAY</span> whatever you <span class="green">WANT!</span>');
 
 // CONSTANT PATHS BELOW (for easy refactor / link changes)
 

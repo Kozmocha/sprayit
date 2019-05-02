@@ -86,6 +86,7 @@ class User {
                 if (DatabaseConnector::createUser($_fname, $_lname, $_email, $_password, $uuid)) {
                     //Api call
                     MailConnector::send($_email, $_fname, REGISTRATION_EMAIL_SUBJECT, REGISTRATON_EMAIL_BODY);
+                    echo "Registered! Login please";
                     return true;
                 } else {
                     echo 'Error: user not created!';

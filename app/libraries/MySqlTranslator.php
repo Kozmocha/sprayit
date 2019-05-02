@@ -6,7 +6,6 @@
  */
 class MySqlTranslator
 {
-
     private $host = DB_HOST;
     private $user = DB_USER;
     private $pass = DB_PASS;
@@ -37,11 +36,9 @@ class MySqlTranslator
         try {
             $this->dbh = new PDO($dsn, $this->user, $this->pass, $options);
         } catch (PDOException $_e) {
-            $this->error = $_e->getMessage();
-            echo $this->error;
+            echo $_e->getMessage();
         }
     }
-
 
     /**
      * Query SQL: Prepares the passed in SQL code for database use.
@@ -270,7 +267,8 @@ class MySqlTranslator
         $db = new MySqlTranslator;
         try {
             $db->query("SELECT * FROM `user` WHERE `user`.email = '{$_email}'");
-            if ($db) {
+            $result = $db->resultSet();
+            if ($result) {
                 return false;
             } else {
                 return true;
