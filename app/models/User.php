@@ -86,14 +86,14 @@ class User {
                 if (DatabaseConnector::createUser($_fname, $_lname, $_email, $_password, $uuid)) {
                     //Api call
                     MailConnector::send($_email, $_fname, REGISTRATION_EMAIL_SUBJECT, REGISTRATON_EMAIL_BODY);
-                    echo "Registered! Login please";
+                    //echo "Registered! Login please";
                     return true;
                 } else {
-                    echo 'Error: user not created!';
+                    //echo 'Error: user not created!';
                     return false;
                 }
             } else {
-                echo "Email already exists in our database.";
+                //echo "Email already exists in our database.";
                 return false;
             }
         }
@@ -107,7 +107,7 @@ class User {
      */
     private static function confirmEmail($_email, $_emailToConfirm) {
         if ($_email != $_emailToConfirm) {
-            echo "Emails do not match!";
+            //echo "Emails do not match!";
             return false;
         } else {
             return true;
@@ -122,7 +122,7 @@ class User {
      */
     private static function checkPasswords($_password, $_samePassword) {
         if ($_password != $_samePassword) {
-            echo "Passwords do not match!";
+            //echo "Passwords do not match!";
             return false;
         } else {
             return true;
