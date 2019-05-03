@@ -7,6 +7,18 @@ class Post {
     //==================================================================================================================
 
     /**
+     * Returns the post's uuid based on the user's ID.
+     *
+     * @return string
+     *
+     * @author Ioannis Batsios
+     */
+    private static function getUuid() {
+        $userId = Session::getField('user_id');
+        return DatabaseConnector::getUuid($userId);
+    }
+
+    /**
      * Returns all posts within the database.
      *
      * @return array
@@ -127,6 +139,28 @@ class Post {
             return DatabaseConnector::deletePost($_postUuid);
         } catch (Exception $e) {
             return false;
+        }
+    }
+
+    /**
+     * A function that checks to make sure the title and body are not empty.
+     *
+     * @param $_title
+     * @param $_body
+     * @return bool
+     *
+     * @author Ioannis Batsios
+     */
+    private static function checkFields($_title, $_body){
+        if ($_title == ""){
+            echo 'There must be a title';
+            return false;
+        } else {
+            if ($_body == ""){
+                echo "There must be a body";
+                return false;
+            }
+            else return true;
         }
     }
 }
