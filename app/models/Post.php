@@ -29,6 +29,21 @@ class Post {
         return DatabaseConnector::getPostByPostUuid($_postUuid);
     }
 
+
+    /**
+     * Returns the post's uuid based on the user's ID.
+     *
+     * @return string
+     *
+     * @author Ioannis Batsios
+     */
+    public static function getUuid() {
+        $userId = Session::getField('user_id');
+        return DatabaseConnector::getUuid($userId);
+    }
+
+    //==================================================================================================================
+
     /**
      * A function that creates a new post.
      *
@@ -50,46 +65,6 @@ class Post {
             }
         } else {
             return false;
-        }
-    }
-
-    //==================================================================================================================
-
-    /**
-     * Returns the post's uuid based on the user's ID.
-     *
-     * @return string
-     *
-     * @author Ioannis Batsios
-     */
-    public static function getUuid() {
-        $userId = Session::getField('user_id');
-        return DatabaseConnector::getUuid($userId);
-    }
-
-    /**
-     * A function that checks to make sure the title and body are not empty.
-     *
-     * @param $_title
-     * @param $_body
-     * @return bool
-     *
-     * @author Ioannis Batsios
-     */
-    public static function checkFields($_title, $_body) {
-        $_title = Auth::sanitizeString($_title);
-        $_body = Auth::sanitizeString($_body);
-
-        if ($_title == "" || $_title == null) {
-            echo "There must be a title";
-            return false;
-        } else {
-            if ($_body == "" || $_body == null) {
-                echo "There must be a body";
-                return false;
-            } else {
-                return true;
-            }
         }
     }
 
@@ -127,6 +102,32 @@ class Post {
             return DatabaseConnector::deletePost($_postUuid);
         } catch (Exception $e) {
             return false;
+        }
+    }
+
+    /**
+     * A function that checks to make sure the title and body are not empty.
+     *
+     * @param $_title
+     * @param $_body
+     * @return bool
+     *
+     * @author Ioannis Batsios
+     */
+    public static function checkFields($_title, $_body) {
+        $_title = Auth::sanitizeString($_title);
+        $_body = Auth::sanitizeString($_body);
+
+        if ($_title == "" || $_title == null) {
+            echo "There must be a title";
+            return false;
+        } else {
+            if ($_body == "" || $_body == null) {
+                echo "There must be a body";
+                return false;
+            } else {
+                return true;
+            }
         }
     }
 }
