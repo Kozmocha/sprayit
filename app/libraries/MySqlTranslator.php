@@ -4,8 +4,7 @@
  * MySQL Translator: A class which connects to a MySQL database (specified in config/config.php), allowing
  * access to persistent data.
  */
-class MySqlTranslator
-{
+class MySqlTranslator {
     private $host = DB_HOST;
     private $user = DB_USER;
     private $pass = DB_PASS;
@@ -23,8 +22,7 @@ class MySqlTranslator
      *
      * @author Christopher Thacker, Ioannis Batsios
      */
-    public function __construct()
-    {
+    public function __construct() {
         // Sets up DSN
         $dsn = 'mysql:host=' . $this->host . ';dbname=' . $this->dbname;
         $options = array(
@@ -41,14 +39,132 @@ class MySqlTranslator
     }
 
     /**
+     * A function to create a new user.
+     * @param $_fname
+     * @param $_lname
+     * @param $_email
+     * @param $_password
+     * @param $_uuid
+     * @return bool
+     *
+     * @author Ioannis Batsios
+     */
+    public static function createUser($_fname, $_lname, $_email, $_password, $_uuid) {
+        $db = new MySqlTranslator();
+        try {
+            $db->query("INSERT INTO `user` 
+                            (`user`.fname, `user`.lname, `user`.email, `user`.password, `user`.user_uuid) 
+                            VALUES ('{$_fname}','{$_lname}','{$_email}','{$_password}', '{$_uuid}')");
+            return $db->execute();
+        } catch (PDOException $_e) {
+            echo $_e->getMessage();
+            return false;
+        }
+    }
+
+    /**
      * Query SQL: Prepares the passed in SQL code for database use.
      *
      * @author Christopher Thacker, Ioannis Batsios
      */
-    public function query($_sql)
-    {
+    public function query($_sql) {
         $this->stmt = $this->dbh->prepare($_sql);
     }
+
+    /**
+     * Execute statement: Runs the stmt property against the database.
+     *
+     * @author Christopher Thacker, Ioannis Batsios
+     */
+    public function execute() {
+        return $this->stmt->execute();
+    }
+
+    /**
+     * A function to create a new post.
+     *
+     * @param $_title
+     * @param $_body
+     * @param $_userUuid
+     * @param $_postUuid
+     * @return bool
+     *
+     * @author Ioannis Batsios
+     */
+    public static function createPost($_title, $_body, $_userUuid, $_postUuid) {
+        $db = new MySqlTranslator();
+        try {
+            $db->query("INSERT INTO `posts` (`posts`.title, `posts`.body, `posts`.user_uuid, `posts`.post_uuid) 
+                              VALUES ('{$_title}','{$_body}','{$_userUuid}', '{$_postUuid}')");
+            return $db->execute();
+        } catch (PDOException $_e) {
+            echo $_e->getMessage();
+            return false;
+        }
+    }
+
+    /**
+     * Get all records from a table: Returns all of the rows within a specified table.
+     *
+     * @param $_table
+     * @return mixed
+     *
+     * @author Christopher Thacker
+     */
+    public static function getAll($_table) {
+        $db = new MySqlTranslator();
+
+        $db->query("SELECT * FROM `{$_table}`");
+
+        $results = $db->resultSet();
+        return $results;
+    }
+
+
+
+    /****************************************** CREATE FUNCTIONS ******************************************************/
+
+    /**
+     * Return set of results: Returns all results of the SQL statement.
+     *
+     * @return mixed
+     *
+     * @author Christopher Thacker, Ioannis Batsios
+     */
+    public function resultSet() {
+        $this->execute();
+        return $this->stmt->fetchAll(PDO::FETCH_OBJ);
+    }
+
+    /**
+     * Find a User by Email: Takes an email address parameter and tries to match it with one in the database. If
+     * a match is found, it returns the corresponding row. If not, it returns false.
+     *
+     * @author Christopher Thacker
+     */
+    public static function findUserByEmail($_email) {
+
+        // Establishes a connection to the database.
+        $db = new MySqlTranslator;
+
+        // Sends the SQL to be prepared for database use.
+        $db->query("SELECT * FROM `user` WHERE email = :email");
+
+        // Bind the email value (expected string) to the prepared variable.
+        $db->bind(':email', $_email);
+
+        // Gets a single row for the matching email.
+        $row = $db->single();
+
+        // Checks the number of rows.
+        if ($db->rowCount() > 0) {
+            return $row;
+        } else {
+            return false;
+        }
+    }
+
+    /****************************************** READ FUNCTIONS ********************************************************/
 
     /**
      * Bind value to parameter: Binds a given value to a given parameter based on its type so that the database can
@@ -57,8 +173,7 @@ class MySqlTranslator
      *
      * @author Christopher Thacker, Ioannis Batsios
      */
-    public function bind($_param, $_value, $_type = null)
-    {
+    public function bind($_param, $_value, $_type = null) {
         if (is_null($_type)) {
             switch (true) {
                 case is_int($_value):
@@ -82,20 +197,9 @@ class MySqlTranslator
      *
      * @author Christopher Thacker, Ioannis Batsios
      */
-    public function single()
-    {
+    public function single() {
         $this->execute();
         return $this->stmt->fetch(PDO::FETCH_OBJ);
-    }
-
-    /**
-     * Execute statement: Runs the stmt property against the database.
-     *
-     * @author Christopher Thacker, Ioannis Batsios
-     */
-    public function execute()
-    {
-        return $this->stmt->execute();
     }
 
     /**
@@ -104,126 +208,9 @@ class MySqlTranslator
      *
      * @author Christopher Thacker, Ioannis Batsios
      */
-    public function rowCount()
-    {
+    public function rowCount() {
         return $this->stmt->rowCount();
     }
-
-
-
-    /****************************************** CREATE FUNCTIONS ******************************************************/
-
-    /**
-     * A function to create a new user.
-     * @param $_fname
-     * @param $_lname
-     * @param $_email
-     * @param $_password
-     * @param $_uuid
-     * @return bool
-     *
-     * @author Ioannis Batsios
-     */
-    public static function createUser($_fname, $_lname, $_email, $_password, $_uuid)
-    {
-        $db = new MySqlTranslator();
-        try {
-            $db->query("INSERT INTO `user` 
-                            (`user`.fname, `user`.lname, `user`.email, `user`.password, `user`.user_uuid) 
-                            VALUES ('{$_fname}','{$_lname}','{$_email}','{$_password}', '{$_uuid}')");
-            return $db->execute();
-        } catch (PDOException $_e) {
-            echo $_e->getMessage();
-            return false;
-        }
-    }
-
-    /**
-     * A function to create a new post.
-     *
-     * @param $_title
-     * @param $_body
-     * @param $_userUuid
-     * @param $_postUuid
-     * @return bool
-     *
-     * @author Ioannis Batsios
-     */
-    public static function createPost($_title, $_body, $_userUuid, $_postUuid)
-    {
-        $db = new MySqlTranslator();
-        try {
-            $db->query("INSERT INTO `posts` (`posts`.title, `posts`.body, `posts`.user_uuid, `posts`.post_uuid) 
-                              VALUES ('{$_title}','{$_body}','{$_userUuid}', '{$_postUuid}')");
-            return $db->execute();
-        } catch (PDOException $_e) {
-            echo $_e->getMessage();
-            return false;
-        }
-    }
-
-    /****************************************** READ FUNCTIONS ********************************************************/
-
-    /**
-     * Return set of results: Returns all results of the SQL statement.
-     *
-     * @return mixed
-     *
-     * @author Christopher Thacker, Ioannis Batsios
-     */
-    public function resultSet()
-    {
-        $this->execute();
-        return $this->stmt->fetchAll(PDO::FETCH_OBJ);
-    }
-
-    /**
-     * Get all records from a table: Returns all of the rows within a specified table.
-     *
-     * @param $_table
-     * @return mixed
-     *
-     * @author Christopher Thacker
-     */
-    public static function getAll($_table)
-    {
-        $db = new MySqlTranslator();
-
-        $db->query("SELECT * FROM `{$_table}`");
-
-        $results = $db->resultSet();
-        return $results;
-    }
-
-    /**
-     * Find a User by Email: Takes an email address parameter and tries to match it with one in the database. If
-     * a match is found, it returns the corresponding row. If not, it returns false.
-     *
-     * @author Christopher Thacker
-     */
-    public static function findUserByEmail($_email)
-    {
-
-        // Establishes a connection to the database.
-        $db = new MySqlTranslator;
-
-        // Sends the SQL to be prepared for database use.
-        $db->query("SELECT * FROM `user` WHERE email = :email");
-
-        // Bind the email value (expected string) to the prepared variable.
-        $db->bind(':email', $_email);
-
-        // Gets a single row for the matching email.
-        $row = $db->single();
-
-        // Checks the number of rows.
-        if ($db->rowCount() > 0) {
-            return $row;
-        } else {
-            return false;
-        }
-    }
-
 
     /**
      * A function to read all posts within the database with the poster's information.
@@ -231,8 +218,7 @@ class MySqlTranslator
      *
      * @author Christopher Thacker
      */
-    public static function getAllPosts()
-    {
+    public static function getAllPosts() {
         $db = new MySqlTranslator();
 
         try {
@@ -262,8 +248,7 @@ class MySqlTranslator
      *
      * @author Ioannis Batsios
      */
-    public static function checkDuplicateEmails($_email)
-    {
+    public static function checkDuplicateEmails($_email) {
         $db = new MySqlTranslator;
         try {
             $db->query("SELECT * FROM `user` WHERE `user`.email = '{$_email}'");
@@ -280,6 +265,26 @@ class MySqlTranslator
     }
 
     /**
+     * Function to delete a Post
+     *
+     * @param $_postUuid
+     * @return bool
+     *
+     * @author Christopher Thacker
+     */
+    public static function deletePost($_postUuid) {
+        $db = new MySqlTranslator();
+        try {
+            $db->query("UPDATE `posts` SET `posts`.active_flag = " . FALSE . " 
+                              WHERE `posts`.post_uuid = '{$_postUuid}'");
+            return $db->execute();
+        } catch (PDOException $_e) {
+            echo $_e->getMessage();
+            return false;
+        }
+    }
+
+    /**
      * A function that gets a post from the database by using the posts uuid.
      *
      * @param $_postUuid
@@ -287,8 +292,7 @@ class MySqlTranslator
      *
      * @author Ioannis Batsios
      */
-    public function getPostByPostUuid($_postUuid)
-    {
+    public function getPostByPostUuid($_postUuid) {
         $db = new MySqlTranslator();
         try {
             $db->query("SELECT * FROM `posts` WHERE `posts`.post_uuid = '{$_postUuid}'");
@@ -300,6 +304,8 @@ class MySqlTranslator
         }
     }
 
+    /****************************************** UPDATE FUNCTIONS ******************************************************/
+
     /**
      * A function to get the User's uuid.
      *
@@ -308,8 +314,7 @@ class MySqlTranslator
      *
      * @author Christopher Thacker
      */
-    public function getUuid($_userId)
-    {
+    public function getUuid($_userId) {
         $db = new MySqlTranslator();
         try {
             $db->query("SELECT user_uuid FROM `user` WHERE id = '{$_userId}'");
@@ -321,7 +326,7 @@ class MySqlTranslator
         }
     }
 
-    /****************************************** UPDATE FUNCTIONS ******************************************************/
+    /****************************************** DELETE FUNCTIONS ******************************************************/
 
     /**
      * A function that Updates a post. Must be post's author to do so.
@@ -333,35 +338,11 @@ class MySqlTranslator
      *
      * @author Ioannis Batsios
      */
-    public function editPost($_postUuid, $_title, $_body)
-    {
+    public function editPost($_postUuid, $_title, $_body) {
         $db = new MySqlTranslator();
         try {
             $db->query("UPDATE `posts` SET `posts`.title = '{$_title}', `posts`.body = '{$_body}' 
             WHERE `posts`.post_uuid = '{$_postUuid}'");
-            return $db->execute();
-        } catch (PDOException $_e) {
-            echo $_e->getMessage();
-            return false;
-        }
-    }
-
-    /****************************************** DELETE FUNCTIONS ******************************************************/
-
-    /**
-     * Function to delete a Post
-     *
-     * @param $_postUuid
-     * @return bool
-     *
-     * @author Christopher Thacker
-     */
-    public static function deletePost($_postUuid)
-    {
-        $db = new MySqlTranslator();
-        try {
-            $db->query("UPDATE `posts` SET `posts`.active_flag = " . FALSE . " 
-                              WHERE `posts`.post_uuid = '{$_postUuid}'");
             return $db->execute();
         } catch (PDOException $_e) {
             echo $_e->getMessage();
