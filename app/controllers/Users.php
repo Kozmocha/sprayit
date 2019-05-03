@@ -56,19 +56,19 @@ class Users extends Controller {
             Redirect::to(POSTS_HOME);
         }
 
-        // Check if Register button is clicked
+        // Check if Register button is clicked.
         if (Session::isPost()) {
             $post = Session::sanitizePost();
 
-            //Passes data to the User model
+            // Passes data to the User model.
             $user = User::registerUser($post['fname'], $post['lname'], $post['email'], $post['confirm_email'], $post['password'], $post['confirm_password']);
 
-            //If the data is returned true
+            // If the data is returned true
             if ($user) {
                 //Go to the login screen
                 $this->view(LOGIN_PATH);
 
-            //Else send back to the registration page.
+                // Else send back to the registration page.
             } else {
                 $this->view(REGISTER_PATH);
             }

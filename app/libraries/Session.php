@@ -22,6 +22,15 @@ class Session {
     //==================================================================================================================
 
     /**
+     * Returns true if a given field within the $_SESSION array is set, false otherwise.
+     *
+     * @author Christopher Thacker
+     */
+    public static function fieldIsSet($_field) {
+        return (isset($_SESSION["{$_field}"]));
+    }
+
+    /**
      * If the request method is POST: Returns true if the server's request method is 'POST', false if not.
      *
      * @author Christopher Thacker
@@ -37,15 +46,6 @@ class Session {
      */
     public static function sanitizePost() {
         return filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-    }
-
-    /**
-     * Returns true if a given field within the $_SESSION array is set, false otherwise.
-     *
-     * @author Christopher Thacker
-     */
-    public static function fieldIsSet($_field) {
-        return (isset($_SESSION["{$_field}"]));
     }
 
     /**

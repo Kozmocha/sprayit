@@ -44,12 +44,12 @@ class Posts extends Controller {
      * @author Ioannis Batsios
      */
     public function add() {
-        // Check if Register button is clicked
+        // Check if Register button is clicked.
         if (Session::isPost()) {
             $newPost = Session::sanitizePost();
 
             $newPost = Post::createPost($newPost['title'], $newPost['body']);
-            //If the data is returned true
+            //If the data is returned true.
             if ($newPost) {
                 $posts = Post::getPosts();
                 $data = [
@@ -111,7 +111,7 @@ class Posts extends Controller {
      * @author Christopher Thacker
      */
     public function delete($_postUuid) {
-        if(Post::deletePost($_postUuid)) {
+        if (Post::deletePost($_postUuid)) {
             Redirect::to(POSTS_DELETE_SUCCESS);
         } else {
             Redirect::to(POSTS_DELETE_ERROR);

@@ -4,7 +4,7 @@
 
 define('DB_HOST', 'localhost');
 define('DB_USER', 'root');
-define('DB_PASS', '123456');
+define('DB_PASS', '');
 define('DB_NAME', 'sprayit');
 
 //======================================================================================================================
@@ -35,9 +35,9 @@ define('MOTTO', 'We don\'t moderate like those panzies <br/><span class="pink"> 
 
 // CONSTANT PATHS BELOW (for easy refactor / link changes)
 
-define ('POSTS_EDIT', 'posts/edit');
+define('POSTS_EDIT', 'posts/edit');
 
-define ('POSTS_EDITED', 'posts/edited');
+define('POSTS_EDITED', 'posts/edited');
 
 define('POSTS_HOME', 'posts/index');
 
@@ -61,7 +61,9 @@ define('NOT_FOUND_PATH', 'pages/not_found');
 
 define('UPDATE_USER', 'users/update');
 
-define ('ERROR_PATH', 'users/error');
+define('ERROR_PATH', 'users/error');
+
+define('TEST_PATH', 'tests/authenticate');
 
 //======================================================================================================================
 
