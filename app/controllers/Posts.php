@@ -111,7 +111,7 @@ class Posts extends Controller {
      * @author Christopher Thacker
      */
     public function delete($_postUuid) {
-        if(Post::deletePost($_postUuid)) {
+        if (Post::deletePost($_postUuid)) {
             Redirect::to(POSTS_DELETE_SUCCESS);
         } else {
             Redirect::to(POSTS_DELETE_ERROR);
