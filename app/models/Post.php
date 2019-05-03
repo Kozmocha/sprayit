@@ -7,18 +7,6 @@ class Post {
     //==================================================================================================================
 
     /**
-     * Returns the post's uuid based on the user's ID.
-     *
-     * @return string
-     *
-     * @author Ioannis Batsios
-     */
-    public static function getUuid() {
-        $userId = Session::getField('user_id');
-        return DatabaseConnector::getUuid($userId);
-    }
-
-    /**
      * Returns all posts within the database.
      *
      * @return array
@@ -26,7 +14,7 @@ class Post {
      * @author Christopher Thacker
      */
     public static function getPosts() {
-            return DatabaseConnector::getAllPosts();
+        return DatabaseConnector::getAllPosts();
     }
 
     /**
@@ -38,10 +26,8 @@ class Post {
      * @author Ioannis Batsios
      */
     public static function getPostByPostUuid($_postUuid) {
-            return DatabaseConnector::getPostByPostUuid($_postUuid);
+        return DatabaseConnector::getPostByPostUuid($_postUuid);
     }
-
-    //==================================================================================================================
 
     /**
      * A function that creates a new post.
@@ -56,7 +42,7 @@ class Post {
         $_userUuid = Post::getUuid();
         $_postUuid = uniqid();
         if (self::checkFields($_title, $_body)) {
-            if (DatabaseConnector::createPost($_title, $_body, $_userUuid, $_postUuid)){
+            if (DatabaseConnector::createPost($_title, $_body, $_userUuid, $_postUuid)) {
                 return true;
             } else {
                 echo "post not created.";
@@ -64,6 +50,46 @@ class Post {
             }
         } else {
             return false;
+        }
+    }
+
+    //==================================================================================================================
+
+    /**
+     * Returns the post's uuid based on the user's ID.
+     *
+     * @return string
+     *
+     * @author Ioannis Batsios
+     */
+    public static function getUuid() {
+        $userId = Session::getField('user_id');
+        return DatabaseConnector::getUuid($userId);
+    }
+
+    /**
+     * A function that checks to make sure the title and body are not empty.
+     *
+     * @param $_title
+     * @param $_body
+     * @return bool
+     *
+     * @author Ioannis Batsios
+     */
+    public static function checkFields($_title, $_body) {
+        $_title = Auth::sanitizeString($_title);
+        $_body = Auth::sanitizeString($_body);
+
+        if ($_title == "" || $_title == null) {
+            echo "There must be a title";
+            return false;
+        } else {
+            if ($_body == "" || $_body == null) {
+                echo "There must be a body";
+                return false;
+            } else {
+                return true;
+            }
         }
     }
 
@@ -101,33 +127,6 @@ class Post {
             return DatabaseConnector::deletePost($_postUuid);
         } catch (Exception $e) {
             return false;
-        }
-    }
-
-
-    /**
-     * A function that checks to make sure the title and body are not empty.
-     *
-     * @param $_title
-     * @param $_body
-     * @return bool
-     *
-     * @author Ioannis Batsios
-     */
-    public static function checkFields($_title, $_body) {
-        $_title = Auth::sanitizeString($_title);
-        $_body = Auth::sanitizeString($_body);
-
-        if ($_title == "" || $_title == null){
-            echo "There must be a title";
-            return false;
-        } else {
-            if ($_body == "" || $_body == null){
-                echo "There must be a body";
-                return false;
-            } else {
-                return true;
-            }
         }
     }
 }

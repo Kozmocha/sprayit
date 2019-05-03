@@ -36,9 +36,9 @@ define('MOTTO', 'We don\'t moderate like those panzies <br/><span class="pink"> 
 
 // CONSTANT PATHS BELOW (for easy refactor / link changes)
 
-define ('POSTS_EDIT', 'posts/edit');
+define('POSTS_EDIT', 'posts/edit');
 
-define ('POSTS_EDITED', 'posts/edited');
+define('POSTS_EDITED', 'posts/edited');
 
 define('POSTS_HOME', 'posts/index');
 
