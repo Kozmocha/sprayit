@@ -129,5 +129,33 @@ class Post {
             }
         }
     }
+
+    /**
+     * Utility method for posts that checks if the logged in user is the author of the post.
+     *
+     * @param $_postUuid
+     * @return bool
+     *
+     * @author Christopher Thacker
+     */
+    public static function verifyAuthor($_postUuid) {
+        if (Session::fieldIsSet('user_uuid')) {
+
+            $userUuid = Session::getField('user_uuid');
+            $post = Post::getPostByPostUuid($_postUuid);
+            $postUserUuid = $post->user_uuid;
+
+            if (Auth::isEqual($postUserUuid, $userUuid)) {
+                // Verified that the logged in user is the author of the post.
+                return true;
+            } else {
+                // Logged in user is not the author of the post.
+                return false;
+            }
+        } else {
+            // User is not logged in.
+            return false;
+        }
+    }
 }
 

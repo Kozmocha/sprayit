@@ -30,8 +30,8 @@ class User {
      *
      * @author Christopher Thacker
      */
-    public function getEmail($user) {
-        return $user->email;
+    public function getEmail($_user) {
+        return $_user->email;
     }
 
     //==================================================================================================================

@@ -70,12 +70,22 @@ class Posts extends Controller {
      * @author Ioannis Batsios
      */
     public function edit($_postUuid) {
-        $post = Post::getPostByPostUuid($_postUuid);
-        $data = [
-            'posts' => $post
-        ];
-        $this->view(POSTS_EDIT, $data);
+
+        // Backend check for matching user UUID.
+        if (Post::verifyAuthor($_postUuid)) {
+            $post = Post::getPostByPostUuid($_postUuid);
+
+            $data = [
+                'posts' => $post
+            ];
+
+            $this->view(POSTS_EDIT, $data);
+        } else {
+            // Credentials could not be authorized.
+            Redirect::to(NOT_FOUND_PATH);
+        }
     }
+
 
     /**
      * Transfers the sanitized, updated post data to the model to be updated.
@@ -85,21 +95,27 @@ class Posts extends Controller {
      * @author Ioannis Batsios
      */
     public function edited($_postUuid) {
-
         if (Session::isPost()) {
             $editedPost = Session::sanitizePost();
 
-            $editedPost = Post::editPost($_postUuid, $editedPost['title'], $editedPost['body']);
+            // Backend check for matching user UUID.
+            if (Post::verifyAuthor($_postUuid)) {
+                $editedPost = Post::editPost($_postUuid, $editedPost['title'], $editedPost['body']);
 
-            if ($editedPost) {
-                $posts = Post::getPosts();
-                $data = [
-                    'posts' => $posts
-                ];
-                $this->view(POSTS_HOME, $data);
+                if ($editedPost) {
+                    $posts = Post::getPosts();
+                    $data = [
+                        'posts' => $posts
+                    ];
+                    $this->view(POSTS_HOME, $data);
+                }
+            } else {
+                // User UUID doesn't match post's author's UUID.
+                Redirect::to(NOT_FOUND_PATH);
             }
         } else {
-            $this->view(NOT_FOUND_PATH);
+            // Session request is not POST.
+            Redirect::to(NOT_FOUND_PATH);
         }
     }
 
@@ -111,9 +127,17 @@ class Posts extends Controller {
      * @author Christopher Thacker
      */
     public function delete($_postUuid) {
-        if (Post::deletePost($_postUuid)) {
-            Redirect::to(POSTS_DELETE_SUCCESS);
+
+        // Backend check for matching user UUID.
+        if (Post::verifyAuthor($_postUuid)) {
+            if (Post::deletePost($_postUuid)) {
+                Redirect::to(POSTS_DELETE_SUCCESS);
+            } else {
+                // Error deleting post.
+                Redirect::to(POSTS_DELETE_ERROR);
+            }
         } else {
+            // Error validating user credentials.
             Redirect::to(POSTS_DELETE_ERROR);
         }
     }
