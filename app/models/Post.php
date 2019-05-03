@@ -13,7 +13,7 @@ class Post {
      *
      * @author Ioannis Batsios
      */
-    public static function getUuid() {
+    private static function getUuid() {
         $userId = Session::getField('user_id');
         return DatabaseConnector::getUuid($userId);
     }
@@ -114,7 +114,7 @@ class Post {
      *
      * @author Ioannis Batsios
      */
-    public static function checkFields($_title, $_body){
+    private static function checkFields($_title, $_body){
         if ($_title == ""){
             echo 'There must be a title';
             return false;
