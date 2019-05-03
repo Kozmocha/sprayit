@@ -59,7 +59,7 @@ class Post {
             if (DatabaseConnector::createPost($_title, $_body, $_userUuid, $_postUuid)) {
                 return true;
             } else {
-                echo "post not created.";
+                //echo "post not created.";
                 return false;
             }
         } else {
@@ -82,7 +82,7 @@ class Post {
             if (DatabaseConnector::editPost($_postUuid, $_title, $_body)) {
                 return true;
             } else {
-                echo "post not updated";
+                //echo "post not updated";
                 return false;
             }
         }
@@ -118,11 +118,11 @@ class Post {
         $_body = Auth::sanitizeString($_body);
 
         if ($_title == "" || $_title == null) {
-            echo "There must be a title";
+            //echo "There must be a title";
             return false;
         } else {
             if ($_body == "" || $_body == null) {
-                echo "There must be a body";
+                //echo "There must be a body";
                 return false;
             } else {
                 return true;
