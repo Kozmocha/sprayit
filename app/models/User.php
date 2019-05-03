@@ -43,6 +43,9 @@ class User {
      * @author Christopher Thacker
      */
     public static function authenticate($_email = null, $_password = null, $_errors = []) {
+        $_email = Auth::sanitizeEmail($_email);
+        $_password = Auth::sanitizeString($_password);
+
         if ($_email != '' && $_email != null && $_password != '' && $_password != null) {
             $user = DatabaseConnector::findUserByEmail($_email);
         } else {

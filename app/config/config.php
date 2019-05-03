@@ -4,7 +4,7 @@
 
 define('DB_HOST', 'localhost');
 define('DB_USER', 'root');
-define('DB_PASS', '123456');
+define('DB_PASS', '');
 define('DB_NAME', 'sprayit');
 
 //======================================================================================================================
@@ -62,7 +62,9 @@ define('NOT_FOUND_PATH', 'pages/not_found');
 
 define('UPDATE_USER', 'users/update');
 
-define ('ERROR_PATH', 'users/error');
+define('ERROR_PATH', 'users/error');
+
+define('TEST_PATH', 'tests/authenticate');
 
 //======================================================================================================================
 
