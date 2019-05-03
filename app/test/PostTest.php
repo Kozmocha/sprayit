@@ -4,6 +4,9 @@
 require_once '../models/Post.php';
 require_once '../libraries/Auth.php';
 
+/**
+* Post Test: Class used for testing methods within the Post model.
+*/
 class PostTest {
 
     /**
