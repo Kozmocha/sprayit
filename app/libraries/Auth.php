@@ -28,4 +28,17 @@ class Auth {
     public static function sanitizeEmail($_email) {
         return filter_var($_email, FILTER_SANITIZE_EMAIL);
     }
+
+    /**
+     * Checks to make sure two values are equal to each other.
+     *
+     * @param $_value1
+     * @param $_value2
+     * @return bool
+     *
+     * @author Christopher Thacker
+     */
+    public static function isEqual($_value1, $_value2) {
+        return $_value1 == $_value2;
+    }
 }
