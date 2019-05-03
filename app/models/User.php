@@ -105,7 +105,7 @@ class User {
      *
      * @author Ioannis Batsios
      */
-    public static function confirmEmail($_email, $_emailToConfirm) {
+    private static function confirmEmail($_email, $_emailToConfirm) {
         if ($_email != $_emailToConfirm) {
             echo "Emails do not match!";
             return false;
@@ -120,7 +120,7 @@ class User {
      *
      * @author Ioannis Batsios
      */
-    public static function checkPasswords($_password, $_samePassword) {
+    private static function checkPasswords($_password, $_samePassword) {
         if ($_password != $_samePassword) {
             echo "Passwords do not match!";
             return false;
@@ -134,7 +134,7 @@ class User {
      *
      * @author Ioannis Batsios
      */
-    public static function saltPassword($_password) {
+    private static function saltPassword($_password) {
         $salt = random_bytes(16);
         return $password_hash = crypt($_password, $salt);
     }

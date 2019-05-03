@@ -7,6 +7,18 @@ class Post {
     //==================================================================================================================
 
     /**
+     * Returns the post's uuid based on the user's ID.
+     *
+     * @return string
+     *
+     * @author Ioannis Batsios
+     */
+    private static function getUuid() {
+        $userId = Session::getField('user_id');
+        return DatabaseConnector::getUuid($userId);
+    }
+
+    /**
      * Returns all posts within the database.
      *
      * @return array
@@ -27,19 +39,6 @@ class Post {
      */
     public static function getPostByPostUuid($_postUuid) {
         return DatabaseConnector::getPostByPostUuid($_postUuid);
-    }
-
-
-    /**
-     * Returns the post's uuid based on the user's ID.
-     *
-     * @return string
-     *
-     * @author Ioannis Batsios
-     */
-    public static function getUuid() {
-        $userId = Session::getField('user_id');
-        return DatabaseConnector::getUuid($userId);
     }
 
     //==================================================================================================================
