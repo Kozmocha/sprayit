@@ -23,7 +23,9 @@ class DatabaseConnector {
     }
 
     /**
-     * Returns all posts from the `posts` table in the database.
+     * A function that returns all posts.
+     *
+     * @return mixed
      *
      * @author Christopher Thacker
      */
@@ -32,11 +34,27 @@ class DatabaseConnector {
         return $dbTranslator::getAllPosts();
     }
 
+    /**
+     * A function that gets a post by the post's uuid.
+     *
+     * @param $_postUuid
+     * @return mixed
+     *
+     * @author Ioannis Batsios
+     */
     public static function getPostByPostUuid($_postUuid) {
         $dbTranslator = static::$translator;
         return $dbTranslator::getPostByPostUuid($_postUuid);
     }
 
+    /**
+     * A function that gets a user uuid.
+     *
+     * @param $_userId
+     * @return mixed
+     *
+     * @author Ioannis Batsios
+     */
     public static function getUuid($_userId) {
         $dbTranslator = static::$translator;
         return $dbTranslator::getUuid($_userId);
