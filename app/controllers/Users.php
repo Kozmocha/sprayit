@@ -38,7 +38,6 @@ class Users extends Controller {
             ];
             if (User::authenticate($post['email'], $post['password'])) {
                 Redirect::to(POSTS_HOME);
-
             }
             $this->view(LOGIN_PATH, $data);
         }
