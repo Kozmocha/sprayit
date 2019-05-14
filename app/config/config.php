@@ -71,7 +71,7 @@ define('TEST_PATH', 'tests/authenticate');
 
 define('MAIL_TRANSLATOR', 'SendGridTranslator');
 
-define('SENDGRID_KEY', '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');
+define('SENDGRID_KEY', '');
 
 define('NOREPLY_ADDRESS', 'noreply@sprayit.com');
 
